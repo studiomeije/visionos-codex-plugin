@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build / Run / Debug"
+  short_description: "Build and debug visionOS apps with XcodeBuildMCP-backed simulator workflows"
+  default_prompt: "Use $build-run-debug to set XcodeBuildMCP session defaults, discover Apple Vision Pro simulator targets, run build/launch/log/debug flows, and route to $test-triage for test failures or $signing-entitlements for capability/privacy/signing blockers. Keep the shell Run-button bootstrap as fallback only."

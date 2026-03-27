@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Triage"
+  short_description: "Run and explain visionOS test failures with focused reruns"
+  default_prompt: "Use $test-triage to classify failing visionOS tests by category (build, assertion, crash, flake, simulator/environment, or entitlement/privacy), run the smallest focused reruns, and hand off to $build-run-debug or $signing-entitlements when the failure class requires it."

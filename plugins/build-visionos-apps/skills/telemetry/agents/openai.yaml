@@ -1,0 +1,4 @@
+interface:
+  display_name: "Telemetry"
+  short_description: "Add and verify structured logging in a visionOS app"
+  default_prompt: "Use $telemetry to run an instrumentation workflow (add logs, run, verify, tighten), route to $build-run-debug for build/run/debug blockers, and hand off to $spatial-app-architecture or $signing-entitlements when telemetry reveals lifecycle-ownership or configuration issues."

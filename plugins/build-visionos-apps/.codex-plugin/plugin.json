@@ -1,0 +1,49 @@
+{
+  "name": "build-visionos-apps",
+  "version": "1.0.0",
+  "description": "Build, debug, refactor, and structure visionOS 26 apps with XcodeBuildMCP-backed workflows, Apple Vision Pro guidance, and shared spatial-computing skills.",
+  "author": {
+    "name": "Studio Meije",
+    "email": "tom@studiomeije.com",
+    "url": "https://github.com/studiomeije"
+  },
+  "homepage": "https://github.com/studiomeije/visionos-codex-plugin",
+  "repository": "https://github.com/studiomeije/visionos-codex-plugin.git",
+  "license": "MIT",
+  "keywords": [
+    "visionos",
+    "visionos-26",
+    "swiftui",
+    "realitykit",
+    "arkit",
+    "xcode",
+    "simulator",
+    "swift-6",
+    "vision-pro",
+    "shareplay",
+    "widgetkit",
+    "shadergraph",
+    "usd"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Build visionOS Apps",
+    "shortDescription": "Build, debug, structure, and refactor visionOS 26 apps with XcodeBuildMCP-backed workflows",
+    "longDescription": "visionOS 26 development workflows for Apple Vision Pro: shared SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, and USD skills from visionOSAgents, plus plugin-only XcodeBuildMCP-backed build/run/debug workflows, command entrypoints, scene and surface architecture guidance, test triage, logging, signing checks, structural refactors, and a project-local Run-button fallback bootstrap.",
+    "developerName": "Studio Meije",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
+    "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
+    "termsOfServiceURL": "https://developer.apple.com/support/terms/",
+    "defaultPrompt": "Build, structure, or refactor a visionOS 26 app, use XcodeBuildMCP to launch it on Apple Vision Pro Simulator, choose the right window, volume, or immersive surface, capture logs or debugger state, or inspect RealityKit, ARKit, and SharePlay behavior.",
+    "screenshots": [],
+    "brandColor": "#0F172A",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

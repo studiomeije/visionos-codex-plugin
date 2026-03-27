@@ -1,0 +1,38 @@
+name: Package Plugin
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build plugin zip
+        run: |
+          mkdir -p dist
+          cd plugins
+          zip -r ../dist/build-visionos-apps.zip build-visionos-apps \
+            -x '*/.DS_Store' \
+               '*/__pycache__/*' \
+               '*/.gitkeep'
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-visionos-apps
+          path: dist/build-visionos-apps.zip
+          if-no-files-found: error
+
+      - name: Attach zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/build-visionos-apps.zip
