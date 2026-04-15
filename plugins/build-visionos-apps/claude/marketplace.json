@@ -1,0 +1,21 @@
+{
+  "name": "build-visionos-apps",
+  "version": "2.0.0",
+  "description": "Build, debug, and ship visionOS 26 apps for Apple Vision Pro. Combines XcodeBuildMCP workflows with spatial SwiftUI, RealityKit, ARKit, and engineering best practices.",
+  "keywords": [
+    "visionos",
+    "realitykit",
+    "arkit",
+    "spatial",
+    "swiftui",
+    "xcode",
+    "apple-vision-pro"
+  ],
+  "skills": ["SKILL.md"],
+  "mcpServers": {
+    "XcodeBuildMCP": {
+      "type": "stdio",
+      "command": "xcodebuilder-mcp"
+    }
+  }
+}
