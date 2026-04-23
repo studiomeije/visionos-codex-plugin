@@ -1,4 +1,4 @@
 interface:
   display_name: "Signing & Entitlements"
-  short_description: "Inspect signing, capabilities, and privacy configuration for visionOS apps"
-  default_prompt: "Use $signing-entitlements to classify simulator vs device/distribution signing failures, verify entitlements/capabilities/privacy keys, and provide the minimum fix path with explicit guidance on when to switch to $build-run-debug."
+  short_description: "Inspect visionOS signing, managed capabilities, provisioning profiles, and privacy usage strings"
+  default_prompt: "Use $signing-entitlements to classify simulator, physical-device, archive, and distribution signing failures; verify built entitlements, embedded profiles, managed ARKit capabilities, and privacy usage keys; then provide the minimum fix path with explicit guidance on when to switch to $build-run-debug or $packaging-distribution."

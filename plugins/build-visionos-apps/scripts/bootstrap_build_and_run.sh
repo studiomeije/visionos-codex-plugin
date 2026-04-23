@@ -107,6 +107,11 @@ if [[ -z "$project" && -z "$workspace" ]]; then
   usage
 fi
 
+if [[ "$derived_data_rel" == /* ]]; then
+  echo "--derived-data must be project-relative." >&2
+  exit 2
+fi
+
 project_kind="project"
 source_path="$project"
 if [[ -n "$workspace" ]]; then
@@ -114,8 +119,18 @@ if [[ -n "$workspace" ]]; then
   source_path="$workspace"
 fi
 
+if [[ ! -e "$source_path" ]]; then
+  echo "Source path does not exist: $source_path" >&2
+  exit 2
+fi
+
 if [[ -z "$project_root" ]]; then
   project_root="$(dirname "$source_path")"
+fi
+
+if [[ ! -d "$project_root" ]]; then
+  echo "Project root does not exist: $project_root" >&2
+  exit 2
 fi
 
 project_root="$(cd "$project_root" && pwd)"
@@ -162,14 +177,41 @@ DEFAULT_SIMULATOR_NAME=$simulator_name_q
 CONFIGURATION=$configuration_q
 DERIVED_DATA_REL=$derived_data_rel_q
 
-PROJECT_PATH="\$ROOT_DIR/\$PROJECT_PATH_REL"
-DERIVED_DATA_PATH="\$ROOT_DIR/\$DERIVED_DATA_REL"
 SIMULATOR_NAME="\${SIMULATOR_NAME:-\$DEFAULT_SIMULATOR_NAME}"
 BUNDLE_ID="\${BUNDLE_ID:-\$DEFAULT_BUNDLE_ID}"
+
+resolve_under_root() {
+  case "\$1" in
+    /*) printf '%s\n' "\$1" ;;
+    *) printf '%s\n' "\$ROOT_DIR/\$1" ;;
+  esac
+}
+
+PROJECT_PATH="\$(resolve_under_root "\$PROJECT_PATH_REL")"
+DERIVED_DATA_PATH="\$(resolve_under_root "\$DERIVED_DATA_REL")"
+
+require_command() {
+  if ! command -v "\$1" >/dev/null 2>&1; then
+    echo "Required command not found: \$1" >&2
+    exit 1
+  fi
+}
+
+check_prerequisites() {
+  require_command xcodebuild
+  require_command xcrun
+  require_command python3
+
+  if [[ ! -e "\$PROJECT_PATH" ]]; then
+    echo "Project path does not exist: \$PROJECT_PATH" >&2
+    exit 1
+  fi
+}
 
 resolve_device_udid() {
   python3 - "\$SIMULATOR_NAME" <<'PY'
 import json
+import re
 import subprocess
 import sys
 
@@ -178,23 +220,36 @@ data = json.loads(
     subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"])
 )
 
+def runtime_version_key(runtime):
+    numbers = [int(part) for part in re.findall(r"\d+", runtime)]
+    padded = (numbers + [0, 0, 0])[:3]
+    return tuple(-number for number in padded)
+
 candidates = []
+available_names = set()
 for runtime, devices in data.get("devices", {}).items():
     if "visionOS" not in runtime and "xrOS" not in runtime:
         continue
     for device in devices:
         if not device.get("isAvailable", True):
             continue
+        name = device.get("name", "")
+        available_names.add(name)
+        if name != simulator_name:
+            continue
         score = (
             0 if device.get("state") == "Booted" else 1,
-            0 if device.get("name") == simulator_name else 1,
-            device.get("name", ""),
+            runtime_version_key(runtime),
             device.get("udid", ""),
         )
         candidates.append((score, device.get("udid", "")))
 
 if not candidates:
-    sys.exit("No available visionOS simulator device was found.")
+    names = ", ".join(sorted(name for name in available_names if name)) or "none"
+    sys.exit(
+        f"No available visionOS simulator named {simulator_name!r} was found. "
+        f"Available visionOS devices: {names}"
+    )
 
 candidates.sort(key=lambda item: item[0])
 print(candidates[0][1], end="")
@@ -207,17 +262,15 @@ ensure_device_booted() {
   xcrun simctl bootstatus "\$udid" -b >/dev/null
 }
 
-resolve_project_flags() {
-  if [[ "\$PROJECT_KIND" == "project" ]]; then
-    printf '%s\n' -project "\$PROJECT_PATH"
-  else
-    printf '%s\n' -workspace "\$PROJECT_PATH"
-  fi
-}
-
 build_app() {
   local udid="\$1"
-  mapfile -t project_flags < <(resolve_project_flags)
+  local project_flags=()
+  if [[ "\$PROJECT_KIND" == "project" ]]; then
+    project_flags=(-project "\$PROJECT_PATH")
+  else
+    project_flags=(-workspace "\$PROJECT_PATH")
+  fi
+
   xcodebuild "\${project_flags[@]}" \
     -scheme "\$SCHEME" \
     -configuration "\$CONFIGURATION" \
@@ -228,18 +281,49 @@ build_app() {
 }
 
 resolve_app_bundle() {
-  local bundle=""
-  bundle="\$(find "\$DERIVED_DATA_PATH/Build/Products" -type d -path '*-xrsimulator/*.app' -name "\$APP_NAME.app" | sort | head -n 1)"
-  if [[ -z "\$bundle" ]]; then
-    bundle="\$(find "\$DERIVED_DATA_PATH/Build/Products" -type d -path '*-xrsimulator/*.app' -name '*.app' | sort | head -n 1)"
-  fi
+  local products_dir="\$DERIVED_DATA_PATH/Build/Products"
+  local exact_bundle=""
+  local fallback_bundle=""
+  local candidate=""
+  local bundle_count=0
 
-  if [[ -z "\$bundle" ]]; then
-    echo "Unable to find a built .app bundle under \$DERIVED_DATA_PATH/Build/Products" >&2
+  if [[ ! -d "\$products_dir" ]]; then
+    echo "Unable to find build products under \$products_dir" >&2
     exit 1
   fi
 
-  printf '%s\n' "\$bundle"
+  while IFS= read -r candidate; do
+    if [[ -z "\$exact_bundle" ]]; then
+      exact_bundle="\$candidate"
+    fi
+  done < <(find "\$products_dir" -type d -path '*-xrsimulator/*.app' -name "\$APP_NAME.app" -print | sort)
+
+  if [[ -n "\$exact_bundle" ]]; then
+    printf '%s\n' "\$exact_bundle"
+    return
+  fi
+
+  while IFS= read -r candidate; do
+    bundle_count=\$((bundle_count + 1))
+    if [[ \$bundle_count -eq 1 ]]; then
+      fallback_bundle="\$candidate"
+    fi
+  done < <(find "\$products_dir" -type d -path '*-xrsimulator/*.app' -name '*.app' -print | sort)
+
+  if [[ \$bundle_count -eq 0 ]]; then
+    echo "Unable to find a built .app bundle under \$products_dir" >&2
+    exit 1
+  fi
+
+  if [[ \$bundle_count -eq 1 ]]; then
+    printf '%s\n' "\$fallback_bundle"
+    return
+  fi
+
+  echo "Found multiple built .app bundles and none matched \$APP_NAME.app." >&2
+  echo "Re-run bootstrap with --app-name set to the built app bundle name." >&2
+  find "\$products_dir" -type d -path '*-xrsimulator/*.app' -name '*.app' -print | sort | sed 's/^/  /' >&2
+  exit 1
 }
 
 resolve_bundle_id() {
@@ -247,6 +331,11 @@ resolve_bundle_id() {
   if [[ -n "\$BUNDLE_ID" ]]; then
     printf '%s\n' "\$BUNDLE_ID"
     return
+  fi
+
+  if [[ ! -x /usr/libexec/PlistBuddy ]]; then
+    echo "Required command not found: /usr/libexec/PlistBuddy" >&2
+    exit 1
   fi
 
   /usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "\$app_bundle/Info.plist"
@@ -272,6 +361,7 @@ launch_and_print() {
 
 main() {
   local udid app_bundle resolved_bundle_id launch_output
+  check_prerequisites
   udid="\$(resolve_device_udid)"
   ensure_device_booted "\$udid"
   build_app "\$udid"

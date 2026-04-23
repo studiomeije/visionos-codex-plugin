@@ -16,5 +16,15 @@ Use this file when choosing concrete AXe commands.
 - `axe describe-ui --udid <udid>`
 - `axe batch --udid <udid> --step "..." --step "..."`
 
+## Command Choice
+
+- Use screenshots and video for visual evidence after launch.
+- Use `describe-ui` for labels, focusability, visible controls, and basic UI
+  state that accessibility can expose.
+- Use keyboard and hardware-button commands for flows the app deliberately
+  exposes through shortcuts or simulator controls.
+- Do not use AXe tap, swipe, or gesture commands as proof of visionOS spatial
+  interaction behavior.
+
 Prefer `axe --help` and `axe <command> --help` when command syntax and local
 AXe version differ from this file.

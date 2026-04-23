@@ -1,6 +1,6 @@
 interface:
   display_name: "Build visionOS Apps"
-  short_description: "Build, debug, structure, and refactor visionOS 26 apps with XcodeBuildMCP-backed workflows"
+  short_description: "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first workflows"
   icon_small: "./assets/icon.png"
   icon_large: "./assets/icon.png"
-  default_prompt: "Use Build visionOS Apps to inspect a visionOS project, sync shared skills, build and launch it on Apple Vision Pro Simulator with XcodeBuildMCP, choose the right scene surface, capture logs or debugger state, bootstrap a Run-button fallback when needed, or refactor spatial SwiftUI and RealityKit code."
+  default_prompt: "Use Build visionOS Apps for visionOS 26 projects: combine shared platform skills with plugin-local workflow skills, build and launch on Apple Vision Pro Simulator through XcodeBuildMCP first, choose the right scene surface, capture logs or debugger state, bootstrap a Run-button fallback when needed, and use optional AXe or asc workflows only when those CLIs are available."

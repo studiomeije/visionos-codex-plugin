@@ -1,6 +1,6 @@
 ---
 name: packaging-distribution
-description: Prepare and troubleshoot archive, signing, and distribution workflows for visionOS apps (TestFlight, ad-hoc, App Store) using xcodebuild archive plus the App Store Connect CLI (asc). Use when asked to archive a visionOS app, upload a build to TestFlight, submit for App Store review, validate bundle structure, reason about TestFlight readiness, or automate App Store Connect metadata and screenshots from the command line.
+description: Prepare and troubleshoot archive, signing, and distribution workflows for visionOS apps (TestFlight, release-testing, enterprise, App Store) using xcodebuild archive plus the App Store Connect CLI (asc). Use when asked to archive a visionOS app, upload a build to TestFlight, submit for App Store review, validate bundle structure, reason about TestFlight readiness, or automate App Store Connect metadata and screenshots from the command line.
 ---
 
 # Packaging & Distribution (visionOS)
@@ -13,11 +13,13 @@ or release-readiness checks.
 
 1. Confirm the goal first:
    - validate an archive locally
-   - export an ad-hoc or enterprise build
+   - export a release-testing or enterprise build
    - upload to TestFlight
    - submit to the App Store
-2. Load the narrowest reference files that match the task.
-3. Keep local build/debug issues in `build-run-debug`, privacy/capability
+2. Confirm the artifact path and whether the artifact is an archive, exported
+   `.ipa`, or only a simulator build.
+3. Load the narrowest reference files that match the task.
+4. Keep local build/debug issues in `build-run-debug`, privacy/capability
    issues in `signing-entitlements`, and failing tests in `test-triage`.
 
 ## Load References When
@@ -33,12 +35,14 @@ or release-readiness checks.
 
 ## Workflow
 
-1. Confirm the release target and artifact path.
-2. Run the `asc` preflight once if the task needs App Store Connect.
-3. Archive and export with the appropriate method.
-4. Validate the archive and exported artifact with the visionOS-specific checks.
-5. Upload, distribute, or submit only after the local artifact is confirmed.
-6. Separate local packaging failures from App Store Connect failures in the
+1. Confirm the release target, scheme, bundle ID, team, and artifact path.
+2. Reject simulator output as non-distributable.
+3. Run the `asc` preflight once if the task needs App Store Connect.
+4. Archive for `generic/platform=visionOS` and export with the appropriate
+   method.
+5. Validate the archive and exported artifact with the visionOS-specific checks.
+6. Upload, distribute, or submit only after the local artifact is confirmed.
+7. Separate local packaging failures from App Store Connect failures in the
    summary.
 
 ## When To Switch Skills
@@ -55,11 +59,18 @@ or release-readiness checks.
   Vision Pro apps are distributed via TestFlight and the App Store, not via
   developer-ID notarized pkgs the way macOS apps are.
 - Do not present simulator archives as distributable.
+- Do not use macOS Developer ID, package notarization, or hardened-runtime
+  release advice for a normal visionOS app distribution path.
 - If this skill and `asc --help` disagree on a flag, prefer `asc --help` and
   note the divergence in your response.
 - Do not run `asc publish appstore --submit` without explicit user
   confirmation; it changes App Store Connect state. `--dry-run` or `asc
   validate` first when unsure.
+- Do not run credential-bearing `xcodebuild` or `asc` commands after the user
+  pasted raw credentials into chat. Ask them to configure credentials locally or
+  through their secret manager.
+- Tell the user before using `xcodebuild -allowProvisioningUpdates`; it may
+  contact Apple Developer services and create or update signing assets.
 - Call out when you lack the actual exported artifact and are inferring from
   project settings.
 

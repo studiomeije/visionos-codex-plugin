@@ -1,6 +1,7 @@
 name: Package Plugin
 
 on:
+  workflow_dispatch:
   release:
     types:
       - published
@@ -15,6 +16,37 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Validate plugin metadata
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          plugin_root = Path("plugins/build-visionos-apps")
+          manifest = json.loads((plugin_root / ".codex-plugin/plugin.json").read_text())
+          marketplace = json.loads(Path(".agents/plugins/marketplace.json").read_text())
+
+          assert manifest["name"] == "build-visionos-apps"
+          assert manifest["skills"] == "./skills/"
+          assert (plugin_root / "assets/icon.png").is_file()
+          assert (plugin_root / "skills").is_dir()
+
+          entries = [
+              entry
+              for entry in marketplace.get("plugins", [])
+              if entry.get("name") == "build-visionos-apps"
+          ]
+          assert len(entries) == 1
+          entry = entries[0]
+          assert entry["source"] == {
+              "source": "local",
+              "path": "./plugins/build-visionos-apps",
+          }
+          assert entry["policy"]["installation"] == "AVAILABLE"
+          assert entry["policy"]["authentication"] == "ON_INSTALL"
+          assert entry["category"] == "Coding"
+          PY
 
       - name: Build plugin zip
         run: |
@@ -33,6 +65,7 @@ jobs:
           if-no-files-found: error
 
       - name: Attach zip to release
+        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
           files: dist/build-visionos-apps.zip

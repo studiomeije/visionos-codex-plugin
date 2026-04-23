@@ -1,18 +1,20 @@
 # Build visionOS Apps for Codex
 
-`build-visionos-apps` is a Codex plugin for building, debugging, refactoring,
-and shipping visionOS 26 apps for Apple Vision Pro.
+`build-visionos-apps` is a Codex plugin for building, running, debugging,
+refactoring, and shipping visionOS 26 apps for Apple Vision Pro.
 
-It combines XcodeBuildMCP-backed build and simulator workflows with focused
-skills for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, Shader
-Graph, USD, immersive media, testing, signing, and packaging.
+It combines XcodeBuildMCP-first build and simulator workflows with shared
+platform skills for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit,
+Shader Graph, USD, immersive media, and coding standards, plus plugin-local
+workflow skills for testing, signing, telemetry, SwiftPM, packaging, and UI
+automation.
 
 ## What The Plugin Does
 
 - discovers local Xcode workspaces, projects, schemes, Swift packages, and
   Apple Vision Pro simulator targets
 - builds, runs, debugs, and captures logs for visionOS apps with
-  `XcodeBuildMCP`
+  `XcodeBuildMCP` as the primary path
 - helps choose the right surface model: window, volume, immersive space, or a
   mixed flow between them
 - guides scene ownership, app structure, and spatial SwiftUI architecture as a
@@ -22,9 +24,9 @@ Graph, USD, immersive media, testing, signing, and packaging.
 - triages tests, signing failures, entitlement issues, privacy-key gaps, and
   launch blockers
 - supports packaging, TestFlight, and App Store submission workflows when the
-  optional `asc` CLI is available
-- supports simulator evidence capture and automation when the optional `AXe`
-  CLI is available
+  optional external `asc` CLI is available
+- supports post-launch simulator evidence capture and automation when the
+  optional external `AXe` CLI is available
 
 ## Best Fit
 
@@ -39,12 +41,12 @@ This plugin is a strong fit when you want Codex to help with:
 
 ## Included Expertise
 
-The plugin bundles both workflow skills and platform skills.
+The plugin bundles shared platform skills and plugin-local workflow skills.
 
-- Workflow coverage includes build and run, test triage, telemetry,
+- Plugin-local workflow coverage includes build and run, test triage, telemetry,
   signing/entitlements, SwiftPM support, packaging/distribution, and
   visionOS-specific UI automation.
-- Platform coverage includes spatial app architecture, spatial SwiftUI,
+- Shared platform coverage includes spatial app architecture, spatial SwiftUI,
   RealityKit, ARKit, SharePlay, WidgetKit, Shader Graph, USD, immersive media,
   and coding standards for modern Swift and visionOS app code.
 
@@ -59,8 +61,8 @@ The plugin bundles both workflow skills and platform skills.
 
 ## Optional External Tools
 
-The core build/debug loop does not require extra CLIs, but two optional tools
-extend what the plugin can do:
+The core XcodeBuildMCP-first build/debug loop does not require extra CLIs, but
+two optional external tools extend what specific skills can do:
 
 - `AXe` for post-launch Apple Vision Pro simulator automation, screenshots,
   accessibility inspection, and capture workflows

@@ -12,6 +12,10 @@ without turning a spatial app into a logging landfill. Prefer Apple's unified
 logging APIs and verify the events after an XcodeBuildMCP-backed build/run
 loop, with the shell run script used only as a fallback.
 
+Treat a successful build as the start of verification, not the end. Confirm the
+instrumented event through XcodeBuildMCP launch output, `log stream`, or another
+observable runtime signal.
+
 Treat telemetry as a loop:
 instrument -> run or observe -> decide -> tighten or remove.
 
@@ -27,10 +31,11 @@ instrument -> run or observe -> decide -> tighten or remove.
 
 1. Identify the behavior that needs observability.
 2. Add the smallest useful instrumentation.
-3. Build and run the app.
-4. Read runtime logs and verify the event fired.
-5. Tighten or remove instrumentation.
-6. Summarize what was observed and what should stay in the codebase.
+3. Build and run the app, recording the XcodeBuildMCP or fallback launch path.
+4. Read runtime logs with a focused process, subsystem, or category predicate.
+5. Verify the expected event count and ordering.
+6. Tighten or remove instrumentation.
+7. Summarize what was observed and what should stay in the codebase.
 
 ## When To Switch Skills
 
@@ -59,5 +64,6 @@ Provide:
 - the behavior instrumented
 - which reference tracks were used
 - the verification path
+- the log predicate or captured launch artifact used
 - what the logs or traces proved or disproved
 - the cleanup or follow-up step

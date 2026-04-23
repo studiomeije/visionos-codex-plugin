@@ -9,9 +9,11 @@ the user explicitly wants a persistent Codex `Run` button.
 Before bootstrapping, confirm you already attempted the MCP-first sequence:
 
 1. `session-show-defaults`
-2. `list_sims`
-3. `session-set-defaults`
-4. `build_run_sim` or `build_sim` for the current goal
+2. `discover_projs` and `list_schemes` when project shape is not already
+   proven
+3. `list_sims`
+4. `session-set-defaults`
+5. `build_run_sim` or `build_sim` for the current goal
 
 Only generate the shell path when that sequence is unavailable or when the user
 explicitly requests a persistent Run action.
@@ -70,6 +72,11 @@ or repo inspection workflow.
 
 The script is a fallback runtime wrapper, not the source of truth for scheme or
 destination selection when MCP is available.
+
+If the current validation required
+`DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer` or
+`ARCHS=arm64 ONLY_ACTIVE_ARCH=YES`, note that explicitly before generating a
+long-lived script instead of baking the workaround in silently.
 
 ### Expected flags
 

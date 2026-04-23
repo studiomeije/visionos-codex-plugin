@@ -41,3 +41,10 @@ Button(action: startExperience) {
 
 Add debug-only launch flags or keyboard shortcuts for immersive entry and
 motion sweeps when repeated automation is required.
+
+Keep simulator hooks deterministic:
+
+- guard them with `#if DEBUG` or an explicit internal build flag
+- make one shortcut perform one observable action
+- emit a `Logger` event from the action if telemetry will verify it
+- avoid hidden production behavior that only exists for automation

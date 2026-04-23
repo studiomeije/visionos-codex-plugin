@@ -15,6 +15,7 @@ aligned to that choice.
 
 | Reference | When to Use |
 |-----------|-------------|
+| [`references/project-discovery.md`](references/project-discovery.md) | When the workspace, project, package, app-producing scheme, bundle id, or runnable target is not already proven. |
 | [`references/mcp-workflow.md`](references/mcp-workflow.md) | When XcodeBuildMCP is available and you need the session, simulator, build, launch, log, or LLDB workflow. |
 | [`references/shell-fallback.md`](references/shell-fallback.md) | When XcodeBuildMCP is unavailable, or when you intentionally want direct `xcodebuild`, `simctl`, `log stream`, and LLDB commands. |
 | [`references/run-button-bootstrap.md`](references/run-button-bootstrap.md) | When the repo needs a persistent `script/build_and_run.sh` and a Codex Run action. |
@@ -23,8 +24,8 @@ aligned to that choice.
 ## Workflow
 
 1. Detect whether XcodeBuildMCP is callable.
-2. Confirm the project shape and the runnable target.
-3. Choose the Apple Vision Pro simulator deliberately.
+2. Confirm the real project shape and the app-producing target.
+3. Choose the Apple Vision Pro Simulator deliberately.
 4. Run the narrowest build, launch, or debug step that can prove or disprove
    the current theory.
 5. Bootstrap the project-local run script only when the shell path or Run
@@ -51,7 +52,13 @@ aligned to that choice.
 - Detect the available build path before running any build commands.
 - When XcodeBuildMCP is available, prefer it. When it is not, use the shell
   path without apology.
-- Do not skip deliberate simulator selection.
+- Do not invent a workspace, project, scheme, package product, or bundle id
+  from the repo name; inspect the actual build graph.
+- Do not skip deliberate Apple Vision Pro Simulator selection.
+- Use the Xcode beta developer directory only when the active Xcode cannot see
+  the required visionOS 26 SDK or simulator runtime.
+- Treat missing `x86_64` simulator slices on Apple silicon as an architecture
+  selection problem before changing app code.
 - Do not write `.codex/environments/environment.toml` before the run script
   exists, and do not point the Run action at a stale script path.
 - Do not describe macOS desktop launch patterns as if they apply to a visionOS
@@ -65,6 +72,7 @@ Provide:
 - the detected project type and chosen scheme
 - whether you used XcodeBuildMCP or the shell path
 - the simulator target selected
+- any `DEVELOPER_DIR` or arm64-only override used
 - the script path and Run action you configured, if applicable
 - the MCP tool call or shell command you ran
 - whether build and launch succeeded

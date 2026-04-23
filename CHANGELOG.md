@@ -1,0 +1,18 @@
+# Changelog
+
+## 1.1.0 - 2026-04-23
+
+- Sharpened the plugin metadata, README, and command entrypoints around
+  XcodeBuildMCP-first visionOS 26 workflows.
+- Improved the build/run/debug, SwiftPM, test triage, telemetry, AXe automation,
+  signing, entitlements, packaging, and distribution skill guidance.
+- Expanded shared `visionOSAgents` skills for spatial SwiftUI, RealityKit, ARKit,
+  SharePlay, USD, ShaderGraph, immersive media, WidgetKit, and Swift coding
+  standards.
+- Strengthened the default guidance for new SwiftUI and visionOS code to use
+  `@Observable` instead of `ObservableObject` unless a compatibility blocker is
+  documented.
+- Improved the plugin installer, marketplace metadata update flow, package
+  workflow validation, and shared-skill sync documentation.
+- Added deterministic Run-button bootstrap checks for Apple Vision Pro Simulator
+  selection, app bundle resolution, and project-local DerivedData paths.

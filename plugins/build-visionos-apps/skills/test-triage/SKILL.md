@@ -11,6 +11,10 @@ Use this skill to run the smallest meaningful test scope first, classify
 failures precisely, and avoid treating every simulator or entitlement issue like
 a product bug.
 
+After a build succeeds, test triage is the verification loop: run the smallest
+relevant XCTest or Swift Testing scope, inspect XcodeBuildMCP or `xcodebuild`
+test output, then classify the result from concrete evidence.
+
 If the project cannot build or the app cannot launch on the selected simulator,
 switch to `build-run-debug` first, establish a stable run loop, then resume
 test triage.
@@ -20,17 +24,20 @@ test triage.
 | Reference | When to Use |
 |-----------|-------------|
 | [`references/harness-detection.md`](references/harness-detection.md) | When identifying XCTest vs Swift Testing targets, or when constructing `-only-testing:` filters. |
+| [`references/post-build-verification.md`](references/post-build-verification.md) | When reviewing XcodeBuildMCP test logs, `xcodebuild test` output, `.xcresult` bundles, or simulator logs after a successful build. |
 | [`references/failure-categories.md`](references/failure-categories.md) | When classifying build failures, assertion failures, crashes, flakes, capability gaps, or lifecycle issues. |
 | [`references/simulator-capability-limits.md`](references/simulator-capability-limits.md) | When the failing test depends on hardware-backed visionOS capabilities that the simulator may stub or omit. |
 | [`references/rerun-strategy.md`](references/rerun-strategy.md) | When deciding how narrowly to rerun and how to summarize confidence. |
 
 ## Workflow
 
-1. Detect the test harness.
-2. Narrow the scope.
-3. Classify the result.
-4. Rerun intelligently.
-5. Summarize the smallest failing scope, the failure class, and the next rerun
+1. Confirm the build/run state, scheme, destination, and simulator UDID.
+2. Detect the test harness.
+3. Run the smallest relevant XCTest or Swift Testing scope.
+4. Inspect XcodeBuildMCP or `xcodebuild` output, result bundles, and simulator
+   logs before classifying.
+5. Rerun intelligently.
+6. Summarize the smallest failing scope, the failure class, and the next rerun
    or fix step.
 
 ## When To Switch Skills
@@ -60,6 +67,7 @@ test triage.
 
 Provide:
 - the command used
+- the evidence source used for classification
 - the smallest failing scope
 - the top failure category
 - a concise explanation of the likely cause

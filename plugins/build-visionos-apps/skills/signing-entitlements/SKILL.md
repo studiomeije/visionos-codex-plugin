@@ -14,11 +14,15 @@ logic:
 - missing privacy usage string
 - capability mismatch between project settings and built output
 - wrong signing identity or provisioning profile for device or archive
+- App Store Connect or export rejection that names an entitlement, profile,
+  privacy key, or unsupported capability
 
 1. Classify the target first: simulator, device, or distribution artifact.
-2. Load only the reference files that match the failure class.
-3. Inspect built output before proposing changes to project settings.
-4. Switch back to `build-run-debug` once signing and privacy state are known
+2. Capture the exact failing boundary: install, launch, ARKit authorization,
+   archive, export, upload validation, or App Review metadata check.
+3. Load only the reference files that match the failure class.
+4. Inspect built output before proposing changes to project settings.
+5. Switch back to `build-run-debug` once signing and privacy state are known
    good and the failure is still present.
 
 ## Load References When
@@ -33,19 +37,27 @@ logic:
 
 ## Workflow
 
-1. Determine whether the artifact is simulator-only, device-only, or a
-   distribution build.
-2. Inspect the built app, entitlements blob, and `Info.plist`.
-3. Classify the failure precisely: identity/profile, capability/entitlement,
-   privacy string, simulator/device mismatch, or non-signing issue.
-4. Apply the smallest fix that matches that class.
-5. Rebuild and verify against built output, not just source configuration.
+1. Determine whether the artifact is simulator-only, physical-device, archive,
+   or exported distribution.
+2. Inspect the built app, embedded entitlements, `Info.plist`, and provisioning
+   profile when present.
+3. Compare three sources before changing anything: project entitlements file,
+   provisioning-profile entitlements, and signed app entitlements.
+4. Classify the failure precisely: identity/profile, managed capability,
+   privacy usage string, simulator/device mismatch, archive/export mismatch, or
+   non-signing issue.
+5. Apply the smallest fix that matches that class.
+6. Rebuild and verify against built output, not just source configuration.
 
 ## Guardrails
 
 - Never invent missing entitlements or privacy keys.
 - Do not conflate simulator signing with device or App Store distribution signing.
 - Do not prescribe distribution signing fixes for simulator-only failures.
+- Do not use macOS sandbox, hardened runtime, notarization, or Developer ID
+  advice unless the visionOS project embeds a macOS helper target.
+- Do not add managed enterprise ARKit entitlements unless Apple has granted the
+  entitlement and the provisioning profile contains it.
 - If the real issue is a missing usage string or target capability, say so directly instead of blaming code signing in general.
 - Always validate fixes against built output, not only project source files.
 

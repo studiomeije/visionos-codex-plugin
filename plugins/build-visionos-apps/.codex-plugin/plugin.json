@@ -1,7 +1,7 @@
 {
   "name": "build-visionos-apps",
-  "version": "1.0.0",
-  "description": "Build, debug, refactor, and structure visionOS 26 apps with XcodeBuildMCP-backed workflows, Apple Vision Pro guidance, and shared spatial-computing skills.",
+  "version": "1.1.0",
+  "description": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
   "author": {
     "name": "Studio Meije",
     "email": "tom@studiomeije.com",
@@ -28,8 +28,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Build visionOS Apps",
-    "shortDescription": "Build, debug, structure, and refactor visionOS 26 apps with XcodeBuildMCP-backed workflows",
-    "longDescription": "visionOS 26 development workflows for Apple Vision Pro: shared SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, and USD skills from visionOSAgents, plus plugin-only XcodeBuildMCP-backed build/run/debug workflows, command entrypoints, scene and surface architecture guidance, test triage, logging, signing checks, structural refactors, and a project-local Run-button fallback bootstrap.",
+    "shortDescription": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first workflows",
+    "longDescription": "visionOS 26 development for Apple Vision Pro: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, command entrypoints, and Run-button fallback bootstrap. AXe and asc are optional external CLIs used only by the skills that document them.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [
@@ -40,7 +40,7 @@
     "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
     "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
     "termsOfServiceURL": "https://developer.apple.com/support/terms/",
-    "defaultPrompt": "Build, structure, or refactor a visionOS 26 app, use XcodeBuildMCP to launch it on Apple Vision Pro Simulator, choose the right window, volume, or immersive surface, capture logs or debugger state, or inspect RealityKit, ARKit, and SharePlay behavior.",
+    "defaultPrompt": "Build, run, debug, structure, or refactor a visionOS 26 app with XcodeBuildMCP on Apple Vision Pro Simulator, choose the right window, volume, or immersive surface, capture logs or debugger state, inspect RealityKit, ARKit, and SharePlay behavior, or prepare packaging workflows with optional external CLIs only when available.",
     "screenshots": [],
     "brandColor": "#0F172A",
     "composerIcon": "./assets/icon.png",

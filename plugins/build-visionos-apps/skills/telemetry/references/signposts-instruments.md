@@ -35,3 +35,7 @@ When that happens, use `sample` as the first CPU-side fallback:
 ```bash
 sample <pid> 5 -file ./artifacts/sample-output.txt
 ```
+
+For post-build verification, pair signpost captures with a small number of
+`Logger` events that prove the measured action actually started and ended in
+the intended app lifecycle path.

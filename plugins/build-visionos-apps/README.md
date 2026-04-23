@@ -1,7 +1,12 @@
 # Build visionOS Apps Plugin
 
-This plugin packages visionOS 26 development workflows in
+This plugin packages XcodeBuildMCP-first visionOS 26 development workflows in
 `plugins/build-visionos-apps` for Apple Vision Pro.
+
+It combines shared platform skills synced from `visionOSAgents` with
+plugin-local workflow skills for build/run/debug, testing, signing, telemetry,
+packaging, UI automation, command entrypoints, and Run-button fallback
+bootstrap.
 
 It currently includes these skills:
 
@@ -108,7 +113,7 @@ with this shape:
     Codex app Run button works even when XcodeBuildMCP is unavailable
 
 - `skills/`
-  - the actual skill payload
+  - shared platform skills and plugin-local workflow skills
   - each skill keeps the standard skill structure (`SKILL.md`, optional
     `references/`, `samples/`, `scripts/`)
 
@@ -140,15 +145,13 @@ flags and subcommands:
 
 ## Notes
 
-This plugin is XcodeBuildMCP-first. Unlike the canonical
-`plugins/build-macos-apps` shape, it deliberately ships `.mcp.json` and a
-bootstrap helper script because the Apple Vision Pro simulator launch loop
-benefits from a dedicated MCP server and a deterministic shell fallback.
-AXe and `asc` sit on top of that as optional, external CLIs for
-post-launch simulator automation and App Store Connect workflows
-respectively.
+This plugin is XcodeBuildMCP-first. It ships `.mcp.json` and a bootstrap
+helper script because the Apple Vision Pro simulator launch loop benefits from
+a dedicated MCP server and a deterministic shell fallback. AXe and `asc` sit on
+top of that as optional, external CLIs for post-launch simulator automation and
+App Store Connect workflows respectively.
 
-The shared core skill layer (`spatial-app-architecture`,
+The shared platform skill layer (`spatial-app-architecture`,
 `spatial-swiftui-developer`, `realitykit-visionos-developer`,
 `arkit-visionos-developer`, `shareplay-developer`,
 `visionos-immersive-media-developer`, `visionos-widgetkit-developer`,
@@ -156,5 +159,5 @@ The shared core skill layer (`spatial-app-architecture`,
 visionOS-specific architecture and implementation guidance. The plugin-local
 workflow skills (`build-run-debug`, `test-triage`, `signing-entitlements`,
 `swiftpm-visionos`, `packaging-distribution`, `telemetry`,
-`visionos-ui-automation`) mirror the shape of `build-macos-apps` with
-visionOS-specific adjustments.
+`visionos-ui-automation`) cover the operational loop around a visionOS 26
+codebase.

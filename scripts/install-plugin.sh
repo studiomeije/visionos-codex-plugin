@@ -8,6 +8,7 @@ plugin_name="build-visionos-apps"
 legacy_plugin_names=(
   "visionos-codex-plugin"
 )
+marketplace_default="$HOME/.agents/plugins/marketplace.json"
 
 print_usage() {
   cat <<'EOF'
@@ -20,6 +21,9 @@ Options:
       --home <path>         Override Codex home (installs to <home>/plugins).
       --plugins-dir <path>  Override plugin directory directly.
       --path <path>         Alias for --plugins-dir.
+      --marketplace-file <path>
+                            Override marketplace metadata file.
+      --skip-marketplace    Do not update marketplace metadata.
       --dry-run             Print the planned install work without changing files.
   -h, --help                Show this help.
 
@@ -30,6 +34,7 @@ Examples:
   ./scripts/install-plugin.sh
   ./scripts/install-plugin.sh --home ~/.codex
   ./scripts/install-plugin.sh --plugins-dir /tmp/codex/plugins
+  ./scripts/install-plugin.sh --skip-marketplace --plugins-dir /tmp/codex/plugins
 EOF
 }
 
@@ -48,6 +53,8 @@ expand_tilde() {
 
 home_override=""
 plugins_dir_override=""
+marketplace_file="$marketplace_default"
+skip_marketplace=0
 dry_run=0
 
 while [[ $# -gt 0 ]]; do
@@ -69,6 +76,19 @@ while [[ $# -gt 0 ]]; do
       fi
       plugins_dir_override="$2"
       shift 2
+      ;;
+    --marketplace-file)
+      if [[ $# -lt 2 ]]; then
+        echo "Missing value for $1" >&2
+        print_usage >&2
+        exit 2
+      fi
+      marketplace_file="$2"
+      shift 2
+      ;;
+    --skip-marketplace)
+      skip_marketplace=1
+      shift
       ;;
     --dry-run)
       dry_run=1
@@ -102,14 +122,25 @@ if [[ -n "$plugins_dir_override" ]]; then
 elif [[ -n "$home_override" ]]; then
   plugins_dir="$(expand_tilde "$home_override")/plugins"
 else
-  plugins_dir="${CODEX_HOME:-$HOME/.codex}/plugins"
+  plugins_dir="$(expand_tilde "${CODEX_HOME:-$HOME/.codex}")/plugins"
 fi
 
 destination_dir="$plugins_dir/$plugin_name"
+marketplace_file="$(expand_tilde "$marketplace_file")"
+marketplace_plugin_path="$destination_dir"
+if [[ "$destination_dir" == "$HOME/"* ]]; then
+  marketplace_plugin_path="./${destination_dir#"$HOME"/}"
+fi
 
 echo "Source plugin: $plugin_root"
 echo "Destination plugins dir: $plugins_dir"
 echo "Destination plugin dir: $destination_dir"
+if [[ $skip_marketplace -eq 1 ]]; then
+  echo "Marketplace update: skipped"
+else
+  echo "Marketplace file: $marketplace_file"
+  echo "Marketplace plugin path: $marketplace_plugin_path"
+fi
 
 remove_targets=("$destination_dir")
 for legacy_name in "${legacy_plugin_names[@]}"; do
@@ -130,6 +161,55 @@ if [[ $dry_run -eq 1 ]]; then
   exit 0
 fi
 
+update_marketplace_metadata() {
+  local path="$1"
+  local plugin_path="$2"
+
+  python3 - "$path" "$plugin_name" "$plugin_path" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+marketplace_path = Path(sys.argv[1])
+plugin_name = sys.argv[2]
+plugin_path = sys.argv[3]
+
+if marketplace_path.is_file():
+    data = json.loads(marketplace_path.read_text(encoding="utf-8"))
+else:
+    data = {
+        "name": "studio-meije",
+        "interface": {"displayName": "Studio Meije"},
+        "plugins": [],
+    }
+
+plugins = data.setdefault("plugins", [])
+if not isinstance(plugins, list):
+    raise SystemExit(f"marketplace plugins must be an array: {marketplace_path}")
+
+entry = next(
+    (candidate for candidate in plugins if candidate.get("name") == plugin_name),
+    None,
+)
+if entry is None:
+    entry = {"name": plugin_name}
+    plugins.append(entry)
+
+entry["source"] = {"source": "local", "path": plugin_path}
+entry["policy"] = {
+    "installation": "INSTALLED_BY_DEFAULT",
+    "authentication": "ON_INSTALL",
+}
+entry["category"] = "Coding"
+
+marketplace_path.parent.mkdir(parents=True, exist_ok=True)
+marketplace_path.write_text(
+    json.dumps(data, indent=2) + "\n",
+    encoding="utf-8",
+)
+PY
+}
+
 mkdir -p "$plugins_dir"
 
 for path in "${remove_targets[@]}"; do
@@ -140,9 +220,22 @@ done
 
 if command -v rsync >/dev/null 2>&1; then
   mkdir -p "$destination_dir"
-  rsync -a --delete "$plugin_root/" "$destination_dir/"
+  rsync -a --delete \
+    --exclude '.DS_Store' \
+    --exclude '__pycache__' \
+    --exclude '.gitkeep' \
+    "$plugin_root/" "$destination_dir/"
 else
   cp -R "$plugin_root" "$plugins_dir/"
+fi
+
+find "$destination_dir" -name '.DS_Store' -type f -delete
+find "$destination_dir" -name '.gitkeep' -type f -delete
+find "$destination_dir" -name '__pycache__' -type d -prune -exec rm -rf {} +
+
+if [[ $skip_marketplace -eq 0 ]]; then
+  update_marketplace_metadata "$marketplace_file" "$marketplace_plugin_path"
+  echo "Updated marketplace metadata -> $marketplace_file"
 fi
 
 echo "Installed $plugin_name -> $destination_dir"

@@ -2,6 +2,18 @@
 
 Prefer `--output json` whenever you need to parse results.
 
+Treat this file as a command-family map, not a replacement for local help.
+Before running a state-changing command, verify the exact syntax with
+`asc <command> --help` in the user's environment.
+
+## Read-Only Discovery
+
+- `asc --version`
+- `asc auth status --output json`
+- `asc auth list --output json`
+- `asc apps list --limit 20 --output json`
+- `asc builds list --app <appId> --limit 20 --output json`
+
 ## Builds And TestFlight
 
 - `asc builds list --app <appId> --limit 20`
@@ -39,3 +51,15 @@ Prefer `--output json` whenever you need to parse results.
 
 - `asc xcode-cloud run --workflow-id "<workflowId>" --pull-request-id "<prId>"`
 - `asc xcode-cloud build-runs get --id <runId>`
+
+## State-Changing Boundaries
+
+- Uploading a build changes App Store Connect state. Require a confirmed
+  exported `.ipa`, working auth profile, and clear user intent.
+- Publishing to TestFlight changes tester availability. Confirm group, build,
+  and whether external testing requires review.
+- Submitting to App Review requires explicit user confirmation in the current
+  conversation. Prefer `asc validate`, `asc review doctor`, or documented
+  dry-run modes first.
+- Metadata and screenshot `apply` commands should use a dry run first and then
+  a separate confirmed apply.

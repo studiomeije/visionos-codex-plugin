@@ -15,8 +15,10 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
 1. Decide whether the work is package structure, build command selection,
    Reality Composer Pro packaging, or diagnostics.
 2. Load only the matching reference files.
-3. Route back to `build-run-debug` once the task becomes app-runner or
-   simulator focused.
+3. Use package-native SwiftPM checks for host-compatible code, and use an
+   Apple Vision Pro Simulator `xcodebuild` destination for visionOS SDK checks.
+4. Route back to `build-run-debug` once the task becomes app-runner or
+   simulator-launch focused.
 
 ## Load References When
 
@@ -48,12 +50,14 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
 ## Guardrails
 
 - Do not assume an app bundle exists in a pure package workflow.
-- Do not silently drop `.visionOS(.v2)` or later from the `platforms:` list;
-  update it deliberately and note any availability guards that need adding.
+- Do not silently downgrade or remove `.visionOS(.v26)` from the `platforms:`
+  list unless the repo intentionally supports an older minimum.
 - Explain when the package is library-only and therefore not directly
   runnable on visionOS.
 - Keep resource paths inside the package instead of reaching into app-level
   bundles.
+- Treat arm64 simulator and Xcode beta requirements as build-environment facts,
+  not reasons to rewrite package code first.
 
 ## Output Expectations
 
@@ -61,6 +65,7 @@ Provide:
 - the package products you found and their platform list
 - the command you ran (`swift build`, `swift test`, or `xcodebuild` against
   the package)
+- any Xcode beta or arm64 simulator override used
 - whether build, run, or test succeeded
 - the top blocker if not
 - explicit routing back to `build-run-debug` or a spatial skill for the next

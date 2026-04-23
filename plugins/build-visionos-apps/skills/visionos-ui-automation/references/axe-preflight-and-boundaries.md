@@ -5,6 +5,10 @@ visionOS support boundary.
 
 ## Preflight
 
+AXe preflight starts after the app has been built and launched. First confirm
+the XcodeBuildMCP or fallback launch output points at the intended Apple Vision
+Pro simulator, then resolve the same simulator UDID for AXe.
+
 ```bash
 command -v axe >/dev/null 2>&1 && axe --version
 ```
@@ -21,6 +25,10 @@ Then confirm a booted Apple Vision Pro simulator is available:
 axe list-simulators 2>/dev/null | grep -i "Apple Vision Pro" || \
   xcrun simctl list devices booted | grep -i "Apple Vision Pro"
 ```
+
+When multiple simulators are booted, stop and pick the UDID explicitly.
+Captures from the wrong simulator are worse than no capture because they can
+contradict the XcodeBuildMCP launch evidence.
 
 ## Manual Fallback
 
@@ -46,5 +54,7 @@ What does not map well:
 - coordinate taps
 - swipes
 - 2D gesture automation
+- proving that a `Logger` event fired
+- proving that an XCTest or Swift Testing assertion passed
 
 Route spatial gesture automation to XCUITest or in-app hooks.

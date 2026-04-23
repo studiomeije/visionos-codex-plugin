@@ -10,6 +10,10 @@ simulator through accessibility and HID input. Use it for screenshots, video,
 keyboard-driven flows, accessibility-tree inspection, and scripted
 post-launch evidence capture outside the test target.
 
+Use AXe after the app is already built, installed, and launched. It complements
+XcodeBuildMCP, XCTest/Swift Testing, and unified logs; it does not replace their
+build, launch, test, or telemetry evidence.
+
 On visionOS, AXe is deliberately narrower than on iOS. Coordinate-based touch
 and swipe automation are not the right abstraction for spatial UI. Route those
 cases to XCUITest or in-app test hooks.
@@ -26,12 +30,14 @@ cases to XCUITest or in-app test hooks.
 ## Workflow
 
 1. Build and launch the app with `build-run-debug`.
-2. Run AXe preflight once and resolve the simulator UDID.
-3. Choose the capture or interaction path: screenshot, video, keyboard input,
+2. Confirm the XcodeBuildMCP or fallback launch output names the intended Apple
+   Vision Pro simulator.
+3. Run AXe preflight once and resolve the simulator UDID.
+4. Choose the capture or interaction path: screenshot, video, keyboard input,
    accessibility dump, or a batched flow.
-4. If the task needs spatial gesture automation, stop and route to
+5. If the task needs spatial gesture automation, stop and route to
    `test-triage` or in-app test hooks.
-5. Verify the produced artifact or parsed accessibility output.
+6. Verify the produced artifact or parsed accessibility output.
 
 ## When To Switch Skills
 
