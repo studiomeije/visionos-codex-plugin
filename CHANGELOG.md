@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.1 - 2026-04-28
+
+- Added shared visionOS SwiftUI guidance requiring intentional
+  `.buttonBorderShape(...)` usage for visible button-like controls.
+- Added review coverage for `Button`, button-like `NavigationLink`, `ShareLink`,
+  and widget AppIntent button surfaces.
+- Synced the new control-shape guidance from `visionOSAgents` into the packaged
+  `build-visionos-apps` plugin.
+
 ## 1.1.0 - 2026-04-23
 
 - Sharpened the plugin metadata, README, and command entrypoints around

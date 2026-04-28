@@ -1,6 +1,6 @@
 {
   "name": "build-visionos-apps",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
   "author": {
     "name": "Studio Meije",
