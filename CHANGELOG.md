@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.2 - 2026-04-29
+
+- Added SwiftUI spatial layout guidance for intentional ZStack depth in
+  visionOS 26.
+- Documented when to use `ZStack(alignment:spacing:)`,
+  `frame(depth:alignment:)`, layout `depthAlignment(_:)`, `SpatialContainer`,
+  `spatialOverlay`, and `offset(z:)`.
+- Clarified that `offset(z:)` is best for small visual lifts and that
+  `zIndex(_:)` affects drawing order, not spatial depth.
+- Added examples for stable card depth, raised labels, and front-aligned
+  controls beside 3D content.
+
 ## 1.1.1 - 2026-04-28
 
 - Added shared visionOS SwiftUI guidance requiring intentional
