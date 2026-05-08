@@ -29,8 +29,16 @@ jobs:
 
           assert manifest["name"] == "build-visionos-apps"
           assert manifest["skills"] == "./skills/"
+          assert manifest["mcpServers"] == "./.mcp.json"
           assert (plugin_root / "assets/icon.png").is_file()
+          assert (plugin_root / ".mcp.json").is_file()
           assert (plugin_root / "skills").is_dir()
+          mcp = json.loads((plugin_root / ".mcp.json").read_text())
+          assert mcp["mcpServers"]["XcodeBuildMCP"]["command"] == "npx"
+          assert mcp["mcpServers"]["xcode"] == {
+              "command": "xcrun",
+              "args": ["mcpbridge"],
+          }
 
           entries = [
               entry

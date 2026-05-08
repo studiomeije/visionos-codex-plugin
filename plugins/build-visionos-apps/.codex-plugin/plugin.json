@@ -26,6 +26,7 @@
     "usd"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Build visionOS Apps",
     "shortDescription": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first workflows",

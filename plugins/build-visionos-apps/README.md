@@ -94,6 +94,7 @@ with this shape:
 - `.mcp.json`
   - ships `XcodeBuildMCP` via `npx -y xcodebuildmcp@latest mcp`
   - enables `simulator`, `debugging`, and `logging` workflows
+  - ships the official Xcode MCP server via `xcrun mcpbridge`
 
 - `agents/`
   - plugin-level agent metadata

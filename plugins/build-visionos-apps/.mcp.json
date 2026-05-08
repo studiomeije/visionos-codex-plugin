@@ -6,6 +6,12 @@
       "env": {
         "XCODEBUILDMCP_ENABLED_WORKFLOWS": "simulator,debugging,logging"
       }
+    },
+    "xcode": {
+      "command": "xcrun",
+      "args": [
+        "mcpbridge"
+      ]
     }
   }
 }

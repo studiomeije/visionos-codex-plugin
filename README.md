@@ -76,7 +76,26 @@ These tools are not bundled with the plugin.
 The plugin installs into `${CODEX_HOME:-~/.codex}/plugins/build-visionos-apps`.
 If you use a non-default Codex home, replace `~/.codex` with `$CODEX_HOME`.
 
-### Option 1: Download The Packaged ZIP
+### Option 1: Use This Repo As A Marketplace Source
+
+Codex can read this repository directly as a plugin marketplace because it
+contains `.agents/plugins/marketplace.json` at the repository root. Add the
+GitHub repo as a marketplace source:
+
+```bash
+codex plugin marketplace add studiomeije/visionos-codex-plugin --ref main
+```
+
+For local development, add the cloned repository instead:
+
+```bash
+codex plugin marketplace add /absolute/path/to/visionos-codex-plugin
+```
+
+Restart Codex, open the plugin directory, choose `visionOS Codex Plugins`, and
+install `Build visionOS Apps`.
+
+### Option 2: Download The Packaged ZIP
 
 The GitHub Actions workflow at `.github/workflows/package-plugin.yml` builds
 `build-visionos-apps.zip` from `plugins/build-visionos-apps/`.
@@ -97,7 +116,7 @@ That creates:
 ${CODEX_HOME:-$HOME/.codex}/plugins/build-visionos-apps
 ```
 
-### Option 2: Clone The Repo And Use The Installer Script
+### Option 3: Clone The Repo And Use The Installer Script
 
 Clone the repo, then run the installer:
 
