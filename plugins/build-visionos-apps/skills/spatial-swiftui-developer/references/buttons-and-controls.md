@@ -5,8 +5,25 @@ volume, ornament, toolbar, form, or spatial attachment.
 
 ## Button Shape Policy
 
-Every visible button-like control in visionOS SwiftUI should make its shape
-intentional with `.buttonBorderShape(...)`.
+Native visionOS toolbar icon actions should use a semantic `Label` and hide
+only the visible title:
+
+```swift
+Button {
+    importPackage()
+} label: {
+    Label("Import Package", systemImage: "square.and.arrow.down")
+        .labelStyle(.iconOnly)
+}
+```
+
+This keeps the title available to accessibility and lets visionOS synthesize
+the expected round toolbar button. Do not use a bare `Image(systemName:)` for
+icon-only toolbar actions, and do not add a manual border shape unless the
+control is outside the native toolbar treatment.
+
+Every visible button-like control outside native toolbar slots should make its
+shape intentional with `.buttonBorderShape(...)`.
 
 Apply the rule to:
 
