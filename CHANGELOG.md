@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.4 - 2026-06-04
+
+- Renamed the marketplace display name from `visionOS Codex Plugins` to
+  `Studio Meije`.
+- Updated the plugin manifest version for the marketplace metadata release.
+
 ## 1.1.3 - 2026-06-04
 
 - Refined shared visionOS skill guidance around official Apple frameworks,

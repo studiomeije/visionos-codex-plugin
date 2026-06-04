@@ -92,7 +92,7 @@ For local development, add the cloned repository instead:
 codex plugin marketplace add /absolute/path/to/visionos-codex-plugin
 ```
 
-Restart Codex, open the plugin directory, choose `visionOS Codex Plugins`, and
+Restart Codex, open the plugin directory, choose `Studio Meije`, and
 install `Build visionOS Apps`.
 
 ### Option 2: Download The Packaged ZIP

@@ -1,7 +1,7 @@
 {
   "name": "visionos-codex-marketplace",
   "interface": {
-    "displayName": "visionOS Codex Plugins"
+    "displayName": "Studio Meije"
   },
   "plugins": [
     {
