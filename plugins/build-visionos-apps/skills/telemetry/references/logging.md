@@ -12,6 +12,13 @@ Use this file when the task needs structured app logs.
 - Never log secrets, auth tokens, personal data, or raw world-sensing payloads.
 - Use privacy annotations deliberately; default sensitive values to private.
 
+## Apple API Anchors
+
+- `Logger`: writes structured messages to Apple's unified logging system.
+- `Logger.init(subsystem:category:)`: gives logs stable filter dimensions.
+- Level methods such as `Logger.info(_:)`, `Logger.debug(_:)`,
+  `Logger.error(_:)`, and `Logger.warning(_:)` record severity.
+
 ## Example
 
 ```swift

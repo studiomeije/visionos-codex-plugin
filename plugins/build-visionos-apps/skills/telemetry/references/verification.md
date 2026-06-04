@@ -8,10 +8,20 @@ Use this file when confirming that the instrumentation actually fired.
 2. Record the scheme, destination, simulator UDID, launch result, and any app
    stdout/stderr surfaced by the build/run tool.
 3. Stream unified logs for the app process, subsystem, or category.
-4. Confirm the expected event fired exactly once or in a bounded sequence.
+4. Confirm the expected `Logger` event or `OSSignposter` signpost fired exactly
+   once or in a bounded sequence.
 5. Check whether missing events are explained by launch failure, entitlement or
    privacy denial, scene lifecycle, or code path not reached.
 6. Remove or demote noisy temporary instrumentation.
+
+## API Policy Pointers
+
+- Use [`logging.md`](logging.md) for `Logger` categories, privacy annotations,
+  and structured-message examples.
+- Use [`signposts-instruments.md`](signposts-instruments.md) for
+  `OSSignposter`, Instruments, and timing-span patterns.
+- Keep this file focused on proving whether the chosen instrumentation fired in
+  the expected runtime path.
 
 ## XcodeBuildMCP Evidence
 

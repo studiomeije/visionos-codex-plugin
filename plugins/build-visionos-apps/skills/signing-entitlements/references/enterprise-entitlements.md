@@ -42,6 +42,7 @@ but not in the profile, treat it as unavailable for that team/profile.
   packaging problem after signing/profile checks pass.
 - Simulator success does not prove the managed entitlement is valid for a
   physical Apple Vision Pro.
-- Scene reconstruction and world tracking use `NSWorldSensingUsageDescription`;
-  do not add a speculative scene-understanding entitlement unless Apple has
+- Scene reconstruction uses `NSWorldSensingUsageDescription` and
+  `.worldSensing` authorization; world tracking does not require authorization.
+  Do not add a speculative scene-understanding entitlement unless Apple has
   granted a documented entitlement for the specific API.

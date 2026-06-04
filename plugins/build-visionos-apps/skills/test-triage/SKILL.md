@@ -15,6 +15,11 @@ After a build succeeds, test triage is the verification loop: run the smallest
 relevant XCTest or Swift Testing scope, inspect XcodeBuildMCP or `xcodebuild`
 test output, then classify the result from concrete evidence.
 
+Anchor every classification to the active test API. Load
+[`harness-detection.md`](references/harness-detection.md) for API-specific
+evidence rules and [`failure-categories.md`](references/failure-categories.md)
+for classification.
+
 If the project cannot build or the app cannot launch on the selected simulator,
 switch to `build-run-debug` first, establish a stable run loop, then resume
 test triage.
@@ -62,6 +67,11 @@ test triage.
 - Mark likely flakes as such instead of overstating confidence.
 - Do not label a failure as a product regression when environment or capability
   evidence is stronger.
+- Do not mix XCTest APIs and Swift Testing APIs inside the same test body; use
+  the active harness reference for the exact evidence rules.
+- Treat a visionOS simulator boot, install, test-host attach, or scene-launch
+  failure that occurs before a test body executes as environment or host
+  lifecycle evidence until a test assertion proves otherwise.
 
 ## Output Expectations
 

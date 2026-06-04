@@ -23,7 +23,10 @@ icon-only toolbar actions, and do not add a manual border shape unless the
 control is outside the native toolbar treatment.
 
 Every visible button-like control outside native toolbar slots should make its
-shape intentional with `.buttonBorderShape(...)`.
+shape intentional with `.buttonBorderShape(...)`. When a visionOS button needs
+a custom control outline, use SwiftUI's `buttonBorderShape(_:)` API instead of
+trying to create the button shape with `clipShape`, `cornerRadius`, or only a
+custom background.
 
 Apply the rule to:
 
@@ -41,11 +44,16 @@ radius.
 
 If a control uses `.buttonStyle(.plain)` because the entire row, card, or
 custom surface owns the visual treatment, keep the shape decision explicit in
-the custom background or component name. Do not leave the shape accidental.
+the custom background or component name. Do not leave the shape accidental, and
+do not use `.plain` as a workaround for a missing `buttonBorderShape(_:)` on a
+bordered visionOS button.
 
 ## Implementation Checklist
 
 - Pick the button style and border shape together.
+- For `.buttonStyle(.bordered)` and `.buttonStyle(.borderedProminent)`, add
+  `.buttonBorderShape(...)` whenever the desired shape is not the system
+  default.
 - Check toolbar items, account/profile actions, destructive actions, share
   actions, onboarding controls, and settings forms.
 - Include `NavigationLink` and `ShareLink` in the same audit as `Button`.

@@ -5,6 +5,7 @@ Use this file when the task is about timing or performance evidence.
 ## `OSSignposter`
 
 Use `OSSignposter` for spans that need measurement in Instruments.
+Use [`logging.md`](logging.md) for `Logger` policy and privacy rules.
 
 ```swift
 import OSLog
@@ -39,3 +40,14 @@ sample <pid> 5 -file ./artifacts/sample-output.txt
 For post-build verification, pair signpost captures with a small number of
 `Logger` events that prove the measured action actually started and ended in
 the intended app lifecycle path.
+
+## Apple API Anchors
+
+- `OSSignposter`: records signposted intervals and events using unified
+  logging.
+- `OSSignposter.init(logger:)`: reuses a `Logger` subsystem and category for
+  signposts.
+- `OSSignposter.beginInterval(_:id:)`,
+  `OSSignposter.endInterval(_:_:)`, `OSSignposter.emitEvent(_:id:)`, and
+  `OSSignposter.withIntervalSignpost(_:id:around:)`: measure spans or mark
+  points of interest for runtime verification and Instruments.

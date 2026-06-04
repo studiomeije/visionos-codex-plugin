@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.3 - 2026-06-04
+
+- Refined shared visionOS skill guidance around official Apple frameworks,
+  including RealityKit `GestureComponent`, SwiftUI scene lifecycle APIs,
+  button shape guidance, immersive media events, SharePlay, WidgetKit, USD, and
+  Shader Graph boundaries.
+- Removed stale route-only documentation and eliminated duplicated or
+  meta-guidance notes from skill references.
+- Removed Apple documentation link sections and literal documentation
+  identifiers from bundled skill markdown.
+- Synced the shared skill set from the packaged plugin back to
+  `visionOSAgents`.
+
 ## 1.1.2 - 2026-04-29
 
 - Added SwiftUI spatial layout guidance for intentional ZStack depth in

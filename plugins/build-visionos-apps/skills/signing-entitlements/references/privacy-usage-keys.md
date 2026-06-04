@@ -6,6 +6,21 @@ strings.
 Add only the keys that match the providers and APIs the app actually uses, and
 each key must contain a human-readable purpose string.
 
+## Official API Anchors
+
+- `NSWorldSensingUsageDescription`: Apple Info.plist key for world-sensing
+  data. Apple documents this as image tracking, plane detection, and scene
+  reconstruction.
+- `NSHandsTrackingUsageDescription`: Apple Info.plist key for hand-tracking
+  data, including hand skeleton, wrist, and forearm position and location.
+- `ARKitSession.AuthorizationType.worldSensing`: authorization for plane
+  detection, scene reconstruction, and image tracking.
+- `ARKitSession.AuthorizationType.handTracking`: authorization for detailed
+  hand-tracking data.
+- `ARKitSession.requestAuthorization(for:)` and
+  `ARKitSession.queryAuthorization(for:)`: use the provider
+  `requiredAuthorizations` values instead of guessing from feature names.
+
 ## Inspect The Built Bundle
 
 ```bash
@@ -18,11 +33,15 @@ app or the app inside the archive.
 
 ## Key Map
 
-- `NSWorldSensingUsageDescription`: world tracking, plane detection, scene
-  reconstruction, image tracking, room tracking, object tracking, world anchors,
-  and other ARKit world-sensing data.
-- `NSHandsTrackingUsageDescription`: hand skeleton, wrist, and forearm data via
-  `HandTrackingProvider`.
+- `NSWorldSensingUsageDescription`: world-sensing data that requires
+  `.worldSensing` authorization, including `PlaneDetectionProvider`,
+  `SceneReconstructionProvider`, and `ImageTrackingProvider` usage. Do not add
+  this key solely because the app uses `WorldTrackingProvider`, `WorldAnchor`,
+  or device-pose queries; Apple states that world tracking, unlike world
+  sensing, does not require authorization.
+- `NSHandsTrackingUsageDescription`: hand skeleton, wrist, and forearm position
+  and location data via `HandTrackingProvider` and `.handTracking`
+  authorization.
 - `NSAccessoryTrackingUsageDescription`: accessory position and orientation data
   via accessory tracking providers.
 - `NSMainCameraUsageDescription`: main-camera frame access on Apple Vision Pro.
@@ -38,6 +57,12 @@ app or the app inside the archive.
 
 - Missing usage strings usually fail at first access or authorization time, not
   at compile time.
+- `ARKitSession.run(_:)` can trigger the authorization prompt if the supplied
+  providers require authorization and the app has not already called
+  `requestAuthorization(for:)`.
+- Check `DataProvider.requiredAuthorizations` for the concrete provider types in
+  use. Treat `.worldSensing` and `.handTracking` as separate authorization
+  classes with separate usage strings.
 - Placeholder text such as `TODO`, empty strings, or internal jargon should be
   treated as invalid for release even if local launch succeeds.
 - Simulator prompts and physical-device prompts can diverge after prior grants.
