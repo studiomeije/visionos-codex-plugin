@@ -1,6 +1,6 @@
 ---
 name: arkit-visionos-developer
-description: Build and debug ARKit features for visionOS 26, including ARKitSession setup, authorization, data providers (world tracking, plane detection, scene reconstruction, hand tracking), anchor processing, and RealityKit integration. Use when implementing ARKit workflows on visionOS or troubleshooting provider-specific space, privacy, and lifecycle behavior.
+description: Build and debug ARKit features for visionOS 27, including ARKitSession setup, authorization, data providers (world tracking, plane detection, scene reconstruction, hand tracking, visual fidelity), anchor processing, and RealityKit integration. Use when implementing ARKit workflows on visionOS or troubleshooting provider-specific space, privacy, and lifecycle behavior.
 ---
 
 # ARKit visionOS Developer
@@ -41,6 +41,7 @@ description: Build and debug ARKit features for visionOS 26, including ARKitSess
 | [`references/environment-light-estimation-provider.md`](references/environment-light-estimation-provider.md) | When estimating ambient lighting. |
 | [`references/shared-coordinate-space-provider.md`](references/shared-coordinate-space-provider.md) | When sharing coordinate spaces across participants or sessions. |
 | [`references/stereo-properties-provider.md`](references/stereo-properties-provider.md) | When working with stereo camera properties. |
+| [`references/visual-fidelity-provider.md`](references/visual-fidelity-provider.md) | When coaching device fit or tuning foveated field of view (new in visionOS 27). |
 
 ## Workflow
 

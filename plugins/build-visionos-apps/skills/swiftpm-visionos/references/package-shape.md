@@ -4,8 +4,8 @@ Use this file when `Package.swift` is the main artifact under review.
 
 ## What To Inspect
 
-- `platforms:` includes `.visionOS(.v26)` for visionOS 26-first packages, or a
-  documented lower minimum when the repo intentionally supports older systems.
+- `platforms:` includes `.visionOS(.v27)` as the floor. visionOS 27 is in
+  beta, so API names may change before release.
 - Products: executable, library, plugin, and test products.
 - Targets that declare resources such as `.rkassets`, `.usdz`, or Shader Graph
   material assets.

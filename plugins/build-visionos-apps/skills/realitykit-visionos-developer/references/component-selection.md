@@ -42,6 +42,34 @@ type. Prefer documented components when they match the behavior.
 - `ARKitSession`: use when the app needs provider streams, explicit
   authorization, or direct anchor-update reconciliation.
 
+## New in visionOS 27
+
+All entries below are new in visionOS 27; beta API names and shapes may change
+before release.
+
+- `GaussianSplatComponent`: render Gaussian splat captures instead of meshes.
+- `ToneMappingComponent`, `BloomComponent`: post-processing (tone mapping,
+  glow on bright content).
+- `PhysicallyBasedDecalComponent`: project PBR decals onto existing geometry.
+- `ClippingComponent`: clip rendered geometry against bounds.
+- `LevelOfDetailComponent`, `OcclusionCullingComponent`: rendering cost
+  control by distance or visibility.
+- Render layers, per-light layer masks, cascaded and spot shadow controls:
+  see `render-layers-and-shadows.md`.
+- Baked lightmaps and diffuse light probes: see `lightmaps-and-probes.md`.
+- Cloth bodies, cloth colliders, and grab support: see `cloth-simulation.md`.
+- GPU particles and compute simulation (`ComputeGraph`): see
+  `compute-graph-particles.md`.
+- Animation graphs, retargeting, root motion, mesh deformers: see
+  `animation-graphs-and-retargeting.md`.
+- Navmesh pathfinding and behavior trees: see
+  `navigation-and-behavior-trees.md`.
+- Grouped audio playback and simulated acoustics: see
+  `audio-groups-and-acoustics.md`.
+- `USDStageComponent`: render a live USD stage; USD export options.
+- Volumetric portals and controller/stylus anchoring: see
+  `portal-volumes-and-accessory-anchoring.md`.
+
 ## Custom ECS Boundary
 
 Create a custom `Component` or `System` only when documented components do not
@@ -60,3 +88,22 @@ Open the component-specific reference for details:
 - [`viewattachmentcomponent.md`](viewattachmentcomponent.md)
 - [`videoplayercomponent.md`](videoplayercomponent.md)
 - [`spatialtrackingsession.md`](spatialtrackingsession.md)
+
+New in visionOS 27:
+
+- [`gaussiansplatcomponent.md`](gaussiansplatcomponent.md)
+- [`tonemappingcomponent.md`](tonemappingcomponent.md)
+- [`bloomcomponent.md`](bloomcomponent.md)
+- [`physicallybaseddecalcomponent.md`](physicallybaseddecalcomponent.md)
+- [`clippingcomponent.md`](clippingcomponent.md)
+- [`levelofdetailcomponent.md`](levelofdetailcomponent.md)
+- [`occlusioncullingcomponent.md`](occlusioncullingcomponent.md)
+- [`render-layers-and-shadows.md`](render-layers-and-shadows.md)
+- [`lightmaps-and-probes.md`](lightmaps-and-probes.md)
+- [`cloth-simulation.md`](cloth-simulation.md)
+- [`compute-graph-particles.md`](compute-graph-particles.md)
+- [`animation-graphs-and-retargeting.md`](animation-graphs-and-retargeting.md)
+- [`navigation-and-behavior-trees.md`](navigation-and-behavior-trees.md)
+- [`audio-groups-and-acoustics.md`](audio-groups-and-acoustics.md)
+- [`usdstagecomponent.md`](usdstagecomponent.md)
+- [`portal-volumes-and-accessory-anchoring.md`](portal-volumes-and-accessory-anchoring.md)

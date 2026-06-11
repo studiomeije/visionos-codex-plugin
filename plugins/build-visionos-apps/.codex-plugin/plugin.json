@@ -1,7 +1,7 @@
 {
   "name": "build-visionos-apps",
-  "version": "1.1.4",
-  "description": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
+  "version": "1.2.0",
+  "description": "Build, run, debug, refactor, and ship visionOS 27 (beta) apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
   "author": {
     "name": "Studio Meije",
     "email": "tom@studiomeije.com",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "keywords": [
     "visionos",
-    "visionos-26",
+    "visionos-27",
     "swiftui",
     "realitykit",
     "arkit",
@@ -29,8 +29,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Build visionOS Apps",
-    "shortDescription": "Build, run, debug, refactor, and ship visionOS 26 apps with XcodeBuildMCP-first workflows",
-    "longDescription": "visionOS 26 development for Apple Vision Pro: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, command entrypoints, and Run-button fallback bootstrap. AXe and asc are optional external CLIs used only by the skills that document them.",
+    "shortDescription": "Build, run, debug, refactor, and ship visionOS 27 apps with XcodeBuildMCP-first workflows",
+    "longDescription": "Development for Apple Vision Pro on visionOS 27: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, command entrypoints, and Run-button fallback bootstrap. AXe and asc are optional external CLIs used only by the skills that document them.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [
@@ -41,7 +41,11 @@
     "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
     "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
     "termsOfServiceURL": "https://developer.apple.com/support/terms/",
-    "defaultPrompt": "Build, run, debug, structure, or refactor a visionOS 26 app with XcodeBuildMCP on Apple Vision Pro Simulator, choose the right window, volume, or immersive surface, capture logs or debugger state, inspect RealityKit, ARKit, and SharePlay behavior, or prepare packaging workflows with optional external CLIs only when available.",
+    "defaultPrompt": [
+      "Build, run, and debug a visionOS 27 app with XcodeBuildMCP on Apple Vision Pro Simulator.",
+      "Choose the right window, volume, or immersive surface and inspect RealityKit, ARKit, and SharePlay behavior.",
+      "Prepare packaging and distribution workflows with optional external CLIs only when available."
+    ],
     "screenshots": [],
     "brandColor": "#0F172A",
     "composerIcon": "./assets/icon.png",

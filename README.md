@@ -1,7 +1,7 @@
 # Build visionOS Apps for Codex
 
 `build-visionos-apps` is a Codex plugin for building, running, debugging,
-refactoring, and shipping visionOS 26 apps for Apple Vision Pro.
+refactoring, and shipping visionOS 27 apps for Apple Vision Pro.
 
 It combines XcodeBuildMCP-first build and simulator workflows with shared
 platform skills for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit,

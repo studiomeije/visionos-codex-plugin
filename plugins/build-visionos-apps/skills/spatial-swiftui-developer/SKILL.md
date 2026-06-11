@@ -1,6 +1,6 @@
 ---
 name: spatial-swiftui-developer
-description: Design and implement visionOS 26 SwiftUI scenes that integrate RealityKit content. Use when building spatial UI with RealityView, Model3D, attachments, volumetric windows, ImmersiveSpace, or spatial gestures, or when choosing SwiftUI vs RealityKit APIs for 3D presentation.
+description: Design and implement visionOS 27 SwiftUI scenes that integrate RealityKit content. Use when building spatial UI with RealityView, Model3D, attachments, volumetric windows, ImmersiveSpace, or spatial gestures, or when choosing SwiftUI vs RealityKit APIs for 3D presentation.
 ---
 
 # Spatial SwiftUI Developer
@@ -41,6 +41,15 @@ description: Design and implement visionOS 26 SwiftUI scenes that integrate Real
 
 ## Guardrails
 
+- Every visible button gets an explicit `.buttonBorderShape(...)` (`.capsule`
+  for labeled actions, `.circle` for icon-only,
+  `.roundedRectangle(radius:)` matching the background for card-like
+  buttons — on visionOS this is also what shapes the button's hover
+  highlight). Non-button hover surfaces pair `.hoverEffect()` with a matching
+  `.contentShape(.hoverEffect, ...)`. Load
+  [`buttons-and-controls.md`](references/buttons-and-controls.md) before
+  writing any control code — this applies even when buttons are incidental to
+  a larger task.
 - Keep RealityKit loads async; do not block the main actor with asset or entity loading.
 - Mutate RealityKit content in `RealityView` make or update closures or in a
   system, not in SwiftUI body code.
@@ -51,6 +60,10 @@ description: Design and implement visionOS 26 SwiftUI scenes that integrate Real
   simulator, codesign, or debugging workflow.
 - Use `spatial-app-architecture` when the question is about scene boundaries,
   ownership, or feature decomposition rather than API usage.
+- visionOS 27 SwiftUI adds no new scene, volume, or immersion APIs; the
+  guidance here is current for visionOS 27. New in 27: gesture `inputKinds:`
+  filtering (see `interaction.md`) plus cross-platform toolbar and navigation
+  refinements that also apply on visionOS.
 ## Output Expectations
 
 Provide:

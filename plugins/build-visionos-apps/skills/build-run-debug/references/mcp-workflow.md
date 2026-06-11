@@ -14,7 +14,7 @@ is available for this session.
 3. `list_schemes`
 4. Choose the app-producing scheme, not a helper package or test target
 5. `list_sims`
-6. Choose an Apple Vision Pro Simulator with a visionOS 26 runtime
+6. Choose an Apple Vision Pro Simulator with a visionOS 27 runtime
 7. `session-set-defaults`
 8. `build_sim` or `build_run_sim`
 9. `launch_app_logs_sim`, log capture, or debugger tools when diagnosis needs
@@ -31,10 +31,11 @@ Set defaults from inspected facts:
 - A simulator destination that resolves to Apple Vision Pro Simulator, not an
   iPhone, iPad, macOS, or generic unavailable destination.
 
-If the MCP cannot see a visionOS 26 SDK or Apple Vision Pro Simulator that the
-shell can see under `/Applications/Xcode-beta.app/Contents/Developer`, report
-that as an MCP environment mismatch and use the shell fallback for the current
-verification.
+The visionOS 27 SDK and simulator runtime ship with Xcode 27 beta. If the
+MCP cannot see a visionOS 27 SDK or Apple Vision Pro Simulator that the
+shell can see under
+`/Applications/Xcode-beta.app/Contents/Developer`, report that as an MCP
+environment mismatch and use the shell fallback for the current verification.
 
 ## Architecture Notes
 

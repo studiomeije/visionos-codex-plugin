@@ -1,6 +1,6 @@
 ---
 name: build-run-debug
-description: Build, run, and debug local visionOS 26 apps with XcodeBuildMCP-backed Apple Vision Pro simulator workflows. Use when asked to build a visionOS app, launch it in Simulator, diagnose compiler or linker failures, inspect simulator launch problems, debug runtime issues in a spatial app, or bootstrap a local Run button fallback.
+description: Build, run, and debug local visionOS 27 apps with XcodeBuildMCP-backed Apple Vision Pro simulator workflows. Use when asked to build a visionOS app, launch it in Simulator, diagnose compiler or linker failures, inspect simulator launch problems, debug runtime issues in a spatial app, or bootstrap a local Run button fallback.
 ---
 
 # Build / Run / Debug
@@ -55,8 +55,8 @@ aligned to that choice.
 - Do not invent a workspace, project, scheme, package product, or bundle id
   from the repo name; inspect the actual build graph.
 - Do not skip deliberate Apple Vision Pro Simulator selection.
-- Use the Xcode beta developer directory only when the active Xcode cannot see
-  the required visionOS 26 SDK or simulator runtime.
+- Use the Xcode beta developer directory when the selected Xcode cannot see
+  the visionOS 27 SDK or simulator runtime; both ship with Xcode 27 beta.
 - Treat missing `x86_64` simulator slices on Apple silicon as an architecture
   selection problem before changing app code.
 - Do not write `.codex/environments/environment.toml` before the run script

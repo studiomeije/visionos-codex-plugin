@@ -74,9 +74,11 @@ The script is a fallback runtime wrapper, not the source of truth for scheme or
 destination selection when MCP is available.
 
 If the current validation required
-`DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer` or
-`ARCHS=arm64 ONLY_ACTIVE_ARCH=YES`, note that explicitly before generating a
-long-lived script instead of baking the workaround in silently.
+`DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer` (because the
+selected Xcode could not see the visionOS 27 SDK) or
+`ARCHS=arm64 ONLY_ACTIVE_ARCH=YES`, note that explicitly
+before generating a long-lived script instead of baking the workaround in
+silently.
 
 ### Expected flags
 

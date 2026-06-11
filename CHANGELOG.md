@@ -1,5 +1,42 @@
 # Changelog
 
+## 1.2.0 - 2026-06-10
+
+- Added visionOS 27 (beta) coverage to the shared RealityKit skill: 16 new
+  references for Gaussian splats, compute-graph particles, cloth simulation,
+  animation graphs and retargeting, navigation and behavior trees,
+  post-processing components (tone mapping, bloom, decals, clipping, LOD,
+  occlusion culling), render layers and shadows, lightmaps and probes, audio
+  playback groups and simulated acoustics, USD stages, and volumetric portals
+  with accessory anchoring.
+- Added USDKit framework coverage to the USD editor skill, including the
+  Swift-native stage/prim/layer API and a USDKit-vs-CLI decision guide.
+- Added a new plugin-local `spatial-preview-developer` skill for the macOS 27
+  Spatial Preview frameworks that stream documents and live USD stages to
+  Apple Vision Pro.
+- Added visionOS 27 ARKit guidance: `VisualFidelityProvider`, live accessory
+  updates, high-frame-rate object tracking, and anchor coordinate-space
+  conformance.
+- Added programmatic shader graph guidance (`ShaderGraph` module,
+  `ShaderGraphMaterial.Program`, lighting models, subsurface scattering) to
+  the Shader Graph skill.
+- Added an in-app ScreenCaptureKit-on-visionOS reference to the UI automation
+  skill, including the picker-only filter model and unavailable-API list.
+- Added SwiftUI `RotateGesture3D` input-kind constraints and widget
+  container-background guidance verified against the visionOS 27 SDK.
+- Replaced WWDC-anchored staleness markers with SDK-verified availability
+  floors across RealityKit references, and rewrote the AttachedTransform and
+  DockingRegion component references from the actual SDK API.
+- Retargeted the plugin to visionOS 27 as the minimum supported release:
+  plugin metadata, READMEs, build/run, and SwiftPM guidance now target
+  visionOS 27, sub-27 availability annotations were removed across the
+  skills, and the SwiftPM platform floor moved to `.visionOS(.v27)`.
+  Xcode-beta SDK semantics were corrected along the way.
+- Fixed plugin validation: skill icons moved so `validate_plugin.py` passes,
+  `defaultPrompt` converted to the spec's array form, missing
+  `agents/openai.yaml` added to three skills, and over-long short
+  descriptions shortened.
+
 ## 1.1.4 - 2026-06-04
 
 - Renamed the marketplace display name from `visionOS Codex Plugins` to

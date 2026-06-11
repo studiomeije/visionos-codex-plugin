@@ -1,6 +1,6 @@
 ---
 name: usd-editor
-description: Guide for modifying USD ASCII (.usda) files, including prims, properties, composition arcs, variants, and transforms. Use when editing or reviewing .usda files by hand.
+description: Guide for modifying USD ASCII (.usda) files, including prims, properties, composition arcs, variants, and transforms, plus the USDKit Swift framework on visionOS 27 / macOS 27 / iOS 27 (beta). Use when editing or reviewing .usda files by hand, or when opening, editing, or observing USD stages from Swift with USDStage, USDPrim, or USDLayer.
 ---
 
 # USD Editor
@@ -18,6 +18,10 @@ authored USD content in Swift unless the request is explicitly procedural.
 If the change is material- or shader-specific for RealityKit, prefer
 `shadergraph-editor`.
 
+Apps can also open and edit stages in-process with the USDKit framework
+(new in visionOS 27 / macOS 27 / iOS 27); see `usdkit-vs-cli` before
+choosing that path over the CLI flow.
+
 ## Load References When
 
 | Reference | When to Use |
@@ -34,6 +38,8 @@ If the change is material- or shader-specific for RealityKit, prefer
 | [`usdtree`](references/usdtree.md) | When inspecting the prim hierarchy of a USD file. |
 | [`usdzip`](references/usdzip.md) | When creating or inspecting USDZ packages. |
 | [`usdedit`](references/usdedit.md) | When you need the official text-editing workflow for a USD-readable file. |
+| [`usdkit-framework`](references/usdkit-framework.md) | When opening, editing, or observing USD stages from Swift with USDKit (new in visionOS 27 / macOS 27 / iOS 27). |
+| [`usdkit-vs-cli`](references/usdkit-vs-cli.md) | When deciding between the usd* CLI flow and in-process USDKit. |
 | [`visionos-runtime-loading.md`](references/visionos-runtime-loading.md) | When the question is how the authored USD or USDZ actually loads and behaves in a visionOS app. |
 | [`apple-runtime-boundaries.md`](references/apple-runtime-boundaries.md) | When deciding whether to edit authored USD / Reality Composer Pro content, load it through RealityKit, or validate it for Apple platforms. |
 

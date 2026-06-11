@@ -26,6 +26,7 @@ cases to XCUITest or in-app test hooks.
 | [`references/axe-commands.md`](references/axe-commands.md) | When choosing concrete AXe commands for capture, keyboard input, hardware buttons, accessibility dumps, or batch steps. |
 | [`references/visionos-automation-app-design.md`](references/visionos-automation-app-design.md) | When the app itself needs keyboard shortcuts, focusability, accessibility labels, or simulator-only debug hooks to make AXe reliable. |
 | [`references/workflow-recipes.md`](references/workflow-recipes.md) | When you need end-to-end screenshot, video, accessibility, or performance-sweep patterns. |
+| [`references/screencapturekit-visionos.md`](references/screencapturekit-visionos.md) | When the app itself needs to record or replay its own content with ScreenCaptureKit — in-app capture (new in visionOS 27), not AXe-driven simulator capture. |
 
 ## Workflow
 

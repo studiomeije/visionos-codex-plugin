@@ -15,9 +15,10 @@ Use this file when selecting the right build or test command.
 
 ## Developer Directory
 
-Use the active Xcode by default. If `swift build` or `xcodebuild` cannot see
-visionOS 26 APIs, verify the SDK set and use the beta developer directory as a
-per-command fallback:
+Use the active Xcode by default. The visionOS 27 SDK and simulator runtime
+ship with Xcode 27 beta. If the selected Xcode cannot see a visionOS 27 SDK,
+verify the SDK set and use the beta developer directory as a per-command
+fallback:
 
 ```bash
 xcodebuild -showsdks | grep -i -E 'vision|xros'

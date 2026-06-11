@@ -5,8 +5,7 @@ Use this file when the build or test result needs classification.
 ## Failure Classes
 
 - Platform-condition mismatch
-- Missing or downgraded `.visionOS(.v26)` when the package is meant to be
-  visionOS 26-first
+- Missing or downgraded `.visionOS(.v27)` floor in the `platforms:` list
 - Active Xcode cannot see the required visionOS SDK or simulator runtime
 - Apple silicon simulator build selected `x86_64` when dependencies only ship
   arm64 simulator slices

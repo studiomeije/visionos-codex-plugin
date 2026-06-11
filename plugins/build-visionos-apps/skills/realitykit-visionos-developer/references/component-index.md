@@ -1,7 +1,8 @@
 # RealityKit Reference Map
 
 Load this file first when you need to decide which detailed component file to
-open next.
+open next. Categories marked "new in visionOS 27" cover the 27 additions; that
+API is beta and names may change before release.
 
 ## Category Routing
 
@@ -9,6 +10,10 @@ open next.
   `modelcomponent`, `modelsortgroupcomponent`, `opacitycomponent`,
   `adaptiveresolutioncomponent`, `meshinstancescomponent`,
   `blendshapeweightscomponent`
+- Rendering and appearance (new in visionOS 27):
+  `gaussiansplatcomponent`, `tonemappingcomponent`, `bloomcomponent`,
+  `physicallybaseddecalcomponent`, `clippingcomponent`,
+  `levelofdetailcomponent`, `occlusioncullingcomponent`
 - Interaction:
   `inputtargetcomponent`, `manipulationcomponent`, `gesturecomponent`,
   `hovereffectcomponent`, `accessibilitycomponent`, `billboardcomponent`
@@ -24,22 +29,32 @@ open next.
   `imagebasedlightcomponent`, `groundingshadowcomponent`,
   `dynamiclightshadowcomponent`, `environmentlightingconfigurationcomponent`,
   `virtualenvironmentprobecomponent`
+- Lighting and shadows (new in visionOS 27):
+  `render-layers-and-shadows`, `lightmaps-and-probes`
 - Audio:
   `spatialaudiocomponent`, `ambientaudiocomponent`,
   `channelaudiocomponent`, `audiolibrarycomponent`, `reverbcomponent`,
   `audiomixgroupscomponent`
+- Audio (new in visionOS 27):
+  `audio-groups-and-acoustics`
 - Animation and character:
   `animationlibrarycomponent`, `charactercontrollercomponent`,
   `charactercontrollerstatecomponent`, `skeletalposescomponent`,
   `ikcomponent`, `bodytrackingcomponent`
+- Animation and behavior (new in visionOS 27):
+  `animation-graphs-and-retargeting`, `navigation-and-behavior-trees`
 - Physics and collision:
   `collisioncomponent`, `physicsbodycomponent`, `physicsmotioncomponent`,
   `physicssimulationcomponent`, `particleemittercomponent`,
   `forceeffectcomponent`, `physicsjointscomponent`,
   `geometricpinscomponent`
+- Physics and simulation (new in visionOS 27):
+  `cloth-simulation`, `compute-graph-particles`
 - Portals and environments:
   `portalcomponent`, `worldcomponent`, `portalcrossingcomponent`,
   `environmentblendingcomponent`
+- Portals and environments (new in visionOS 27):
+  `portal-volumes-and-accessory-anchoring`
 - Presentation and UI:
   `viewattachmentcomponent`, `presentationcomponent`, `textcomponent`,
   `imagepresentationcomponent`, `videoplayercomponent`
@@ -47,6 +62,8 @@ open next.
   `spatialtrackingsession`
 - Networking and sync:
   `synchronizationcomponent`, `transientcomponent`
+- USD stages and export (new in visionOS 27):
+  `usdstagecomponent`
 
 ## Custom ECS Work
 

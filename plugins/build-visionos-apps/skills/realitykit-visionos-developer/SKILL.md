@@ -1,6 +1,6 @@
 ---
 name: realitykit-visionos-developer
-description: Build, debug, and optimize RealityKit scenes for visionOS 26, including entity/component setup, rendering, animation, physics, audio, input, attachments, and custom systems. Use when implementing RealityKit features or troubleshooting ECS behavior on visionOS.
+description: Build, debug, and optimize RealityKit scenes for visionOS 27, covering entity/component setup, rendering, animation, physics, audio, input, attachments, and custom systems, including gaussian splats, compute-graph particles, cloth simulation, animation graphs, navigation and behavior trees, post-processing, lightmaps, USD stages, and audio groups. Use when implementing RealityKit features or troubleshooting ECS behavior on visionOS.
 ---
 
 # RealityKit visionOS Developer
@@ -35,6 +35,15 @@ description: Build, debug, and optimize RealityKit scenes for visionOS 26, inclu
 | [`references/synchronizationcomponent.md`](references/synchronizationcomponent.md) | When synchronizing entity state across a session. |
 | [`references/custom-components.md`](references/custom-components.md) | When defining custom per-entity state. |
 | [`references/custom-systems.md`](references/custom-systems.md) | When implementing custom systems or per-frame behavior. |
+| [`references/gaussiansplatcomponent.md`](references/gaussiansplatcomponent.md) | When rendering Gaussian splat captures (new in 27). |
+| [`references/compute-graph-particles.md`](references/compute-graph-particles.md) | When building GPU particles or compute simulations with `ComputeGraph` (new in 27). |
+| [`references/cloth-simulation.md`](references/cloth-simulation.md) | When simulating cloth bodies, colliders, or cloth grabbing (new in 27). |
+| [`references/animation-graphs-and-retargeting.md`](references/animation-graphs-and-retargeting.md) | When using animation graphs, retargeting, root motion, or mesh deformers (new in 27). |
+| [`references/navigation-and-behavior-trees.md`](references/navigation-and-behavior-trees.md) | When adding navmesh pathfinding or behavior trees (new in 27). |
+| [`references/tonemappingcomponent.md`](references/tonemappingcomponent.md) | When tuning tone mapping or bloom post-processing; pairs with `references/bloomcomponent.md` (new in 27). |
+| [`references/lightmaps-and-probes.md`](references/lightmaps-and-probes.md) | When applying baked lightmaps or diffuse light probes (new in 27). |
+| [`references/usdstagecomponent.md`](references/usdstagecomponent.md) | When rendering a live USD stage or exporting USD (new in 27). |
+| [`references/audio-groups-and-acoustics.md`](references/audio-groups-and-acoustics.md) | When grouping audio playback or simulating room acoustics (new in 27). |
 
 ## Workflow
 

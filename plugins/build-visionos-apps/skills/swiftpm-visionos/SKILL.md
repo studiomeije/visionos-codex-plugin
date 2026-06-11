@@ -50,8 +50,8 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
 ## Guardrails
 
 - Do not assume an app bundle exists in a pure package workflow.
-- Do not silently downgrade or remove `.visionOS(.v26)` from the `platforms:`
-  list unless the repo intentionally supports an older minimum.
+- Do not silently downgrade or remove `.visionOS(.v27)` from the `platforms:`
+  list.
 - Explain when the package is library-only and therefore not directly
   runnable on visionOS.
 - Keep resource paths inside the package instead of reaching into app-level

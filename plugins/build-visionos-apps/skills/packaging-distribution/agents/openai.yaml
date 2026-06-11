@@ -1,0 +1,6 @@
+interface:
+  display_name: "Packaging & Distribution"
+  short_description: "Archive and distribute visionOS apps with asc workflows"
+  icon_small: "./assets/studio-meije-logo-small.png"
+  icon_large: "./assets/studio-meije-logo.png"
+  default_prompt: "Use $packaging-distribution to archive a visionOS app and run TestFlight, App Store, or enterprise distribution checks."

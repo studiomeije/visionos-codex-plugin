@@ -62,8 +62,8 @@ Example target-scoped declaration:
   platform processing, `.copy` for authored folders that must keep their exact
   structure and names.
 - Confirm the consuming app or package imports the generated module.
-- Confirm `Package.swift` carries the expected visionOS minimum, usually
-  `.visionOS(.v26)` for visionOS 26 plugin work.
+- Confirm `Package.swift` carries the expected visionOS minimum,
+  `.visionOS(.v27)`.
 - Use `xcodebuild` with an Apple Vision Pro Simulator destination when asset
   package code depends on generated RealityKit or visionOS SDK symbols.
 - If asset edits do not appear, clean DerivedData or the package build products.

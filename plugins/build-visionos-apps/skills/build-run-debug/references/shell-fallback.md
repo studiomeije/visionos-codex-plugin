@@ -13,9 +13,10 @@ the better fit.
 
 ## Developer Directory Fallback
 
-Start with the active developer directory. Use the beta path only when the
-active Xcode does not expose the needed visionOS 26 SDK, simulator runtime, or
-Swift language mode:
+Start with the active developer directory. The visionOS 27 SDK and simulator
+runtime ship with Xcode 27 beta. If the selected Xcode cannot see a visionOS
+27 SDK, point `DEVELOPER_DIR` at
+`/Applications/Xcode-beta.app/Contents/Developer`:
 
 ```bash
 xcode-select -p

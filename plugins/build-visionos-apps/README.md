@@ -1,7 +1,7 @@
 # Build visionOS Apps Plugin
 
-This plugin packages XcodeBuildMCP-first visionOS 26 development workflows in
-`plugins/build-visionos-apps` for Apple Vision Pro.
+This plugin packages XcodeBuildMCP-first development workflows for visionOS 27
+apps in `plugins/build-visionos-apps` for Apple Vision Pro.
 
 It combines shared platform skills synced from `visionOSAgents` with
 plugin-local workflow skills for build/run/debug, testing, signing, telemetry,
@@ -160,5 +160,5 @@ The shared platform skill layer (`spatial-app-architecture`,
 visionOS-specific architecture and implementation guidance. The plugin-local
 workflow skills (`build-run-debug`, `test-triage`, `signing-entitlements`,
 `swiftpm-visionos`, `packaging-distribution`, `telemetry`,
-`visionos-ui-automation`) cover the operational loop around a visionOS 26
+`visionos-ui-automation`) cover the operational loop around a visionOS 27
 codebase.

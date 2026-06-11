@@ -1,0 +1,6 @@
+interface:
+  display_name: "SwiftPM for visionOS"
+  short_description: "Build and test Swift packages that target visionOS"
+  icon_small: "./assets/studio-meije-logo-small.png"
+  icon_large: "./assets/studio-meije-logo.png"
+  default_prompt: "Use $swiftpm-visionos to inspect Package.swift, choose the right build or test command, and classify visionOS package failures."

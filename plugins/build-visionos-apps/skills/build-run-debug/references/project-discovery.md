@@ -22,8 +22,8 @@ by the user, repo docs, or current session defaults.
 - The selected workspace or project is the one used by the app entrypoint.
 - The scheme builds a `.app` for `visionOS Simulator`, not just a library,
   command-line tool, test bundle, or Reality Composer Pro asset package.
-- The destination is an Apple Vision Pro Simulator with a visionOS 26 runtime
-  unless the user intentionally names a device or older runtime.
+- The destination is an Apple Vision Pro Simulator with a visionOS 27 runtime
+  unless the user intentionally names a device or another runtime.
 - The bundle identifier comes from build settings or the built app, not from a
   guessed reverse-DNS string.
 - A repo-local run script, if present, points at the same workspace or project,

@@ -4,7 +4,7 @@ Use this file when a launch symptom may not actually be a build failure.
 
 - A cold Apple Vision Pro simulator boot can take 30 to 60 seconds.
 - A simulator named "Apple Vision Pro" can exist for more than one runtime;
-  confirm the selected device uses the expected visionOS 26 runtime.
+  confirm the selected device uses a visionOS 27 runtime.
 - Apps that declare an `ImmersiveSpace` still usually launch into a window
   first; the immersive space only opens when the app calls
   `openImmersiveSpace(id:)`.
