@@ -1,6 +1,6 @@
 interface:
   display_name: "visionOS UI Automation"
-  short_description: "Automate the Vision Pro simulator with the AXe CLI"
+  short_description: "Automate Vision Pro UI with XCUITest and simctl"
   icon_small: "./assets/studio-meije-logo-small.png"
   icon_large: "./assets/studio-meije-logo.png"
-  default_prompt: "Use $visionos-ui-automation to script simulator interactions, capture screenshots or video, and inspect accessibility trees with AXe."
+  default_prompt: "Use $visionos-ui-automation to validate Vision Pro UI flows with XCUITest, capture simulator screenshots or video with simctl, and route spatial automation through app debug hooks."

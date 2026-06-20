@@ -19,7 +19,7 @@ is batch/CI/asset-pipeline work (CLI) vs in-process, runtime stage work
 ## Keep the CLI When
 
 - The asset is authored content fixed at build time; edit the source layer
-  and validate with `usdchecker`, exactly as the rest of this skill does.
+  and validate with `usdchecker` through `$usd-editor`.
 - The work runs in CI or a content pipeline on machines without the 27 SDKs.
 - You only need to look: `usdtree` and `usdcat` are faster than writing a
   Swift inspection harness.

@@ -11,9 +11,10 @@ to day plugin usage.
 Only the shared core skills listed in `sync/shared-skills.json` participate in
 repo-to-repo sync.
 
-Plugin-only workflow skills such as `build-run-debug`,
-`packaging-distribution`, `visionos-ui-automation`, and `telemetry` stay local
-to `visionos-plugin-codex` and must not be added to the shared-skill manifest.
+Plugin-only workflow and Vision Pro-adjacent tooling skills such as
+`build-run-debug`, `packaging-distribution`, `visionos-ui-automation`,
+`spatial-preview-developer`, and `telemetry` stay local to
+`visionos-plugin-codex` and must not be added to the shared-skill manifest.
 
 Both repos keep the same lock file in `sync/shared-skills.lock.json`.
 

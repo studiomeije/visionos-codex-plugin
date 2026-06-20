@@ -16,14 +16,26 @@ It currently includes these skills:
 - `signing-entitlements`
 - `swiftpm-visionos`
 - `packaging-distribution`
+- `spatial-preview-developer`
 - `spatial-app-architecture`
 - `telemetry`
 - `coding-standards-enforcer`
 - `spatial-swiftui-developer`
+- `swiftui-chart3d-developer`
 - `realitykit-visionos-developer`
+- `realitykit-rendering-materials`
+- `realitykit-animation-physics`
+- `realitykit-audio-spatial`
+- `realitykit-ecs-systems`
 - `arkit-visionos-developer`
+- `arkit-spatial-tracking-providers`
+- `arkit-hand-tracking-provider`
+- `arkit-reference-tracking-providers`
+- `arkit-camera-access-providers`
+- `arkit-rendering-context-providers`
 - `shadergraph-editor`
 - `usd-editor`
+- `usdkit-runtime-developer`
 - `visionos-immersive-media-developer`
 - `shareplay-developer`
 - `visionos-widgetkit-developer`
@@ -46,10 +58,12 @@ It currently includes these skills:
 - integrating ARKit providers (world tracking, hand tracking, plane detection,
   scene reconstruction, image/object/room tracking, accessory tracking, barcode
   detection) with authorization flows and shared-space vs full-space behavior
+- streaming Mac documents and live USD stages to Vision Pro with Spatial
+  Preview
 - authoring Reality Composer Pro Shader Graph materials and loading them at
   runtime via `ShaderGraphMaterial` with promoted inputs
-- editing USD ASCII (`.usda`) files, inspecting stages, and packaging USDZ for
-  RealityKit
+- editing USD ASCII (`.usda`) files, inspecting stages, packaging USDZ for
+  RealityKit, and using USDKit runtime stage APIs when the app owns live USD
 - implementing immersive and spatial video playback with RealityKit
   `VideoPlayerComponent`, AVKit `AVExperienceController`, Apple Projected Media
   Profile, and comfort mitigation events
@@ -62,9 +76,8 @@ It currently includes these skills:
 - adding `Logger` / `OSLog` instrumentation, `OSSignposter` spans, and
   Instruments RealityKit Trace workflows for spatial performance
 - triaging failing XCTest and Swift Testing targets on the visionOS simulator
-- driving post-launch simulator automation (screenshots, video capture,
-  accessibility-tree dumps, keyboard flows) with [AXe](https://github.com/cameroncooke/AXe)
-  as a complement to XCTest/XCUITest
+- driving simulator UI automation and evidence capture with XCTest/XCUITest,
+  XcodeBuildMCP or `xcodebuild`, `xcrun simctl`, and app-designed debug hooks
 - inspecting signing identities, entitlements, enterprise ARKit entitlements,
   and visionOS-specific privacy keys
 - automating App Store Connect workflows (TestFlight uploads, App Store
@@ -95,6 +108,8 @@ with this shape:
   - ships `XcodeBuildMCP` via `npx -y xcodebuildmcp@latest mcp`
   - enables `simulator`, `debugging`, and `logging` workflows
   - ships the official Xcode MCP server via `xcrun mcpbridge`
+  - treats XcodeBuildMCP as the default build/run/debug path, with
+    `xcode` / `mcpbridge` reserved for active Xcode session capabilities
 
 - `agents/`
   - plugin-level agent metadata
@@ -120,22 +135,15 @@ with this shape:
 
 ## Optional External CLIs
 
-Two standalone command-line tools complement XcodeBuildMCP and are
-documented directly by the skills that use them. They are not bundled and
-are not required for the core build/run/debug loop:
+One standalone command-line tool complements XcodeBuildMCP and is documented
+directly by the skill that uses it. It is not bundled and is not required for
+the core build/run/debug or UI automation loop:
 
 Treat the upstream tool help and README as the source of truth for current
 flags and subcommands:
 
-- `axe --help` / `axe <command> --help`
 - `asc --help` / `asc <command> --help`
 
-- **AXe** (`brew install cameroncooke/axe/axe`) — simulator automation for
-  screenshots, video, keyboard input, hardware buttons, and accessibility
-  trees. Used by `visionos-ui-automation`. AXe's 2D touch commands
-  (`tap`/`swipe`/`gesture`) target iOS and are not reliable on visionOS;
-  the skill documents exactly which commands work on the Apple Vision Pro
-  simulator and routes spatial gestures back to XCUITest.
 - **App Store Connect CLI** (`brew install asc`) — JWT-authenticated
   automation for TestFlight, App Store submission, metadata, screenshots,
   certificates, profiles, and Xcode Cloud. Used by `packaging-distribution`.
@@ -148,17 +156,30 @@ flags and subcommands:
 
 This plugin is XcodeBuildMCP-first. It ships `.mcp.json` and a bootstrap
 helper script because the Apple Vision Pro simulator launch loop benefits from
-a dedicated MCP server and a deterministic shell fallback. AXe and `asc` sit on
-top of that as optional, external CLIs for post-launch simulator automation and
-App Store Connect workflows respectively.
+a dedicated MCP server and a deterministic shell fallback. UI automation uses
+first-party XCTest/XCUITest, XcodeBuildMCP or `xcodebuild`, `simctl`, app debug
+hooks. `asc` sits on top of the packaging skill as the only optional external
+CLI for App Store Connect workflows.
+
+The plugin also ships the official `xcode` MCP bridge through `xcrun
+mcpbridge`. That bridge is intentionally secondary: use it for live Xcode
+debugger or Xcode-owned session/device state, not as the default replacement
+for XcodeBuildMCP's project discovery, scheme selection, simulator selection,
+build, install, launch, log, and test workflow.
 
 The shared platform skill layer (`spatial-app-architecture`,
-`spatial-swiftui-developer`, `realitykit-visionos-developer`,
-`arkit-visionos-developer`, `shareplay-developer`,
+`spatial-swiftui-developer`, `swiftui-chart3d-developer`,
+`realitykit-visionos-developer`, `realitykit-rendering-materials`,
+`realitykit-animation-physics`, `realitykit-audio-spatial`,
+`realitykit-ecs-systems`, `arkit-visionos-developer`,
+`arkit-spatial-tracking-providers`, `arkit-hand-tracking-provider`,
+`arkit-reference-tracking-providers`, `arkit-camera-access-providers`,
+`arkit-rendering-context-providers`, `shareplay-developer`,
 `visionos-immersive-media-developer`, `visionos-widgetkit-developer`,
-`shadergraph-editor`, `usd-editor`, `coding-standards-enforcer`) carries the
-visionOS-specific architecture and implementation guidance. The plugin-local
-workflow skills (`build-run-debug`, `test-triage`, `signing-entitlements`,
-`swiftpm-visionos`, `packaging-distribution`, `telemetry`,
-`visionos-ui-automation`) cover the operational loop around a visionOS 27
-codebase.
+`shadergraph-editor`, `usd-editor`, `usdkit-runtime-developer`,
+`coding-standards-enforcer`) carries the visionOS-specific architecture and
+implementation guidance. The plugin-local workflow skills (`build-run-debug`,
+`test-triage`, `signing-entitlements`, `swiftpm-visionos`,
+`packaging-distribution`, `telemetry`, `visionos-ui-automation`,
+`spatial-preview-developer`) cover the operational loop and Vision Pro-adjacent
+tooling around a visionOS 27 codebase.

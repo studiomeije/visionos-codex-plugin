@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased
+
+- Split oversized shared skills into smaller focused skills:
+  RealityKit rendering/materials, animation/physics, audio/spatial, and ECS;
+  ARKit spatial, hand, reference, camera-access, and rendering-context
+  providers; USDKit runtime; and SwiftUI Chart3D.
+- Reworked `visionos-ui-automation` to remove the previous third-party UI
+  automation CLI dependency and route through XCTest/XCUITest, XcodeBuildMCP
+  or `xcodebuild`, `simctl`, and app debug hooks.
+- Documented the boundary between XcodeBuildMCP as the default build/run/debug
+  loop, `xcode` / `mcpbridge` for active Xcode session capabilities, and shell
+  tools as fallback.
+- Moved the long SharePlay sample-backed GroupActivities material into
+  `shareplay-developer/samples/` and kept the active reference as a compact
+  pattern map.
+- Kept `spatial-preview-developer` in the plugin and added it to the published
+  skill inventory.
+
 ## 1.2.0 - 2026-06-10
 
 - Added visionOS 27 (beta) coverage to the shared RealityKit skill: 16 new
@@ -20,8 +38,6 @@
 - Added programmatic shader graph guidance (`ShaderGraph` module,
   `ShaderGraphMaterial.Program`, lighting models, subsurface scattering) to
   the Shader Graph skill.
-- Added an in-app ScreenCaptureKit-on-visionOS reference to the UI automation
-  skill, including the picker-only filter model and unavailable-API list.
 - Added SwiftUI `RotateGesture3D` input-kind constraints and widget
   container-background guidance verified against the visionOS 27 SDK.
 - Replaced WWDC-anchored staleness markers with SDK-verified availability
@@ -81,7 +97,7 @@
 
 - Sharpened the plugin metadata, README, and command entrypoints around
   XcodeBuildMCP-first visionOS 26 workflows.
-- Improved the build/run/debug, SwiftPM, test triage, telemetry, AXe automation,
+- Improved the build/run/debug, SwiftPM, test triage, telemetry, UI automation,
   signing, entitlements, packaging, and distribution skill guidance.
 - Expanded shared `visionOSAgents` skills for spatial SwiftUI, RealityKit, ARKit,
   SharePlay, USD, ShaderGraph, immersive media, WidgetKit, and Swift coding

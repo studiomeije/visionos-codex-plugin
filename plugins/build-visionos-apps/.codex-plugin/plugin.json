@@ -30,7 +30,7 @@
   "interface": {
     "displayName": "Build visionOS Apps",
     "shortDescription": "Build, run, debug, refactor, and ship visionOS 27 apps with XcodeBuildMCP-first workflows",
-    "longDescription": "Development for Apple Vision Pro on visionOS 27: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, command entrypoints, and Run-button fallback bootstrap. AXe and asc are optional external CLIs used only by the skills that document them.",
+    "longDescription": "Development for Apple Vision Pro on visionOS 27: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, USDKit, Chart3D, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, Spatial Preview, command entrypoints, and Run-button fallback bootstrap. UI automation uses XCTest/XCUITest, XcodeBuildMCP, xcodebuild, simctl, app debug hooks, and ScreenCaptureKit; asc is the only optional external CLI documented for distribution automation.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [

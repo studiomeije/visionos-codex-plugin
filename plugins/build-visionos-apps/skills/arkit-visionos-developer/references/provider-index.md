@@ -11,6 +11,18 @@ Load this file first when you need to decide which provider reference to open.
 - Use [realitykit-bridge.md](realitykit-bridge.md) for mapping model-layer
   state into RealityKit entities.
 
+## Provider-Focused Skills
+
+- Use `$arkit-spatial-tracking-providers` for world tracking, plane detection,
+  scene reconstruction, room tracking, and shared coordinate spaces.
+- Use `$arkit-hand-tracking-provider` for hands, joints, hand-driven
+  interactions, and hand visualizations.
+- Use `$arkit-reference-tracking-providers` for known images, reference
+  objects, barcodes, and accessories.
+- Use `$arkit-camera-access-providers` for camera frames and camera regions.
+- Use `$arkit-rendering-context-providers` for environment lighting, stereo
+  properties, visual fidelity, device-fit status, and foveated field of view.
+
 ## Provider Guides
 
 - [accessory-tracking-provider.md](accessory-tracking-provider.md) —

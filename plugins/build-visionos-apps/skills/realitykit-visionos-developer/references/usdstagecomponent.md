@@ -12,8 +12,8 @@ export gains `WriteOptions` and multi-scene `write`. New in visionOS 27.
 Also on iOS, macOS, macCatalyst, and tvOS 27.
 
 For the USD stage/layer/prim API itself (opening, authoring, composition),
-see the usd-editor skill:
-[`usdkit-framework.md`](../../usd-editor/references/usdkit-framework.md).
+see the USDKit runtime skill:
+[`usdkit-framework.md`](../../usdkit-runtime-developer/references/usdkit-framework.md).
 
 ## When to Use
 

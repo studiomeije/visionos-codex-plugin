@@ -1,6 +1,9 @@
 # MCP Workflow
 
-Use this file when XcodeBuildMCP is available.
+Use this file when XcodeBuildMCP is available and the task is the normal
+plugin-owned build, install, launch, log, or debugger-oriented simulator loop.
+For the boundary with the official Xcode MCP bridge, see
+[`xcode-mcpbridge-boundary.md`](xcode-mcpbridge-boundary.md).
 
 ## Detect Availability
 

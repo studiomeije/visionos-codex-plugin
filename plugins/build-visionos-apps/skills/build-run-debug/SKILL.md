@@ -7,9 +7,10 @@ description: Build, run, and debug local visionOS 27 apps with XcodeBuildMCP-bac
 
 ## Quick Start
 
-This skill supports two valid execution paths: XcodeBuildMCP and direct shell
-tools. Detect the available path first and keep the rest of the workflow
-aligned to that choice.
+This skill supports three execution paths: XcodeBuildMCP as the default,
+`xcode` / `mcpbridge` for active Xcode session capabilities, and direct shell
+tools as the fallback. Detect the available path first and keep the rest of the
+workflow aligned to that choice.
 
 ## Load References When
 
@@ -17,6 +18,7 @@ aligned to that choice.
 |-----------|-------------|
 | [`references/project-discovery.md`](references/project-discovery.md) | When the workspace, project, package, app-producing scheme, bundle id, or runnable target is not already proven. |
 | [`references/mcp-workflow.md`](references/mcp-workflow.md) | When XcodeBuildMCP is available and you need the session, simulator, build, launch, log, or LLDB workflow. |
+| [`references/xcode-mcpbridge-boundary.md`](references/xcode-mcpbridge-boundary.md) | When deciding whether to use XcodeBuildMCP, the official Xcode MCP bridge, or direct shell tools. |
 | [`references/shell-fallback.md`](references/shell-fallback.md) | When XcodeBuildMCP is unavailable, or when you intentionally want direct `xcodebuild`, `simctl`, `log stream`, and LLDB commands. |
 | [`references/run-button-bootstrap.md`](references/run-button-bootstrap.md) | When the repo needs a persistent `script/build_and_run.sh` and a Codex Run action. |
 | [`references/launch-caveats.md`](references/launch-caveats.md) | When a slow simulator boot, immersive-space expectation, or launch symptom may be misclassified as a build failure. |
@@ -50,8 +52,12 @@ aligned to that choice.
 
 - Prefer the narrowest command that proves or disproves the current theory.
 - Detect the available build path before running any build commands.
-- When XcodeBuildMCP is available, prefer it. When it is not, use the shell
-  path without apology.
+- Use XcodeBuildMCP for deterministic project discovery, simulator selection,
+  build, install, launch, logs, and debugger-oriented simulator workflows.
+- Use `xcode` / `mcpbridge` only when the task depends on an active Xcode
+  session or Xcode-provided runtime state that XcodeBuildMCP does not expose.
+- When MCP tooling is unavailable or mismatched with the local SDK/runtime, use
+  the shell path without apology.
 - Do not invent a workspace, project, scheme, package product, or bundle id
   from the repo name; inspect the actual build graph.
 - Do not skip deliberate Apple Vision Pro Simulator selection.
@@ -70,7 +76,7 @@ aligned to that choice.
 
 Provide:
 - the detected project type and chosen scheme
-- whether you used XcodeBuildMCP or the shell path
+- whether you used XcodeBuildMCP, `xcode` / `mcpbridge`, or the shell path
 - the simulator target selected
 - any `DEVELOPER_DIR` or arm64-only override used
 - the script path and Run action you configured, if applicable

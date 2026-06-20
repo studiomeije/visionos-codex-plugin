@@ -1,78 +1,84 @@
 ---
 name: visionos-ui-automation
-description: Drive the Apple Vision Pro simulator from outside the test target for screenshots, video capture, keyboard input, hardware-button presses, and accessibility tree inspection using AXe (github.com/cameroncooke/AXe) on top of XcodeBuildMCP. Use when automating end-to-end flows, capturing visual evidence for PRs or review, or scripting post-launch simulator interactions that do not fit inside an XCTest/Swift Testing target.
+description: Automate Apple Vision Pro simulator validation with XCTest/XCUITest, XcodeBuildMCP or xcodebuild, simctl capture/control, and app-designed debug hooks for spatial flows. Use when validating launched UI flows, accessibility behavior, screenshots, video evidence, simulator settings, or deterministic spatial automation.
 ---
 
-# visionOS UI Automation (AXe)
+# visionOS UI Automation
 
-This skill wraps AXe, a standalone CLI that drives the Apple Vision Pro
-simulator through accessibility and HID input. Use it for screenshots, video,
-keyboard-driven flows, accessibility-tree inspection, and scripted
-post-launch evidence capture outside the test target.
+This skill uses first-party and local automation paths for visionOS UI work.
+Prefer XCTest/XCUITest for UI flows and accessibility assertions,
+XcodeBuildMCP or `xcodebuild` for build/launch/test execution, `xcrun simctl`
+for simulator screenshots, video, display/UI settings, URL opens, pasteboard,
+and locally supported hardware-button or HID-style operations, app-designed
+debug hooks for spatial gestures.
 
-Use AXe after the app is already built, installed, and launched. It complements
-XcodeBuildMCP, XCTest/Swift Testing, and unified logs; it does not replace their
-build, launch, test, or telemetry evidence.
-
-On visionOS, AXe is deliberately narrower than on iOS. Coordinate-based touch
-and swipe automation are not the right abstraction for spatial UI. Route those
-cases to XCUITest or in-app test hooks.
+On visionOS, coordinate-based host-side taps and swipes are not the right
+abstraction for spatial UI. Route those cases to XCUITest-accessible controls,
+explicit launch arguments, URL schemes, or debug-only app hooks that exercise
+the same application state path.
 
 ## Load References When
 
 | Reference | When to Use |
 |-----------|-------------|
-| [`references/axe-preflight-and-boundaries.md`](references/axe-preflight-and-boundaries.md) | When you need AXe preflight, install checks, fallback behavior, or the visionOS support boundary. |
-| [`references/axe-commands.md`](references/axe-commands.md) | When choosing concrete AXe commands for capture, keyboard input, hardware buttons, accessibility dumps, or batch steps. |
-| [`references/visionos-automation-app-design.md`](references/visionos-automation-app-design.md) | When the app itself needs keyboard shortcuts, focusability, accessibility labels, or simulator-only debug hooks to make AXe reliable. |
-| [`references/workflow-recipes.md`](references/workflow-recipes.md) | When you need end-to-end screenshot, video, accessibility, or performance-sweep patterns. |
-| [`references/screencapturekit-visionos.md`](references/screencapturekit-visionos.md) | When the app itself needs to record or replay its own content with ScreenCaptureKit — in-app capture (new in visionOS 27), not AXe-driven simulator capture. |
+| [`references/official-tooling-boundaries.md`](references/official-tooling-boundaries.md) | When choosing the automation path, checking local tooling, or deciding what cannot be automated from the host. |
+| [`references/xctest-xcuitest-flows.md`](references/xctest-xcuitest-flows.md) | When implementing or running repeatable UI flows, accessibility assertions, and test-owned screenshots. |
+| [`references/simctl-capture-and-control.md`](references/simctl-capture-and-control.md) | When capturing simulator screenshots/video, changing simulator UI settings, opening URLs, seeding pasteboard data, relaunching with flags, or checking local button/HID support. |
+| [`references/visionos-automation-app-design.md`](references/visionos-automation-app-design.md) | When the app itself needs accessibility identifiers, labels, focusability, launch flags, URL hooks, or simulator-only debug controls. |
+| [`references/workflow-recipes.md`](references/workflow-recipes.md) | When you need end-to-end screenshot, video, accessibility, spatial-sweep, or simulator-settings patterns. |
 
 ## Workflow
 
-1. Build and launch the app with `build-run-debug`.
-2. Confirm the XcodeBuildMCP or fallback launch output names the intended Apple
-   Vision Pro simulator.
-3. Run AXe preflight once and resolve the simulator UDID.
-4. Choose the capture or interaction path: screenshot, video, keyboard input,
-   accessibility dump, or a batched flow.
-5. If the task needs spatial gesture automation, stop and route to
-   `test-triage` or in-app test hooks.
-6. Verify the produced artifact or parsed accessibility output.
+1. Choose the owner for the proof: XCUITest assertion, simulator artifact,
+   app debug hook, or unified log.
+2. Build, install, launch, or test with XcodeBuildMCP first. Use `xcodebuild`
+   and `xcrun simctl` as the shell fallback.
+3. Confirm the selected Apple Vision Pro simulator destination or UDID matches
+   the build/run evidence.
+4. For UI flows and accessibility, run the smallest relevant XCTest/XCUITest
+   scope and capture result bundles or test attachments.
+5. For visual evidence around an already launched app, use `xcrun simctl io`
+   screenshots or video with the resolved UDID.
+6. For spatial gestures or immersive state, use explicit app-designed hooks and
+   pair the visual artifact with XCUITest assertions or telemetry.
+7. Verify the artifact, assertion result, or log output before claiming the
+   evidence supports the theory.
 
 ## When To Switch Skills
 
 - Switch to `build-run-debug` when the app will not launch, the simulator is
   not booted, or logs must be captured through XcodeBuildMCP.
-- Switch to `test-triage` when the work is running XCTest / Swift Testing
-  targets or narrowing failing scopes — AXe is not a test harness.
+- Switch to `test-triage` when a test target fails or you need to narrow a
+  failing XCTest, XCUITest, or Swift Testing scope.
 - Switch to `telemetry` when the question is "did the app emit this event?"
-  — AXe inspects the UI surface, not the unified-logging stream.
+  - UI automation artifacts do not replace unified-log proof.
 - Switch to `realitykit-visionos-developer` for entity-level manipulation
   test hooks when a test needs to assert spatial gesture state.
 
 ## Guardrails
 
-- Do not pretend AXe's `tap`/`swipe`/`gesture` commands drive the visionOS
-  spatial UI. They are for iOS simulators and their behavior on visionOS is
-  at best undefined.
-- Do not treat AXe as a replacement for XCTest/XCUITest. It is a simulator
-  automation layer, not an in-process test harness. Use it alongside tests,
-  not in place of them.
+- Do not use host-side coordinate taps, swipes, or gestures as proof of
+  visionOS spatial interaction behavior.
+- Do not replace XCTest/XCUITest assertions with screenshots when the behavior
+  can be asserted in the test runner.
 - Do not commit captured screenshots or videos that contain private account
   data, unreleased assets under NDA, or anything the user has flagged as
   confidential.
-- Do not assume `describe-ui` output shape is stable across AXe versions;
-  pin the AXe version in CI and regenerate fixtures when upgrading.
-- Always verify the target UDID corresponds to an Apple Vision Pro
-  simulator before running commands — it is easy to type into the wrong
-  booted device and get confusing results.
+- Do not assume a `simctl` subcommand exists across Xcode releases. Check local
+  `xcrun simctl help` output and document the fallback when the operation is
+  unavailable.
+- Always verify the target UDID corresponds to an Apple Vision Pro simulator
+  before running commands. It is easy to capture or relaunch the wrong booted
+  device and get misleading evidence.
 
 ## Output Expectations
 
 Provide:
-- the AXe commands you ran with the resolved simulator UDID
-- the artifact paths produced
+- the runner or command path used: XcodeBuildMCP, `xcodebuild`, `xcrun simctl`,
+  XCUITest, or app debug hook
+- the simulator destination or resolved UDID
+- the focused test scope, launch arguments, URL hook, or simulator command
+- artifact paths produced: screenshots, videos, result bundles, or logs
 - whether the captured evidence supports or rejects the current theory
 - explicit routing back to `build-run-debug`, `test-triage`, or
   `telemetry` for the next step

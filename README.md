@@ -25,8 +25,8 @@ automation.
   launch blockers
 - supports packaging, TestFlight, and App Store submission workflows when the
   optional external `asc` CLI is available
-- supports post-launch simulator evidence capture and automation when the
-  optional external `AXe` CLI is available
+- supports simulator evidence capture and UI automation through
+  XCTest/XCUITest, XcodeBuildMCP, `xcodebuild`, `simctl`, and app debug hooks
 
 ## Best Fit
 
@@ -61,15 +61,13 @@ The plugin bundles shared platform skills and plugin-local workflow skills.
 
 ## Optional External Tools
 
-The core XcodeBuildMCP-first build/debug loop does not require extra CLIs, but
-two optional external tools extend what specific skills can do:
+The core XcodeBuildMCP-first build/debug loop and UI automation guidance do not
+require extra CLIs. One optional external tool extends distribution workflows:
 
-- `AXe` for post-launch Apple Vision Pro simulator automation, screenshots,
-  accessibility inspection, and capture workflows
 - `asc` for App Store Connect automation such as TestFlight uploads, metadata,
   and submission workflows
 
-These tools are not bundled with the plugin.
+This tool is not bundled with the plugin.
 
 ## Installation
 

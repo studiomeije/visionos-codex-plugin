@@ -120,4 +120,5 @@ MyAction.subscribe(to: .updated) { event -> ActionResult in
 - `CharacterControllerComponent` - move agents along computed paths
 - `SceneUnderstandingComponent` - real-world geometry as pathfinding input
 - `AnimationGraphComponent` - drive locomotion states from behavior trees
-- `custom-systems.md` - per-frame agent steering
+- [`custom-systems.md`](../../realitykit-ecs-systems/references/custom-systems.md)
+  - per-frame agent steering

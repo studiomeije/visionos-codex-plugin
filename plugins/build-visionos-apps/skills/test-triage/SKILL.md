@@ -55,8 +55,9 @@ test triage.
   proof needs targeted runtime instrumentation.
 - Switch to `visionos-ui-automation` when the evidence you need is a
   screenshot, a video, a keyboard-driven flow, or an accessibility-tree dump
-  from the running simulator rather than a test assertion. AXe complements
-  XCTest/Swift Testing; it does not replace them.
+  from the running simulator rather than a test assertion. UI automation uses
+  XCTest/XCUITest, XcodeBuildMCP or `xcodebuild`, and `simctl`; it does not
+  replace focused test triage.
 - Resume `test-triage` after the blocker category is resolved and re-run the
   narrowest failing scope.
 
