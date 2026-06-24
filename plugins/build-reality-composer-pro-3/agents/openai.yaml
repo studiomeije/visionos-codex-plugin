@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build with Reality Composer Pro 3"
+  short_description: "Author and debug RCP3 projects, graphs, packages, and USD asset pipelines"
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use Build with Reality Composer Pro 3 for authored RCP3 work: Shader Graph materials, Script Graph behavior, Animation Graph state machines, package inspection, USD edits, USDZ validation, and explicit handoff to RealityKit runtime or visionOS app workflows."

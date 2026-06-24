@@ -1,34 +1,21 @@
 {
   "version": 1,
   "lastSync": {
-    "at": "2026-06-19T23:47:26+00:00",
+    "at": "2026-06-20T14:19:33+00:00",
     "source": "plugin",
     "destination": "agents",
     "skills": [
-      "arkit-camera-access-providers",
-      "arkit-hand-tracking-provider",
-      "arkit-reference-tracking-providers",
-      "arkit-rendering-context-providers",
-      "arkit-spatial-tracking-providers",
-      "arkit-visionos-developer",
-      "coding-standards-enforcer",
+      "animationgraph-editor",
       "realitykit-animation-physics",
-      "realitykit-audio-spatial",
-      "realitykit-ecs-systems",
-      "realitykit-rendering-materials",
       "realitykit-visionos-developer",
-      "shadergraph-editor",
-      "shareplay-developer",
-      "spatial-app-architecture",
-      "spatial-swiftui-developer",
-      "swiftui-chart3d-developer",
-      "usd-editor",
-      "usdkit-runtime-developer",
-      "visionos-immersive-media-developer",
-      "visionos-widgetkit-developer"
+      "scriptgraph-editor",
+      "usd-editor"
     ]
   },
   "skills": {
+    "animationgraph-editor": {
+      "digest": "da50ef074ba07da9cc78efac2c3e62d20f900edc24a92428374985b1e589f3ac"
+    },
     "arkit-camera-access-providers": {
       "digest": "415660e82f9148032b0abbb4827b511b9942dfc020e85994af6debce696249a1"
     },
@@ -51,22 +38,25 @@
       "digest": "8c6aeebc93cb9beb64e9694ed37d9e767f319284da56bc8e0e780017c2fe8acb"
     },
     "realitykit-animation-physics": {
-      "digest": "59fdb2479dee507f90ac9e464075d5c4dd86db875e44d1c787bcdfc4baac0c6e"
+      "digest": "3c9d82f47c1de37b0bf3d23b14d4a1942a70058b93b205333d90d95e46250856"
     },
     "realitykit-audio-spatial": {
       "digest": "2928916b6ab191137c5bc20aa007e03d5f1a35c037eaa17fd8dbe273ab1ada1c"
     },
     "realitykit-ecs-systems": {
-      "digest": "0d4544ee1162435e7c280307b95672401fc815bc17f25b7cd6f8de0711cc6d59"
+      "digest": "7b8433270cf7791eb1cb6c7f16572c14c91a923d4b621ca8818d40c4c9e079b8"
     },
     "realitykit-rendering-materials": {
-      "digest": "f7ea2072fc1b05d6a088ede1771abc3bbd81f43a2c58ea4d267ce858df3b93fa"
+      "digest": "c303fb199b67cf2e6dc99350f40814bee1cc13d43b00dd865662ea1ca4d8bee5"
     },
     "realitykit-visionos-developer": {
-      "digest": "dc7ef7d4661156dbb0ee9de1fd0f913a46f2ca103a3aeaf0cd1efcdb61279810"
+      "digest": "184e48bb02b4ad4726917e7121c78bc0886dce429d86b077b61076785eead8dd"
+    },
+    "scriptgraph-editor": {
+      "digest": "2311f79d15fdf684e03c9870ac6eff562c4f95931f5b1d9de205e53f66fb84af"
     },
     "shadergraph-editor": {
-      "digest": "cb741e654ca22283ae9c6315e70f23c87b05d13db9ec566ea6ec52f1b056fade"
+      "digest": "e871ace8a42612377a358a085bf9c39faa871021b856fbd55b92f5011f96b637"
     },
     "shareplay-developer": {
       "digest": "c06c654878378dd1a8c2a136f8e6b16d84914321e90e2020289dd348da60becc"
@@ -81,7 +71,7 @@
       "digest": "ff5d41a63c93b7813404a13fb0631e2eb3489892a247bea1605634a1b9a3571d"
     },
     "usd-editor": {
-      "digest": "984b93e6a061255f7d6f3d6db60bfa31bba003bdd8e0515e079a96bc09a69513"
+      "digest": "8b22d539785d609e519ae42c1c705d97600ea0e8e277d3606ec678760a20f10c"
     },
     "usdkit-runtime-developer": {
       "digest": "e0d210186af2ffa0b45c04b5621420d127f2bcfae5ffd75145a3aebacfbd79ba"

@@ -1,6 +1,7 @@
 {
   "version": 1,
   "sharedSkills": [
+    "animationgraph-editor",
     "arkit-camera-access-providers",
     "arkit-hand-tracking-provider",
     "arkit-reference-tracking-providers",
@@ -14,6 +15,7 @@
     "realitykit-rendering-materials",
     "realitykit-visionos-developer",
     "shadergraph-editor",
+    "scriptgraph-editor",
     "shareplay-developer",
     "spatial-app-architecture",
     "spatial-swiftui-developer",

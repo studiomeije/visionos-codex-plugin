@@ -1,0 +1,51 @@
+{
+  "name": "build-realitykit",
+  "version": "1.0.0",
+  "description": "Build cross-platform RealityKit scenes, systems, rendering, animation, physics, audio, and USDKit runtime flows for Apple platforms.",
+  "author": {
+    "name": "Studio Meije",
+    "email": "tom@studiomeije.com",
+    "url": "https://github.com/studiomeije"
+  },
+  "homepage": "https://github.com/studiomeije/visionos-codex-plugin",
+  "repository": "https://github.com/studiomeije/visionos-codex-plugin.git",
+  "license": "MIT",
+  "keywords": [
+    "realitykit",
+    "spatial-computing",
+    "swift",
+    "swiftui",
+    "usdkit",
+    "rendering",
+    "materials",
+    "animation",
+    "physics",
+    "audio",
+    "ecs"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Build with RealityKit",
+    "shortDescription": "Build RealityKit scenes, systems, rendering, animation, physics, audio, and USDKit runtime flows",
+    "longDescription": "Cross-platform RealityKit development for Apple platforms: scene setup, entity loading, documented components, custom ECS systems, rendering and materials, animation and physics, spatial audio, USDKit runtime stages, and runtime handoff from authored Reality Composer Pro 3 assets. Use alongside Build visionOS 27 apps for platform app structure and Build with Reality Composer Pro 3 for authored graph and package work.",
+    "developerName": "Studio Meije",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
+    "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
+    "termsOfServiceURL": "https://developer.apple.com/support/terms/",
+    "defaultPrompt": [
+      "Build a RealityKit scene with documented entities, components, systems, and runtime ownership.",
+      "Debug RealityKit rendering, animation, physics, audio, or USDKit runtime behavior on Apple platforms.",
+      "Route authored Reality Composer Pro 3 graph/package work to Build with Reality Composer Pro 3 when needed."
+    ],
+    "screenshots": [],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

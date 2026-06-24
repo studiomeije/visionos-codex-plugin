@@ -50,13 +50,18 @@ the tool stops and those conflicts must be merged manually before rerunning it.
 
 ## After Syncing
 
-Repo-to-repo sync does not update the installed Codex plugin. After a successful
-sync, install the packaged plugin into the home Codex plugin directory:
+Repo-to-repo sync does not update installed Codex plugins. After a successful
+sync, install the packaged plugins into the home Codex plugin directory:
 
 ```bash
 ./scripts/install-plugin.sh --home ~/.codex
 ```
 
-That installs to `~/.codex/plugins/build-visionos-apps` and updates
-`~/.agents/plugins/marketplace.json` so the `build-visionos-apps` entry points
-at `./.codex/plugins/build-visionos-apps` with `INSTALLED_BY_DEFAULT`.
+That installs:
+
+- `~/.codex/plugins/build-visionos-apps`
+- `~/.codex/plugins/build-realitykit`
+- `~/.codex/plugins/build-reality-composer-pro-3`
+
+and updates `~/.agents/plugins/marketplace.json` so all three entries point at
+their installed plugin directories with `INSTALLED_BY_DEFAULT`.

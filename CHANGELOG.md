@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Split the previous all-in-one `build-visionos-apps` package into three
+  distinct Codex plugins: `build-visionos-apps` for visionOS 27 app workflows,
+  `build-realitykit` for RealityKit runtime development, and
+  `build-reality-composer-pro-3` for Reality Composer Pro 3 graph/package/USD
+  authoring.
+- Updated marketplace metadata, installer behavior, release packaging, and
+  shared-skill sync routing so all three plugin roots are first-class.
 - Split oversized shared skills into smaller focused skills:
   RealityKit rendering/materials, animation/physics, audio/spatial, and ECS;
   ARKit spatial, hand, reference, camera-access, and rendering-context
@@ -15,8 +22,14 @@
 - Moved the long SharePlay sample-backed GroupActivities material into
   `shareplay-developer/samples/` and kept the active reference as a compact
   pattern map.
-- Kept `spatial-preview-developer` in the plugin and added it to the published
-  skill inventory.
+- Kept `spatial-preview-developer` in the visionOS plugin and added it to the
+  published skill inventory.
+- Added `scriptgraph-editor` for Reality Composer Pro 3 Script Graph behavior,
+  node metadata inspection, package graph inspection, and runtime ownership
+  routing.
+- Added `animationgraph-editor` for Reality Composer Pro 3 Animation Graph /
+  Animator Graph state machines, transition/clip binding inspection, package
+  graph inspection, and runtime ownership routing.
 
 ## 1.2.0 - 2026-06-10
 

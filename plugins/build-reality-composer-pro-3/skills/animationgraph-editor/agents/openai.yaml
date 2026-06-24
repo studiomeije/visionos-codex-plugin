@@ -1,0 +1,7 @@
+interface:
+  display_name: "AnimationGraph Editor"
+  short_description: "Edit RCP Animation Graphs"
+  icon_small: "./assets/studio-meije-logo-small.png"
+  icon_large: "./assets/studio-meije-logo.png"
+  brand_color: "#F47A73"
+  default_prompt: "Use $animationgraph-editor to inspect this Reality Composer Pro 3 Animation Graph and propose safe animation-state edits."

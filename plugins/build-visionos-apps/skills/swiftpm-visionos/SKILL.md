@@ -42,8 +42,10 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
 
 - Switch to `build-run-debug` when the work moves from package shape to
   running the app in the Apple Vision Pro simulator.
-- Switch to `shadergraph-editor` or `usd-editor` when a Reality Composer Pro
-  asset needs authoring or inspection rather than package wiring.
+- Switch to `shadergraph-editor`, `scriptgraph-editor`,
+  `animationgraph-editor`, or `usd-editor` when a Reality Composer Pro asset
+  needs material, behavior, animation graph, or authored USD inspection rather
+  than package wiring.
 - Switch to `signing-entitlements` when entitlements or privacy keys must be
   propagated through package-declared target dependencies to the host app.
 

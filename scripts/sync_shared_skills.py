@@ -21,6 +21,31 @@ from typing import Iterable
 IGNORED_NAMES = {".DS_Store", "__pycache__", ".gitkeep"}
 MANIFEST_PATH = Path("sync/shared-skills.json")
 LOCK_PATH = Path("sync/shared-skills.lock.json")
+PLUGIN_SKILL_OWNERS = {
+    "animationgraph-editor": "build-reality-composer-pro-3",
+    "arkit-camera-access-providers": "build-visionos-apps",
+    "arkit-hand-tracking-provider": "build-visionos-apps",
+    "arkit-reference-tracking-providers": "build-visionos-apps",
+    "arkit-rendering-context-providers": "build-visionos-apps",
+    "arkit-spatial-tracking-providers": "build-visionos-apps",
+    "arkit-visionos-developer": "build-visionos-apps",
+    "coding-standards-enforcer": "build-visionos-apps",
+    "realitykit-animation-physics": "build-realitykit",
+    "realitykit-audio-spatial": "build-realitykit",
+    "realitykit-ecs-systems": "build-realitykit",
+    "realitykit-rendering-materials": "build-realitykit",
+    "realitykit-visionos-developer": "build-realitykit",
+    "shadergraph-editor": "build-reality-composer-pro-3",
+    "scriptgraph-editor": "build-reality-composer-pro-3",
+    "shareplay-developer": "build-visionos-apps",
+    "spatial-app-architecture": "build-visionos-apps",
+    "spatial-swiftui-developer": "build-visionos-apps",
+    "swiftui-chart3d-developer": "build-visionos-apps",
+    "usd-editor": "build-reality-composer-pro-3",
+    "usdkit-runtime-developer": "build-realitykit",
+    "visionos-immersive-media-developer": "build-visionos-apps",
+    "visionos-widgetkit-developer": "build-visionos-apps",
+}
 
 
 class SyncError(Exception):
@@ -31,6 +56,7 @@ class SyncError(Exception):
 class RepoState:
     root: Path
     skills_root: Path
+    skill_roots: dict[str, Path]
     manifest_path: Path
     lock_path: Path
     shared_skills: list[str]
@@ -149,15 +175,35 @@ def build_repo_state(root: Path, repo_kind: str) -> RepoState:
 
     if repo_kind == "agents":
         skills_root = root / "skills"
+        skill_roots = {skill: skills_root for skill in shared_skills}
     else:
-        skills_root = detect_plugin_skills_root(root)
+        plugin_skill_roots = detect_plugin_skill_roots(root)
+        missing_owners = sorted(set(shared_skills) - set(PLUGIN_SKILL_OWNERS))
+        if missing_owners:
+            raise SyncError(
+                "missing plugin ownership mapping for shared skills: "
+                + ", ".join(missing_owners)
+            )
+        skill_roots = {}
+        for skill in shared_skills:
+            owner = PLUGIN_SKILL_OWNERS[skill]
+            skills_root = plugin_skill_roots.get(owner)
+            if skills_root is None:
+                raise SyncError(f"missing plugin skills directory for {owner}")
+            skill_roots[skill] = skills_root
+        skills_root = root / "plugins"
 
-    if not skills_root.is_dir():
-        raise SyncError(f"missing skills directory for {repo_kind} repo: {skills_root}")
+    missing_roots = sorted({path for path in skill_roots.values() if not path.is_dir()})
+    if missing_roots:
+        raise SyncError(
+            f"missing skills directory for {repo_kind} repo: "
+            + ", ".join(str(path) for path in missing_roots)
+        )
 
     return RepoState(
         root=root,
         skills_root=skills_root,
+        skill_roots=skill_roots,
         manifest_path=manifest_path,
         lock_path=lock_path,
         shared_skills=shared_skills,
@@ -165,7 +211,7 @@ def build_repo_state(root: Path, repo_kind: str) -> RepoState:
     )
 
 
-def detect_plugin_skills_root(root: Path) -> Path:
+def detect_plugin_skill_roots(root: Path) -> dict[str, Path]:
     marketplace_path = root / ".agents/plugins/marketplace.json"
     if not marketplace_path.is_file():
         raise SyncError(f"missing plugin marketplace file: {marketplace_path}")
@@ -175,7 +221,11 @@ def detect_plugin_skills_root(root: Path) -> Path:
     if not isinstance(plugins, list) or not plugins:
         raise SyncError(f"marketplace file does not define any plugins: {marketplace_path}")
 
+    skill_roots: dict[str, Path] = {}
     for plugin in plugins:
+        name = plugin.get("name")
+        if not isinstance(name, str) or not name:
+            continue
         source = plugin.get("source", {})
         if source.get("source") != "local":
             continue
@@ -185,9 +235,12 @@ def detect_plugin_skills_root(root: Path) -> Path:
         candidate = (root / plugin_path).resolve()
         skills_root = candidate / "skills"
         if skills_root.is_dir():
-            return skills_root
+            skill_roots[name] = skills_root
 
-    raise SyncError(f"could not locate plugin skills directory from {marketplace_path}")
+    if not skill_roots:
+        raise SyncError(f"could not locate plugin skills directories from {marketplace_path}")
+
+    return skill_roots
 
 
 def choose_skills(repos: dict[str, RepoState], requested_skills: list[str]) -> list[str]:
@@ -456,8 +509,8 @@ def write_shared_lock(
 
 
 def copy_skill(source_repo: RepoState, destination_repo: RepoState, skill: str) -> None:
-    source_dir = source_repo.skills_root / skill
-    destination_dir = destination_repo.skills_root / skill
+    source_dir = skill_dir(source_repo, skill)
+    destination_dir = skill_dir(destination_repo, skill)
 
     if not source_dir.is_dir():
         raise SyncError(f"source skill directory does not exist: {source_dir}")
@@ -484,10 +537,17 @@ def remove_ignored_entries(root: Path) -> None:
 
 
 def skill_digest_or_missing(repo: RepoState, skill: str) -> str:
-    skill_dir = repo.skills_root / skill
-    if not skill_dir.is_dir():
+    path = skill_dir(repo, skill)
+    if not path.is_dir():
         return "<missing>"
-    return digest_directory(skill_dir)
+    return digest_directory(path)
+
+
+def skill_dir(repo: RepoState, skill: str) -> Path:
+    skills_root = repo.skill_roots.get(skill)
+    if skills_root is None:
+        raise SyncError(f"missing skill root mapping for {skill} in {repo.root}")
+    return skills_root / skill
 
 
 def digest_directory(root: Path) -> str:

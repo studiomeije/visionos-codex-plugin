@@ -1,0 +1,50 @@
+{
+  "name": "build-reality-composer-pro-3",
+  "version": "1.0.0",
+  "description": "Author, inspect, and troubleshoot Reality Composer Pro 3 projects, Shader Graphs, Script Graphs, Animation Graphs, and USD asset pipelines.",
+  "author": {
+    "name": "Studio Meije",
+    "email": "tom@studiomeije.com",
+    "url": "https://github.com/studiomeije"
+  },
+  "homepage": "https://github.com/studiomeije/visionos-codex-plugin",
+  "repository": "https://github.com/studiomeije/visionos-codex-plugin.git",
+  "license": "MIT",
+  "keywords": [
+    "reality-composer-pro",
+    "reality-composer-pro-3",
+    "rcp3",
+    "shadergraph",
+    "scriptgraph",
+    "animationgraph",
+    "usd",
+    "usdz",
+    "materialx",
+    "visionos"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Build with Reality Composer Pro 3",
+    "shortDescription": "Author and debug RCP3 projects, graphs, packages, and USD asset pipelines",
+    "longDescription": "Reality Composer Pro 3 authoring support for Shader Graph materials, Script Graph behavior, Animation Graph state machines, direct package inspection, USD ASCII edits, USD command-line validation, and safe handoff into RealityKit or visionOS apps. Use alongside Build with RealityKit for runtime Swift integration and Build visionOS 27 apps for app build, simulator, ARKit, and distribution workflows.",
+    "developerName": "Studio Meije",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
+    "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
+    "termsOfServiceURL": "https://developer.apple.com/support/terms/",
+    "defaultPrompt": [
+      "Author or inspect a Reality Composer Pro 3 Shader Graph, Script Graph, or Animation Graph.",
+      "Repair a narrow RCP3 package or USD asset issue while preserving authored structure.",
+      "Route runtime RealityKit or visionOS app integration to the matching plugin when needed."
+    ],
+    "screenshots": [],
+    "brandColor": "#7C2D12",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

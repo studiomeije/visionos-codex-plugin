@@ -1,140 +1,91 @@
-# Build visionOS Apps for Codex
+# Studio Meije Spatial Codex Plugins
 
-`build-visionos-apps` is a Codex plugin for building, running, debugging,
-refactoring, and shipping visionOS 27 apps for Apple Vision Pro.
+This repository packages three Codex plugins for Apple spatial-computing work:
 
-It combines XcodeBuildMCP-first build and simulator workflows with shared
-platform skills for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit,
-Shader Graph, USD, immersive media, and coding standards, plus plugin-local
-workflow skills for testing, signing, telemetry, SwiftPM, packaging, and UI
-automation.
+- `build-visionos-apps` - Build visionOS 27 apps.
+- `build-realitykit` - Build with RealityKit.
+- `build-reality-composer-pro-3` - Build with Reality Composer Pro 3.
 
-## What The Plugin Does
+The split keeps platform app work, runtime RealityKit work, and authored RCP3
+asset work in separate plugin surfaces while allowing each plugin to route to
+the others when a task crosses boundaries.
 
-- discovers local Xcode workspaces, projects, schemes, Swift packages, and
-  Apple Vision Pro simulator targets
-- builds, runs, debugs, and captures logs for visionOS apps with
-  `XcodeBuildMCP` as the primary path
-- helps choose the right surface model: window, volume, immersive space, or a
-  mixed flow between them
-- guides scene ownership, app structure, and spatial SwiftUI architecture as a
-  codebase grows
-- implements and troubleshoots RealityKit, ARKit, SharePlay, WidgetKit,
-  immersive media, Shader Graph, and USD workflows
-- triages tests, signing failures, entitlement issues, privacy-key gaps, and
-  launch blockers
-- supports packaging, TestFlight, and App Store submission workflows when the
-  optional external `asc` CLI is available
-- supports simulator evidence capture and UI automation through
-  XCTest/XCUITest, XcodeBuildMCP, `xcodebuild`, `simctl`, and app debug hooks
+## Plugin Roles
 
-## Best Fit
+### Build visionOS 27 apps
 
-This plugin is a strong fit when you want Codex to help with:
+Use `build-visionos-apps` for Apple Vision Pro app work:
 
-- building and launching a visionOS app on Apple Vision Pro Simulator
-- refactoring an oversized spatial app into cleaner scene and feature
-  boundaries
-- debugging RealityKit, ARKit, SharePlay, or immersive-media behavior
-- fixing signing, privacy, capability, or simulator test failures
-- preparing a visionOS app for packaging or distribution
+- XcodeBuildMCP-first build, run, debug, log, and simulator workflows
+- spatial SwiftUI, windows, volumes, immersive spaces, ornaments, and app
+  architecture
+- ARKit providers, SharePlay, WidgetKit, immersive media, Spatial Preview, and
+  Vision Pro specific interaction workflows
+- signing, entitlements, privacy keys, testing, telemetry, SwiftPM, packaging,
+  distribution, and simulator UI automation
 
-## Included Expertise
+This plugin links out to `build-realitykit` when the task becomes RealityKit
+runtime code, and to `build-reality-composer-pro-3` when authored graph,
+package, or USD asset-pipeline work is the source of truth.
 
-The plugin bundles shared platform skills and plugin-local workflow skills.
+### Build with RealityKit
 
-- Plugin-local workflow coverage includes build and run, test triage, telemetry,
-  signing/entitlements, SwiftPM support, packaging/distribution, and
-  visionOS-specific UI automation.
-- Shared platform coverage includes spatial app architecture, spatial SwiftUI,
-  RealityKit, ARKit, SharePlay, WidgetKit, Shader Graph, USD, immersive media,
-  and coding standards for modern Swift and visionOS app code.
+Use `build-realitykit` for cross-platform RealityKit runtime development:
 
-## Use In Codex
+- entity loading, component selection, scene ownership, and runtime integration
+- rendering, materials, cameras, lighting, shadows, post-processing, LOD,
+  occlusion, splats, and decals
+- animation, physics, particles, character controllers, IK, navigation,
+  behavior trees, collision, cloth, and runtime animation graphs
+- spatial audio, audio resources, mix groups, reverb, and acoustic simulation
+- custom components, systems, ECS queries, registration, and update ordering
+- USDKit runtime stage, layer, prim, observer, export, and RealityKit bridge
+  flows
 
-- Ask directly for the outcome you want and let Codex choose the bundled
-  skills.
-- Type `@` to invoke `Build visionOS Apps` or one of its skills explicitly.
-- Use the command layer when you want a narrower entrypoint:
-  `/build-and-run-visionos-app`, `/fix-visionos-capability-error`, or
-  `/test-visionos-app`.
+This plugin routes authored RCP3 graph/package edits to
+`build-reality-composer-pro-3` and visionOS app lifecycle or simulator tasks to
+`build-visionos-apps`.
 
-## Optional External Tools
+### Build with Reality Composer Pro 3
 
-The core XcodeBuildMCP-first build/debug loop and UI automation guidance do not
-require extra CLIs. One optional external tool extends distribution workflows:
+Use `build-reality-composer-pro-3` for authored asset workflows:
 
-- `asc` for App Store Connect automation such as TestFlight uploads, metadata,
-  and submission workflows
+- Reality Composer Pro 3 Shader Graph materials and promoted inputs
+- Script Graph event/action behavior and package inspection
+- Animation Graph / Animator Graph state machines, transitions, parameters,
+  tags, and clip bindings
+- text-level USD ASCII edits, command-line USD inspection, USDZ packaging, and
+  Apple-platform validation
 
-This tool is not bundled with the plugin.
+This plugin routes runtime Swift integration to `build-realitykit` and app
+build/run/debug or RealityKitContent package wiring to `build-visionos-apps`.
 
 ## Installation
 
-The plugin installs into `${CODEX_HOME:-~/.codex}/plugins/build-visionos-apps`.
-If you use a non-default Codex home, replace `~/.codex` with `$CODEX_HOME`.
-
-### Option 1: Use This Repo As A Marketplace Source
-
-Codex can read this repository directly as a plugin marketplace because it
-contains `.agents/plugins/marketplace.json` at the repository root. Add the
-GitHub repo as a marketplace source:
-
-```bash
-codex plugin marketplace add studiomeije/visionos-codex-plugin --ref main
-```
-
-For local development, add the cloned repository instead:
+For local development, add this repository as a marketplace source:
 
 ```bash
 codex plugin marketplace add /absolute/path/to/visionos-codex-plugin
 ```
 
-Restart Codex, open the plugin directory, choose `Studio Meije`, and
-install `Build visionOS Apps`.
+Restart Codex, open the Studio Meije marketplace source, and install the
+plugin or plugins you need.
 
-### Option 2: Download The Packaged ZIP
-
-The GitHub Actions workflow at `.github/workflows/package-plugin.yml` builds
-`build-visionos-apps.zip` from `plugins/build-visionos-apps/`.
-
-The zip is created only for published GitHub releases. Download
-`build-visionos-apps.zip` from the release assets.
-
-Install it by unzipping into your Codex plugins directory:
+You can also install all packaged plugins from this checkout:
 
 ```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/plugins"
-unzip build-visionos-apps.zip -d "${CODEX_HOME:-$HOME/.codex}/plugins"
-```
-
-That creates:
-
-```text
-${CODEX_HOME:-$HOME/.codex}/plugins/build-visionos-apps
-```
-
-### Option 3: Clone The Repo And Use The Installer Script
-
-Clone the repo, then run the installer:
-
-```bash
-git clone https://github.com/studiomeije/visionos-codex-plugin.git
-cd visionos-codex-plugin
 ./scripts/install-plugin.sh
 ```
 
-The script removes any previous install of `build-visionos-apps` and copies the
-packaged plugin from `plugins/build-visionos-apps/` into your Codex plugins
-directory. You can also target a custom location:
+The installer copies:
 
-```bash
-./scripts/install-plugin.sh --home ~/.codex
-./scripts/install-plugin.sh --plugins-dir /path/to/codex/plugins
+```text
+${CODEX_HOME:-$HOME/.codex}/plugins/build-visionos-apps
+${CODEX_HOME:-$HOME/.codex}/plugins/build-realitykit
+${CODEX_HOME:-$HOME/.codex}/plugins/build-reality-composer-pro-3
 ```
 
-Keep the marketplace entry in `.agents/plugins/marketplace.json`, then restart
-Codex so it picks up the updated plugin and MCP config.
+and updates `~/.agents/plugins/marketplace.json` with all three plugin entries.
 
 ## Maintenance
 
@@ -142,11 +93,9 @@ The repo-to-repo sync workflow with `visionOSAgents` is documented in
 `docs/sync-agents.skills.md`. That document is only for keeping the shared
 skill set aligned between the two repos.
 
----
-
 ## Credits
 
-This plugin and its shared skill work were inspired by the work of:
+These plugins and shared skill work were inspired by the work of:
 
 - [Ivan Campos](https://github.com/ivancampos)
 - [Paul Hudson](https://github.com/twostraws)

@@ -1,7 +1,7 @@
 {
   "name": "build-visionos-apps",
   "version": "1.2.0",
-  "description": "Build, run, debug, refactor, and ship visionOS 27 (beta) apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
+  "description": "Build, run, debug, refactor, and ship visionOS 27 apps with XcodeBuildMCP-first Apple Vision Pro workflows.",
   "author": {
     "name": "Studio Meije",
     "email": "tom@studiomeije.com",
@@ -14,7 +14,6 @@
     "visionos",
     "visionos-27",
     "swiftui",
-    "realitykit",
     "arkit",
     "xcode",
     "simulator",
@@ -22,15 +21,14 @@
     "vision-pro",
     "shareplay",
     "widgetkit",
-    "shadergraph",
-    "usd"
+    "spatial-preview"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Build visionOS Apps",
+    "displayName": "Build visionOS 27 apps",
     "shortDescription": "Build, run, debug, refactor, and ship visionOS 27 apps with XcodeBuildMCP-first workflows",
-    "longDescription": "Development for Apple Vision Pro on visionOS 27: shared platform skills from visionOSAgents for spatial SwiftUI, RealityKit, ARKit, SharePlay, WidgetKit, immersive media, Shader Graph, USD, USDKit, Chart3D, and coding standards, plus plugin-local XcodeBuildMCP-first workflow skills for build/run/debug, testing, signing, telemetry, SwiftPM, packaging, UI automation, Spatial Preview, command entrypoints, and Run-button fallback bootstrap. UI automation uses XCTest/XCUITest, XcodeBuildMCP, xcodebuild, simctl, app debug hooks, and ScreenCaptureKit; asc is the only optional external CLI documented for distribution automation.",
+    "longDescription": "Development for Apple Vision Pro on visionOS 27: spatial SwiftUI, ARKit, SharePlay, WidgetKit, immersive media, app architecture, signing, packaging, telemetry, SwiftPM, simulator UI automation, Spatial Preview, XcodeBuildMCP-first build/run/debug workflows, command entrypoints, and Run-button fallback bootstrap. Link to Build with RealityKit for RealityKit runtime work and Build with Reality Composer Pro 3 for authored graph, package, and USD asset-pipeline work.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [
@@ -43,8 +41,8 @@
     "termsOfServiceURL": "https://developer.apple.com/support/terms/",
     "defaultPrompt": [
       "Build, run, and debug a visionOS 27 app with XcodeBuildMCP on Apple Vision Pro Simulator.",
-      "Choose the right window, volume, or immersive surface and inspect RealityKit, ARKit, and SharePlay behavior.",
-      "Prepare packaging and distribution workflows with optional external CLIs only when available."
+      "Choose the right window, volume, immersive surface, ARKit provider, SharePlay flow, or WidgetKit surface.",
+      "Route RealityKit runtime work to Build with RealityKit and authored RCP3 graph/package work to Build with Reality Composer Pro 3."
     ],
     "screenshots": [],
     "brandColor": "#0F172A",
