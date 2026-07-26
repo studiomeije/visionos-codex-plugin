@@ -22,4 +22,18 @@ Use `build-realitykit` when the task is runtime Swift, entities, components,
 systems, animation playback, physics, audio, rendering, or USDKit. Use
 `build-visionos-apps` when the task is app structure, ARKit, build/run/debug,
 testing, signing, packaging, simulator automation, or Vision Pro specific
-workflow.
+workflow. Use `profile-realitykit-apps` when a loaded asset or authored graph
+needs trace-backed runtime cost analysis before returning here for the source
+change.
+
+## Installation
+
+Install this plugin only through the Studio Meije Codex marketplace:
+
+```bash
+codex plugin marketplace add studiomeije/visionos-codex-plugin --ref main
+codex plugin add build-reality-composer-pro-3@visionos-codex-marketplace
+```
+
+For local development, replace the GitHub source with the absolute path to this
+repository. Do not copy this plugin into a Codex home manually.

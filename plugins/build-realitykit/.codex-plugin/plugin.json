@@ -27,7 +27,7 @@
   "interface": {
     "displayName": "Build with RealityKit",
     "shortDescription": "Build RealityKit scenes, systems, rendering, animation, physics, audio, and USDKit runtime flows",
-    "longDescription": "Cross-platform RealityKit development for Apple platforms: scene setup, entity loading, documented components, custom ECS systems, rendering and materials, animation and physics, spatial audio, USDKit runtime stages, and runtime handoff from authored Reality Composer Pro 3 assets. Use alongside Build visionOS 27 apps for platform app structure and Build with Reality Composer Pro 3 for authored graph and package work.",
+    "longDescription": "Cross-platform RealityKit implementation for Apple platforms: scene setup, entity loading, documented components, custom ECS systems, rendering and materials, animation and physics, spatial audio, USDKit runtime stages, and runtime handoff from authored Reality Composer Pro 3 assets. Use alongside Build visionOS 27 apps for platform app structure, Profile & Optimize RealityKit for measured runtime performance investigations, and Build with Reality Composer Pro 3 for authored graph and package work.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [
@@ -40,7 +40,8 @@
     "termsOfServiceURL": "https://developer.apple.com/support/terms/",
     "defaultPrompt": [
       "Build a RealityKit scene with documented entities, components, systems, and runtime ownership.",
-      "Debug RealityKit rendering, animation, physics, audio, or USDKit runtime behavior on Apple platforms.",
+      "Implement a measured RealityKit rendering, animation, physics, audio, ECS, or USDKit runtime fix.",
+      "Route profiling, Instruments traces, high CPU or GPU, memory growth, and performance verification to Profile & Optimize RealityKit.",
       "Route authored Reality Composer Pro 3 graph/package work to Build with Reality Composer Pro 3 when needed."
     ],
     "screenshots": [],

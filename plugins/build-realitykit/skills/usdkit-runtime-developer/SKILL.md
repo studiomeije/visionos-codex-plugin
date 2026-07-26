@@ -18,7 +18,9 @@ switch to `$usd-editor`.
 4. Keep `USDStage`, `USDPrim`, `USDLayer`, and nested property work on one
    actor; these types are not Sendable.
 5. For live RealityKit display, use `USDStageComponent` from the RealityKit
-   skill; for Spatial Preview streaming, keep `$spatial-preview-developer`.
+   skill.
+6. Route runtime load hitches, memory growth, or resource-residency
+   investigations to `realitykit-performance-triage`.
 
 ## Load References When
 

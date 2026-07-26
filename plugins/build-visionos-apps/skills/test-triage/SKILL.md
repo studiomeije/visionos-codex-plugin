@@ -12,8 +12,9 @@ failures precisely, and avoid treating every simulator or entitlement issue like
 a product bug.
 
 After a build succeeds, test triage is the verification loop: run the smallest
-relevant XCTest or Swift Testing scope, inspect XcodeBuildMCP or `xcodebuild`
-test output, then classify the result from concrete evidence.
+relevant XCTest or Swift Testing scope with `xcodebuild test`, inspect the
+result bundle and simulator logs, then classify the result from concrete
+evidence.
 
 Anchor every classification to the active test API. Load
 [`harness-detection.md`](references/harness-detection.md) for API-specific
@@ -29,7 +30,7 @@ test triage.
 | Reference | When to Use |
 |-----------|-------------|
 | [`references/harness-detection.md`](references/harness-detection.md) | When identifying XCTest vs Swift Testing targets, or when constructing `-only-testing:` filters. |
-| [`references/post-build-verification.md`](references/post-build-verification.md) | When reviewing XcodeBuildMCP test logs, `xcodebuild test` output, `.xcresult` bundles, or simulator logs after a successful build. |
+| [`references/post-build-verification.md`](references/post-build-verification.md) | When reviewing `xcodebuild test` output, `.xcresult` bundles, or simulator logs after a successful build. |
 | [`references/failure-categories.md`](references/failure-categories.md) | When classifying build failures, assertion failures, crashes, flakes, capability gaps, or lifecycle issues. |
 | [`references/simulator-capability-limits.md`](references/simulator-capability-limits.md) | When the failing test depends on hardware-backed visionOS capabilities that the simulator may stub or omit. |
 | [`references/rerun-strategy.md`](references/rerun-strategy.md) | When deciding how narrowly to rerun and how to summarize confidence. |
@@ -39,8 +40,8 @@ test triage.
 1. Confirm the build/run state, scheme, destination, and simulator UDID.
 2. Detect the test harness.
 3. Run the smallest relevant XCTest or Swift Testing scope.
-4. Inspect XcodeBuildMCP or `xcodebuild` output, result bundles, and simulator
-   logs before classifying.
+4. Inspect `xcodebuild` output, result bundles, and simulator logs before
+   classifying.
 5. Rerun intelligently.
 6. Summarize the smallest failing scope, the failure class, and the next rerun
    or fix step.
@@ -51,12 +52,12 @@ test triage.
   failures, launch failures, or crash-debugging workflows.
 - Switch to `signing-entitlements` for provisioning, capability, entitlements,
   privacy usage-key, or sandbox denial issues.
-- Switch to `telemetry` when lifecycle/event ordering is the likely cause and
-  proof needs targeted runtime instrumentation.
+- Switch to `realitykit-observability` when RealityKit lifecycle or event
+  ordering is the likely cause and proof needs targeted instrumentation.
 - Switch to `visionos-ui-automation` when the evidence you need is a
   screenshot, a video, a keyboard-driven flow, or an accessibility-tree dump
   from the running simulator rather than a test assertion. UI automation uses
-  XCTest/XCUITest, XcodeBuildMCP or `xcodebuild`, and `simctl`; it does not
+  XCTest/XCUITest, `xcodebuild`, and `simctl`; it does not
   replace focused test triage.
 - Resume `test-triage` after the blocker category is resolved and re-run the
   narrowest failing scope.

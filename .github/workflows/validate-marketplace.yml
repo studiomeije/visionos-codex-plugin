@@ -1,0 +1,134 @@
+name: Validate Marketplace
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate plugin metadata
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          marketplace = json.loads(Path(".agents/plugins/marketplace.json").read_text())
+          expected_plugins = {
+              "build-visionos-apps": {"xcode_bridge": True},
+              "build-realitykit": {"xcode_bridge": False},
+              "profile-realitykit-apps": {"xcode_bridge": False},
+              "build-reality-composer-pro-3": {"xcode_bridge": False},
+          }
+
+          entries = {
+              entry.get("name"): entry
+              for entry in marketplace.get("plugins", [])
+          }
+          assert set(entries) == set(expected_plugins)
+          assert not Path("scripts/install-plugin.sh").exists()
+
+          for plugin_name, options in expected_plugins.items():
+              plugin_root = Path("plugins") / plugin_name
+              manifest = json.loads((plugin_root / ".codex-plugin/plugin.json").read_text())
+
+              assert manifest["name"] == plugin_name
+              assert manifest["skills"] == "./skills/"
+              assert (plugin_root / "assets/icon.png").is_file()
+              assert (plugin_root / "skills").is_dir()
+              assert any((plugin_root / "skills").iterdir())
+
+              for skill_root in (plugin_root / "skills").iterdir():
+                  if not skill_root.is_dir():
+                      continue
+                  skill_file = skill_root / "SKILL.md"
+                  agent_file = skill_root / "agents/openai.yaml"
+                  assert skill_file.is_file(), skill_root
+                  assert agent_file.is_file(), skill_root
+
+              if options["xcode_bridge"]:
+                  assert manifest["mcpServers"] == "./.mcp.json"
+                  assert (plugin_root / ".mcp.json").is_file()
+                  mcp = json.loads((plugin_root / ".mcp.json").read_text())
+                  assert mcp["mcpServers"]["xcode"] == {
+                      "command": "xcrun",
+                      "args": ["mcpbridge"],
+                  }
+                  assert set(mcp["mcpServers"]) == {"xcode"}
+              else:
+                  assert "mcpServers" not in manifest
+
+              entry = entries.get(plugin_name)
+              assert entry is not None
+              assert entry["source"] == {
+                  "source": "local",
+                  "path": f"./plugins/{plugin_name}",
+              }
+              assert entry["policy"]["installation"] == "AVAILABLE"
+              assert entry["policy"]["authentication"] == "ON_INSTALL"
+              assert entry["category"] == "Coding"
+
+          skill_roots = sorted(Path("plugins").glob("*/skills/*"))
+          skill_names = set()
+          for skill_root in skill_roots:
+              if not skill_root.is_dir():
+                  continue
+              skill_file = skill_root / "SKILL.md"
+              text = skill_file.read_text()
+              assert text.startswith("---\n"), skill_file
+              frontmatter = text.split("---\n", 2)[1]
+              name_lines = [
+                  line.removeprefix("name:").strip()
+                  for line in frontmatter.splitlines()
+                  if line.startswith("name:")
+              ]
+              assert name_lines == [skill_root.name], skill_file
+              assert skill_root.name not in skill_names, skill_root.name
+              skill_names.add(skill_root.name)
+
+          import re
+          route_files = list(Path("plugins").glob("*/skills/*/SKILL.md"))
+          route_files += list(Path("plugins").glob("*/skills/*/agents/openai.yaml"))
+          for route_file in route_files:
+              for route in re.findall(r"\$([a-z0-9][a-z0-9-]+)", route_file.read_text()):
+                  assert route in skill_names, (route_file, route)
+
+          for markdown_file in Path(".").rglob("*.md"):
+              if ".git" in markdown_file.parts:
+                  continue
+              for target in re.findall(
+                  r"(?<!!)\[[^\]]*\]\(([^)]+)\)",
+                  markdown_file.read_text(errors="ignore"),
+              ):
+                  target = target.strip().split()[0].strip("<>")
+                  if not target or target.startswith(
+                      ("#", "http://", "https://", "mailto:")
+                  ):
+                      continue
+                  path_part = target.split("#", 1)[0]
+                  assert (markdown_file.parent / path_part).resolve().exists(), (
+                      markdown_file,
+                      target,
+                  )
+
+          forbidden_artifacts = {
+              ".trace",
+              ".logarchive",
+              ".gputrace",
+              ".spindump",
+              ".ips",
+          }
+          for path in Path(".").rglob("*"):
+              assert path.suffix not in forbidden_artifacts, path
+          PY

@@ -1,13 +1,13 @@
 ---
 name: visionos-ui-automation
-description: Automate Apple Vision Pro simulator validation with XCTest/XCUITest, XcodeBuildMCP or xcodebuild, simctl capture/control, and app-designed debug hooks for spatial flows. Use when validating launched UI flows, accessibility behavior, screenshots, video evidence, simulator settings, or deterministic spatial automation.
+description: Automate Apple Vision Pro simulator validation with XCTest/XCUITest, xcodebuild, simctl capture/control, and app-designed debug hooks for spatial flows. Use when validating launched UI flows, accessibility behavior, screenshots, video evidence, simulator settings, or deterministic spatial automation.
 ---
 
 # visionOS UI Automation
 
 This skill uses first-party and local automation paths for visionOS UI work.
 Prefer XCTest/XCUITest for UI flows and accessibility assertions,
-XcodeBuildMCP or `xcodebuild` for build/launch/test execution, `xcrun simctl`
+`xcodebuild` for build/test execution, `xcrun simctl`
 for simulator screenshots, video, display/UI settings, URL opens, pasteboard,
 and locally supported hardware-button or HID-style operations, app-designed
 debug hooks for spatial gestures.
@@ -31,8 +31,8 @@ the same application state path.
 
 1. Choose the owner for the proof: XCUITest assertion, simulator artifact,
    app debug hook, or unified log.
-2. Build, install, launch, or test with XcodeBuildMCP first. Use `xcodebuild`
-   and `xcrun simctl` as the shell fallback.
+2. Build or test with `xcodebuild`; use `xcrun simctl` for simulator install,
+   launch, capture, and supported control operations.
 3. Confirm the selected Apple Vision Pro simulator destination or UDID matches
    the build/run evidence.
 4. For UI flows and accessibility, run the smallest relevant XCTest/XCUITest
@@ -40,23 +40,27 @@ the same application state path.
 5. For visual evidence around an already launched app, use `xcrun simctl io`
    screenshots or video with the resolved UDID.
 6. For spatial gestures or immersive state, use explicit app-designed hooks and
-   pair the visual artifact with XCUITest assertions or telemetry.
+   pair the visual artifact with XCUITest assertions or runtime logs.
 7. Verify the artifact, assertion result, or log output before claiming the
    evidence supports the theory.
 
 ## When To Switch Skills
 
 - Switch to `build-run-debug` when the app will not launch, the simulator is
-  not booted, or logs must be captured through XcodeBuildMCP.
+  not booted, or logs must be captured.
 - Switch to `test-triage` when a test target fails or you need to narrow a
   failing XCTest, XCUITest, or Swift Testing scope.
-- Switch to `telemetry` when the question is "did the app emit this event?"
-  - UI automation artifacts do not replace unified-log proof.
+- Switch to `build-run-debug` when the question is "did the app emit this
+  event?" UI automation artifacts do not replace unified-log proof.
+- Switch to `realitykit-observability` when the question is whether a
+  RealityKit event fired. UI automation artifacts do not replace unified-log
+  proof.
 - Switch to `realitykit-visionos-developer` for entity-level manipulation
   test hooks when a test needs to assert spatial gesture state.
 
 ## Guardrails
 
+- Do not use third-party host-side UI automation CLIs for visionOS testing.
 - Do not use host-side coordinate taps, swipes, or gestures as proof of
   visionOS spatial interaction behavior.
 - Do not replace XCTest/XCUITest assertions with screenshots when the behavior
@@ -74,11 +78,10 @@ the same application state path.
 ## Output Expectations
 
 Provide:
-- the runner or command path used: XcodeBuildMCP, `xcodebuild`, `xcrun simctl`,
+- the runner or command path used: `xcodebuild`, `xcrun simctl`,
   XCUITest, or app debug hook
 - the simulator destination or resolved UDID
 - the focused test scope, launch arguments, URL hook, or simulator command
 - artifact paths produced: screenshots, videos, result bundles, or logs
 - whether the captured evidence supports or rejects the current theory
-- explicit routing back to `build-run-debug`, `test-triage`, or
-  `telemetry` for the next step
+- explicit routing back to `build-run-debug` or `test-triage` for the next step

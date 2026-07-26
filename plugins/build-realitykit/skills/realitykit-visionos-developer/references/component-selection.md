@@ -103,8 +103,7 @@ before release.
 - Local USD rendering: use
   [`USDStageComponent`](usdstagecomponent.md). For Swift USDKit authoring, use
   `usdkit-runtime-developer`; for authored USD edits or command-line
-  inspection, use `usd-editor`; for Mac-to-Vision-Pro streaming, use
-  `spatial-preview-developer`.
+  inspection, use `usd-editor`.
 - Portals and accessory anchoring: use
   [`portal-volumes-and-accessory-anchoring.md`](portal-volumes-and-accessory-anchoring.md).
 

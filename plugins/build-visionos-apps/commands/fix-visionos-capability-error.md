@@ -16,7 +16,7 @@ differences.
 1. Route to the real plugin skill for the failure class.
    - Use `../skills/signing-entitlements/SKILL.md` as the primary skill.
    - Use `../skills/build-run-debug/SKILL.md` only when you need to reproduce
-     the launch failure through XcodeBuildMCP before inspecting the artifact.
+     the launch failure before inspecting the artifact.
 
 2. Inspect the artifact or project settings.
    - Prefer the built `.app` when one exists.

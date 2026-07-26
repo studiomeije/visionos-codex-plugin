@@ -16,26 +16,8 @@
     "animationgraph-editor": {
       "digest": "da50ef074ba07da9cc78efac2c3e62d20f900edc24a92428374985b1e589f3ac"
     },
-    "arkit-camera-access-providers": {
-      "digest": "415660e82f9148032b0abbb4827b511b9942dfc020e85994af6debce696249a1"
-    },
-    "arkit-hand-tracking-provider": {
-      "digest": "7cd41a2679b49e50c4d29e3c3184cf670e398efeb988088e67ffe82014b497f8"
-    },
-    "arkit-reference-tracking-providers": {
-      "digest": "dfb03cacc45a000a10372591abace6d002c5d9c3075cabf88c4895505b1c0480"
-    },
-    "arkit-rendering-context-providers": {
-      "digest": "996184e7d78c2d10609834737033e3677e9d4d51bd81cd62aebfd243645ec498"
-    },
-    "arkit-spatial-tracking-providers": {
-      "digest": "a9fe2147a3ffebc08ca5db6f710985a8d2367155af5093baf462502ec71e9b85"
-    },
     "arkit-visionos-developer": {
       "digest": "46bab777fd0b4864768bcdbe1455a1fd1edf95109a16e80ea646bf9fdcab29ca"
-    },
-    "coding-standards-enforcer": {
-      "digest": "8c6aeebc93cb9beb64e9694ed37d9e767f319284da56bc8e0e780017c2fe8acb"
     },
     "realitykit-animation-physics": {
       "digest": "3c9d82f47c1de37b0bf3d23b14d4a1942a70058b93b205333d90d95e46250856"
@@ -66,9 +48,6 @@
     },
     "spatial-swiftui-developer": {
       "digest": "fc9322d3bce0227538a50c6b62d0f60e787c40fa3c6f04e3e81f10c222a90196"
-    },
-    "swiftui-chart3d-developer": {
-      "digest": "ff5d41a63c93b7813404a13fb0631e2eb3489892a247bea1605634a1b9a3571d"
     },
     "usd-editor": {
       "digest": "8b22d539785d609e519ae42c1c705d97600ea0e8e277d3606ec678760a20f10c"

@@ -26,7 +26,7 @@
   "interface": {
     "displayName": "Build with Reality Composer Pro 3",
     "shortDescription": "Author and debug RCP3 projects, graphs, packages, and USD asset pipelines",
-    "longDescription": "Reality Composer Pro 3 authoring support for Shader Graph materials, Script Graph behavior, Animation Graph state machines, direct package inspection, USD ASCII edits, USD command-line validation, and safe handoff into RealityKit or visionOS apps. Use alongside Build with RealityKit for runtime Swift integration and Build visionOS 27 apps for app build, simulator, ARKit, and distribution workflows.",
+    "longDescription": "Reality Composer Pro 3 authoring support for Shader Graph materials, Script Graph behavior, Animation Graph state machines, direct package inspection, USD ASCII edits, USD command-line validation, and safe handoff into RealityKit or visionOS apps. Use alongside Build with RealityKit for runtime Swift integration, Profile & Optimize RealityKit for runtime cost evidence, and Build visionOS 27 apps for app build, simulator, ARKit, and distribution workflows.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [
@@ -40,7 +40,7 @@
     "defaultPrompt": [
       "Author or inspect a Reality Composer Pro 3 Shader Graph, Script Graph, or Animation Graph.",
       "Repair a narrow RCP3 package or USD asset issue while preserving authored structure.",
-      "Route runtime RealityKit or visionOS app integration to the matching plugin when needed."
+      "Route runtime implementation, profiling, or visionOS app integration to the matching plugin when needed."
     ],
     "screenshots": [],
     "brandColor": "#7C2D12",

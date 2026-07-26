@@ -12,29 +12,32 @@ Only the shared core skills listed in `sync/shared-skills.json` participate in
 repo-to-repo sync.
 
 Plugin-only workflow and Vision Pro-adjacent tooling skills such as
-`build-run-debug`, `packaging-distribution`, `visionos-ui-automation`,
-`spatial-preview-developer`, and `telemetry` stay local to
-`visionos-plugin-codex` and must not be added to the shared-skill manifest.
+`build-run-debug`, `packaging-distribution`, and `visionos-ui-automation` stay
+local to `visionos-codex-plugin` and must not be added to the shared-skill
+manifest.
+
+All skills under `profile-realitykit-apps` are operational profiling workflows
+and also remain plugin-local.
 
 Both repos keep the same lock file in `sync/shared-skills.lock.json`.
 
 ## Commands
 
 Use the repo-root sync tool to inspect or move shared skill changes between
-`visionos-plugin-codex` and `visionOSAgents`:
+`visionos-codex-plugin` and `visionOSAgents`:
 
 ```bash
 python3 scripts/sync_shared_skills.py status \
   --agents-repo /path/to/visionOSAgents \
-  --plugin-repo /path/to/visionos-plugin-codex
+  --plugin-repo /path/to/visionos-codex-plugin
 
 python3 scripts/sync_shared_skills.py sync --from agents --to plugin \
   --agents-repo /path/to/visionOSAgents \
-  --plugin-repo /path/to/visionos-plugin-codex
+  --plugin-repo /path/to/visionos-codex-plugin
 
 python3 scripts/sync_shared_skills.py sync --from plugin --to agents \
   --agents-repo /path/to/visionOSAgents \
-  --plugin-repo /path/to/visionos-plugin-codex
+  --plugin-repo /path/to/visionos-codex-plugin
 ```
 
 Use `--from agents --to plugin` when the shared skill source change was made in
@@ -51,17 +54,17 @@ the tool stops and those conflicts must be merged manually before rerunning it.
 ## After Syncing
 
 Repo-to-repo sync does not update installed Codex plugins. After a successful
-sync, install the packaged plugins into the home Codex plugin directory:
+sync, validate the marketplace checkout and use the normal Codex marketplace
+installation or update flow. For a local checkout, configure it once:
 
 ```bash
-./scripts/install-plugin.sh --home ~/.codex
+codex plugin marketplace add /absolute/path/to/visionos-codex-plugin
 ```
 
-That installs:
+Install a plugin from that marketplace when needed:
 
-- `~/.codex/plugins/build-visionos-apps`
-- `~/.codex/plugins/build-realitykit`
-- `~/.codex/plugins/build-reality-composer-pro-3`
+```bash
+codex plugin add build-visionos-apps@visionos-codex-marketplace
+```
 
-and updates `~/.agents/plugins/marketplace.json` so all three entries point at
-their installed plugin directories with `INSTALLED_BY_DEFAULT`.
+Do not copy plugin directories or edit Codex marketplace metadata manually.

@@ -1,4 +1,4 @@
 interface:
   display_name: "Build / Run / Debug"
-  short_description: "Build, run, and debug visionOS apps with XcodeBuildMCP"
-  default_prompt: "Use $build-run-debug to inspect the real workspace/project/scheme, set XcodeBuildMCP session defaults, choose an Apple Vision Pro Simulator target, run build/launch/log/debug flows, and route to $test-triage for test failures or $signing-entitlements for capability/privacy/signing blockers. Keep Xcode beta and arm64 shell workarounds explicit fallback choices."
+  short_description: "Build, run, and debug visionOS apps"
+  default_prompt: "Use $build-run-debug to inspect the real workspace/project/scheme, choose an Apple Vision Pro Simulator target, and run build, install, launch, basic log, or debugger workflows with the official Xcode bridge or direct xcodebuild/simctl tools. Route to $test-triage for test failures, $signing-entitlements for capability/privacy/signing blockers, and $realitykit-performance-triage when a running RealityKit app needs profiling."

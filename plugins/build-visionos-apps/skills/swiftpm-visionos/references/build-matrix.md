@@ -37,5 +37,5 @@ xcodebuild build \
   ARCHS=arm64 ONLY_ACTIVE_ARCH=YES
 ```
 
-Prefer `build-run-debug` and XcodeBuildMCP once the task becomes an interactive
-simulator loop instead of a package-shape or compile-target question.
+Prefer `build-run-debug` once the task becomes an interactive simulator loop
+instead of a package-shape or compile-target question.

@@ -1,14 +1,20 @@
 # Studio Meije Spatial Codex Plugins
 
-This repository packages three Codex plugins for Apple spatial-computing work:
+This repository packages four Codex plugins for Apple spatial-computing work:
 
 - `build-visionos-apps` - Build visionOS 27 apps.
 - `build-realitykit` - Build with RealityKit.
+- `profile-realitykit-apps` - Profile and optimize RealityKit apps.
 - `build-reality-composer-pro-3` - Build with Reality Composer Pro 3.
 
-The split keeps platform app work, runtime RealityKit work, and authored RCP3
-asset work in separate plugin surfaces while allowing each plugin to route to
-the others when a task crosses boundaries.
+## Choose A Plugin
+
+| Plugin | Use When | Produces |
+|---|---|---|
+| `build-visionos-apps` | The task is app structure, build, launch, signing, testing, SwiftUI, ARKit, SharePlay, or WidgetKit. | A runnable and correctly configured visionOS app. |
+| `build-realitykit` | The task is RealityKit entities, components, systems, rendering, animation, physics, audio, or USDKit implementation. | Runtime code and architecture changes. |
+| `profile-realitykit-apps` | A running RealityKit app is slow, stuttering, memory-heavy, thermally constrained, or needs trace-backed verification. | Logs, signposts, traces, bottleneck evidence, and matched comparisons. |
+| `build-reality-composer-pro-3` | The editable source is an RCP graph/package, Shader Graph, Script Graph, Animation Graph, USD, or USDZ asset. | Authored graph and asset changes. |
 
 ## Plugin Roles
 
@@ -16,17 +22,18 @@ the others when a task crosses boundaries.
 
 Use `build-visionos-apps` for Apple Vision Pro app work:
 
-- XcodeBuildMCP-first build, run, debug, log, and simulator workflows
+- first-party Xcode build, run, debug, log, and simulator workflows
 - spatial SwiftUI, windows, volumes, immersive spaces, ornaments, and app
   architecture
-- ARKit providers, SharePlay, WidgetKit, immersive media, Spatial Preview, and
+- ARKit providers, SharePlay, WidgetKit, immersive media, and
   Vision Pro specific interaction workflows
-- signing, entitlements, privacy keys, testing, telemetry, SwiftPM, packaging,
+- signing, entitlements, privacy keys, testing, SwiftPM, packaging,
   distribution, and simulator UI automation
 
 This plugin links out to `build-realitykit` when the task becomes RealityKit
-runtime code, and to `build-reality-composer-pro-3` when authored graph,
-package, or USD asset-pipeline work is the source of truth.
+runtime code, to `profile-realitykit-apps` for performance evidence, and to
+`build-reality-composer-pro-3` when authored graph, package, or USD
+asset-pipeline work is the source of truth.
 
 ### Build with RealityKit
 
@@ -44,7 +51,22 @@ Use `build-realitykit` for cross-platform RealityKit runtime development:
 
 This plugin routes authored RCP3 graph/package edits to
 `build-reality-composer-pro-3` and visionOS app lifecycle or simulator tasks to
-`build-visionos-apps`.
+`build-visionos-apps`. It routes runtime profiling and optimization
+verification to `profile-realitykit-apps`.
+
+### Profile & Optimize RealityKit
+
+Use `profile-realitykit-apps` for evidence-driven runtime investigation:
+
+- reproducible scenarios, baselines, and evidence contracts
+- Console, unified logging, `Logger`, and `OSSignposter`
+- RealityKit Trace and dynamic `xctrace` capability discovery
+- CPU/ECS, frame/GPU, memory/assets, audio, thermal, and power diagnosis
+- trace artifact handling and before-and-after performance verification
+
+This plugin routes build and launch plumbing to `build-visionos-apps`, runtime
+code fixes to `build-realitykit`, and authored asset or graph fixes to
+`build-reality-composer-pro-3`.
 
 ### Build with Reality Composer Pro 3
 
@@ -57,35 +79,38 @@ Use `build-reality-composer-pro-3` for authored asset workflows:
 - text-level USD ASCII edits, command-line USD inspection, USDZ packaging, and
   Apple-platform validation
 
-This plugin routes runtime Swift integration to `build-realitykit` and app
-build/run/debug or RealityKitContent package wiring to `build-visionos-apps`.
+This plugin routes runtime Swift integration to `build-realitykit`, runtime
+profiling to `profile-realitykit-apps`, and app build/run/debug or
+RealityKitContent package wiring to `build-visionos-apps`.
 
 ## Installation
 
-For local development, add this repository as a marketplace source:
+The Codex plugin marketplace is the only supported installation path. Do not
+copy plugin directories into a Codex home or edit marketplace metadata by hand.
+
+Add the GitHub repository as a marketplace source:
+
+```bash
+codex plugin marketplace add studiomeije/visionos-codex-plugin --ref main
+```
+
+For local development, add the checkout instead:
 
 ```bash
 codex plugin marketplace add /absolute/path/to/visionos-codex-plugin
 ```
 
-Restart Codex, open the Studio Meije marketplace source, and install the
-plugin or plugins you need.
-
-You can also install all packaged plugins from this checkout:
+Then install the plugins you need from the configured marketplace:
 
 ```bash
-./scripts/install-plugin.sh
+codex plugin add build-visionos-apps@visionos-codex-marketplace
+codex plugin add build-realitykit@visionos-codex-marketplace
+codex plugin add profile-realitykit-apps@visionos-codex-marketplace
+codex plugin add build-reality-composer-pro-3@visionos-codex-marketplace
 ```
 
-The installer copies:
-
-```text
-${CODEX_HOME:-$HOME/.codex}/plugins/build-visionos-apps
-${CODEX_HOME:-$HOME/.codex}/plugins/build-realitykit
-${CODEX_HOME:-$HOME/.codex}/plugins/build-reality-composer-pro-3
-```
-
-and updates `~/.agents/plugins/marketplace.json` with all three plugin entries.
+The same plugins are available from the Studio Meije marketplace in the Codex
+UI. Restart Codex after installation when prompted.
 
 ## Maintenance
 

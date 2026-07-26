@@ -1,0 +1,49 @@
+{
+  "name": "profile-realitykit-apps",
+  "version": "1.0.0",
+  "description": "Profile and optimize RealityKit apps with unified logging, signposts, Instruments traces, and device-first performance evidence.",
+  "author": {
+    "name": "Studio Meije",
+    "email": "tom@studiomeije.com",
+    "url": "https://github.com/studiomeije"
+  },
+  "homepage": "https://github.com/studiomeije/visionos-codex-plugin",
+  "repository": "https://github.com/studiomeije/visionos-codex-plugin.git",
+  "license": "MIT",
+  "keywords": [
+    "realitykit",
+    "performance",
+    "profiling",
+    "instruments",
+    "xctrace",
+    "oslog",
+    "signposts",
+    "metal",
+    "visionos"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Profile & Optimize RealityKit",
+    "shortDescription": "Measure, diagnose, and verify RealityKit performance",
+    "longDescription": "Evidence-driven RealityKit diagnostics for Apple platforms: reproducible performance investigations, unified logging and OSSignposter instrumentation, RealityKit Trace, xctrace capability discovery, CPU and ECS analysis, frame and GPU analysis, memory and asset-lifetime analysis, physical-device validation, and before-and-after verification. Use alongside Build visionOS 27 apps for build and launch plumbing, Build with RealityKit for implementation fixes, and Build with Reality Composer Pro 3 for authored asset and graph corrections.",
+    "developerName": "Studio Meije",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/studiomeije/visionos-codex-plugin",
+    "privacyPolicyURL": "https://www.apple.com/legal/privacy/",
+    "termsOfServiceURL": "https://developer.apple.com/support/terms/",
+    "defaultPrompt": [
+      "Create a reproducible RealityKit performance investigation and capture the smallest useful trace.",
+      "Correlate privacy-safe Logger and OSSignposter evidence with RealityKit Trace.",
+      "Compare matched device captures and verify whether an optimization improved the measured bottleneck."
+    ],
+    "screenshots": [],
+    "brandColor": "#D97706",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
+  }
+}

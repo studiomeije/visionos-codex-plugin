@@ -3,4 +3,4 @@ interface:
   short_description: "Build RealityKit scenes, systems, rendering, animation, physics, audio, and USDKit runtime flows"
   icon_small: "./assets/icon.png"
   icon_large: "./assets/icon.png"
-  default_prompt: "Use Build with RealityKit for cross-platform RealityKit work: choose documented entities and components, load assets, design custom systems, debug rendering, animation, physics, audio, and USDKit runtime stages, and route authored Reality Composer Pro 3 graph or package edits to Build with Reality Composer Pro 3."
+  default_prompt: "Use Build with RealityKit for cross-platform RealityKit implementation: choose documented entities and components, load assets, design custom systems, and fix rendering, animation, physics, audio, ECS, and USDKit runtime behavior. Route measured performance investigations to Profile & Optimize RealityKit and authored Reality Composer Pro 3 graph or package edits to Build with Reality Composer Pro 3."

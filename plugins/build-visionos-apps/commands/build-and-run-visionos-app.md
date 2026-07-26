@@ -1,9 +1,9 @@
 # /build-and-run-visionos-app
 
 Build, install, launch, or debug a local visionOS app. Start with the
-`build-run-debug` skill and use XcodeBuildMCP as the primary path. Use the
-project-local `script/build_and_run.sh` fallback only when the user wants a
-persistent Codex `Run` button or XcodeBuildMCP is unavailable.
+`build-run-debug` skill. Use the official Xcode bridge for active Xcode session
+state, direct `xcodebuild` and `simctl` for deterministic shell work, and a
+project-local `script/build_and_run.sh` for a persistent Codex `Run` button.
 
 ## Arguments
 
@@ -18,8 +18,7 @@ persistent Codex `Run` button or XcodeBuildMCP is unavailable.
 
 1. Route through the real plugin skill first.
    - Use `../skills/build-run-debug/SKILL.md` for project discovery,
-     XcodeBuildMCP defaults, simulator choice, build, install, launch, logs,
-     and LLDB.
+     simulator choice, build, install, launch, logs, and LLDB.
    - Use `../skills/swiftpm-visionos/SKILL.md` only for package-first work that
      does not have an app-producing Xcode scheme.
 
@@ -27,14 +26,14 @@ persistent Codex `Run` button or XcodeBuildMCP is unavailable.
    - Prefer the app-producing scheme over helper targets.
    - If the repo is ambiguous, explain the choice before running anything.
 
-3. Use XcodeBuildMCP as the default path.
-   - Read current session defaults, then set `projectPath` or `workspacePath`,
-     `scheme`, `platform: "visionOS"`, and an Apple Vision Pro simulator
-     destination when needed.
-   - Prefer `build_run_sim` for the normal build-install-launch loop.
-   - Use `build_sim` for compile-only checks.
-   - Use launch, log capture, or debug attach only when the requested mode or
-     failure needs runtime evidence.
+3. Choose the first-party execution path.
+   - Use `xcode` / `mcpbridge` when the task depends on active Xcode session or
+     debugger state.
+   - Use `xcodebuild` for compile and test actions.
+   - Use `xcrun simctl` for simulator boot, install, launch, termination,
+     screenshots, video, and focused simulator control.
+   - Use unified logging and LLDB only when the requested mode or failure needs
+     runtime evidence.
 
 4. Choose the simulator deliberately.
    - Prefer a booted Apple Vision Pro simulator.
@@ -42,7 +41,7 @@ persistent Codex `Run` button or XcodeBuildMCP is unavailable.
    - Distinguish simulator work from device work if the user names a physical
      device or asks for signing-sensitive validation.
 
-5. Fall back to the shell bootstrap only when needed.
+5. Use the shell bootstrap when a repeatable entrypoint is useful.
    - If a project-local `./script/build_and_run.sh` already exists and clearly
      matches the active app target, use it.
    - Otherwise generate it with
@@ -57,17 +56,17 @@ persistent Codex `Run` button or XcodeBuildMCP is unavailable.
      signing failures.
    - Use `../skills/test-triage/SKILL.md` if the user is really asking about a
      failing test or a launch-time regression.
-   - Use `../skills/telemetry/SKILL.md` when the task is to add or verify
-     unified logging, signposts, or runtime instrumentation.
+   - Use `realitykit-observability` when a running RealityKit app needs
+     structured logs, signposts, or runtime-event verification.
    - Use `../skills/visionos-ui-automation/SKILL.md` when a launched app needs
      screenshots, video, accessibility inspection, or keyboard-driven flows.
 
 ## Guardrails
 
-- Prefer XcodeBuildMCP over the shell fallback.
+- Prefer first-party Xcode tools and keep the selected path explicit.
 - Do not treat macOS launch or iOS automation patterns as valid for visionOS.
 - Do not assume a simulator failure is a code-signing issue.
-- Keep the fallback script outside app source folders and do not rewrite an
+- Keep the run script outside app source folders and do not rewrite an
   existing project run script unless the user asks for replacement.
 - Do not invent a destination, scheme, or product name when the project shape
   can be inspected directly.

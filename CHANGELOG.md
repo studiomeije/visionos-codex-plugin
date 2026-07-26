@@ -2,28 +2,33 @@
 
 ## Unreleased
 
-- Split the previous all-in-one `build-visionos-apps` package into three
+- Split the previous all-in-one `build-visionos-apps` package into four
   distinct Codex plugins: `build-visionos-apps` for visionOS 27 app workflows,
-  `build-realitykit` for RealityKit runtime development, and
+  `build-realitykit` for RealityKit runtime development,
+  `profile-realitykit-apps` for evidence-driven profiling and optimization, and
   `build-reality-composer-pro-3` for Reality Composer Pro 3 graph/package/USD
   authoring.
-- Updated marketplace metadata, installer behavior, release packaging, and
-  shared-skill sync routing so all three plugin roots are first-class.
-- Split oversized shared skills into smaller focused skills:
-  RealityKit rendering/materials, animation/physics, audio/spatial, and ECS;
-  ARKit spatial, hand, reference, camera-access, and rendering-context
-  providers; USDKit runtime; and SwiftUI Chart3D.
-- Reworked `visionos-ui-automation` to remove the previous third-party UI
-  automation CLI dependency and route through XCTest/XCUITest, XcodeBuildMCP
-  or `xcodebuild`, `simctl`, and app debug hooks.
-- Documented the boundary between XcodeBuildMCP as the default build/run/debug
-  loop, `xcode` / `mcpbridge` for active Xcode session capabilities, and shell
-  tools as fallback.
+- Made the Codex plugin marketplace the only supported installation path,
+  removed the direct-copy installer and release ZIP packaging, and updated
+  marketplace validation and shared-skill sync documentation.
+- Split oversized RealityKit skills into rendering/materials,
+  animation/physics, audio/spatial, and ECS skills, and added a focused USDKit
+  runtime skill.
+- Consolidated ARKit provider guidance into `arkit-visionos-developer`, merged
+  Chart3D guidance into `spatial-swiftui-developer`, and moved runtime logging,
+  signposts, trace selection, and verification into the dedicated
+  `profile-realitykit-apps` plugin.
+- Reworked `visionos-ui-automation` to use XCTest/XCUITest, `xcodebuild`,
+  `simctl`, and app debug hooks, with no third-party UI automation CLI.
+- Removed the third-party build MCP server. Build, run, debug, and test
+  workflows now use the official `xcode` / `mcpbridge` integration for active
+  Xcode session capabilities and first-party shell tools for deterministic
+  workflows.
 - Moved the long SharePlay sample-backed GroupActivities material into
   `shareplay-developer/samples/` and kept the active reference as a compact
   pattern map.
-- Kept `spatial-preview-developer` in the visionOS plugin and added it to the
-  published skill inventory.
+- Removed the macOS-only Spatial Preview skill and the redundant coding
+  standards skill from the visionOS-focused plugin.
 - Added `scriptgraph-editor` for Reality Composer Pro 3 Script Graph behavior,
   node metadata inspection, package graph inspection, and runtime ownership
   routing.
@@ -109,7 +114,7 @@
 ## 1.1.0 - 2026-04-23
 
 - Sharpened the plugin metadata, README, and command entrypoints around
-  XcodeBuildMCP-first visionOS 26 workflows.
+  automated visionOS 26 workflows.
 - Improved the build/run/debug, SwiftPM, test triage, telemetry, UI automation,
   signing, entitlements, packaging, and distribution skill guidance.
 - Expanded shared `visionOSAgents` skills for spatial SwiftUI, RealityKit, ARKit,
@@ -118,7 +123,7 @@
 - Strengthened the default guidance for new SwiftUI and visionOS code to use
   `@Observable` instead of `ObservableObject` unless a compatibility blocker is
   documented.
-- Improved the plugin installer, marketplace metadata update flow, package
-  workflow validation, and shared-skill sync documentation.
+- Improved marketplace metadata validation and shared-skill sync
+  documentation.
 - Added deterministic Run-button bootstrap checks for Apple Vision Pro Simulator
   selection, app bundle resolution, and project-local DerivedData paths.

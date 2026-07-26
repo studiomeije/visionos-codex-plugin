@@ -1,4 +1,14 @@
 .DS_Store
 __pycache__/
 .pytest_cache/
-dist/
+
+# Local profiling and diagnostic artifacts
+profiling-artifacts/
+*.trace/
+*.trace.zip
+*.logarchive/
+*.gputrace/
+*.spindump
+*.ips
+*.sysdiagnose
+*.sysdiagnose.tar.gz

@@ -7,7 +7,7 @@
 - See the original samples' LICENSE.txt files for licensing terms.
 - Some excerpts preserve the original sample code's Combine-era
   `ObservableObject` patterns. Treat them as source-sample context only; for
-  new visionOS SwiftUI code, follow `coding-standards-enforcer` and use
+  new visionOS SwiftUI code, follow the repository's Swift standards and use
   `@Observable` unless the user explicitly asks for a compatibility path.
 
 ## Table of Contents

@@ -1,0 +1,4 @@
+interface:
+  display_name: "RealityKit Observability"
+  short_description: "Correlate RealityKit logs, signposts, and runtime events"
+  default_prompt: "Use $realitykit-observability to add privacy-safe Logger and OSSignposter evidence around app-owned RealityKit boundaries, capture it with bounded predicates, verify the expected sequence, and correlate it with the relevant trace time range."

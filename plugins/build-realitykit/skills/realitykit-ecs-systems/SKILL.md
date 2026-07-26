@@ -1,6 +1,6 @@
 ---
 name: realitykit-ecs-systems
-description: Design, implement, and debug custom RealityKit components, systems, ECS queries, component registration, update loops, Codable component state, and per-frame multi-entity behavior on visionOS. Use when documented RealityKit components do not represent the needed state or behavior, when behavior spans multiple entities, or when a task needs custom System and Component architecture instead of SwiftUI view logic.
+description: Design, implement, and debug custom RealityKit components, systems, ECS queries, component registration, update loops, Codable component state, and per-frame multi-entity behavior on visionOS. Use for ECS architecture, correctness, or implementing a measured fix. Route hot System.update work, high CPU, contention, task storms, and trace-backed ECS profiling to realitykit-performance-triage.
 ---
 
 # RealityKit ECS Systems
@@ -38,6 +38,8 @@ description: Design, implement, and debug custom RealityKit components, systems,
 - Use `realitykit-audio-spatial` when systems coordinate entity-owned audio.
 - Use `scriptgraph-editor` when the behavior is authored inside Reality
   Composer Pro Script Graphs rather than app-owned Swift systems.
+- Use `realitykit-performance-triage` when ECS cost, query cadence, scheduling,
+  or CPU impact needs measurement.
 
 ## Guardrails
 

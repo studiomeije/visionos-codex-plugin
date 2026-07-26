@@ -1,0 +1,4 @@
+interface:
+  display_name: "RealityKit Instruments Profiling"
+  short_description: "Capture and interpret RealityKit performance traces"
+  default_prompt: "Use $realitykit-instruments-profiling to discover the selected Xcode's available templates and targets, record one bounded RealityKit performance capture, inspect the relevant trace data, identify the measured bottleneck, and require a matched verification run."

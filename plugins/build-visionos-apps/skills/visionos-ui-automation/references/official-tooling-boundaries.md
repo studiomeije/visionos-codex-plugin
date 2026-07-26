@@ -6,10 +6,9 @@ tool availability.
 ## Preflight
 
 Start from the same simulator and app instance used by the build/run evidence.
-Prefer XcodeBuildMCP for project defaults, build, install, launch, and test
-entrypoints. Use `xcode` / `mcpbridge` only when the task depends on active
-Xcode session state. When the MCP path is unavailable, fall back to
-`xcodebuild` and `xcrun simctl`.
+Use `xcodebuild` and `xcrun simctl` for deterministic build, test, simulator,
+and capture workflows. Use `xcode` / `mcpbridge` when the task depends on
+active Xcode session or debugger state.
 
 Confirm the selected Xcode and local simulator commands before documenting a
 flow:
@@ -37,11 +36,9 @@ explicitly from `xcrun simctl list devices booted`.
 
 - XCTest/XCUITest: UI flows, accessibility labels, focusability, element state,
   screenshots attached to test results, and repeatable assertions.
-- XcodeBuildMCP: build, install, launch, logs, simulator selection, and tests
-  when the session exposes a suitable runner.
 - `xcode` / `mcpbridge`: active Xcode debugger or device/session state that is
   already owned by a running Xcode instance.
-- `xcodebuild`: shell fallback for XCTest/XCUITest when MCP is unavailable.
+- `xcodebuild`: builds and XCTest/XCUITest execution with result bundles.
 - `xcrun simctl`: screenshots, video, display enumeration, UI appearance and
   content-size settings, URL opens, pasteboard setup, app launch arguments, and
   any hardware-button or HID-style operations shown by local `simctl help`.
@@ -71,6 +68,6 @@ What does not map well:
 
 ## Manual Fallback
 
-When an operation is not exposed by XcodeBuildMCP, XCUITest, or local `simctl`,
+When an operation is not exposed by XCUITest, the official Xcode bridge, or local `simctl`,
 say so directly. Use the Simulator UI or Accessibility Inspector only as a
 manual diagnostic step, and record that the step was manual in the summary.

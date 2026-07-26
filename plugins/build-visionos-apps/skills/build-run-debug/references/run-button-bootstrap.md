@@ -1,22 +1,9 @@
 # Run Button Bootstrap
 
-This is the fallback bootstrap contract for the visionOS Build plugin's local
-run loop.
+This is the bootstrap contract for the visionOS Build plugin's local run loop.
 
-Use this only when XcodeBuildMCP is not the chosen path for the task or when
-the user explicitly wants a persistent Codex `Run` button.
-
-Before bootstrapping, confirm you already attempted the MCP-first sequence:
-
-1. `session-show-defaults`
-2. `discover_projs` and `list_schemes` when project shape is not already
-   proven
-3. `list_sims`
-4. `session-set-defaults`
-5. `build_run_sim` or `build_sim` for the current goal
-
-Only generate the shell path when that sequence is unavailable or when the user
-explicitly requests a persistent Run action.
+Use this when the user wants a persistent Codex `Run` button or the repository
+benefits from a repeatable build-install-launch entrypoint.
 
 When a project does not already have an established visionOS run entrypoint:
 
@@ -67,11 +54,11 @@ Use one project-specific script with a default no-flag path that:
 
 The script should use `xcodebuild`, `xcrun simctl`, and a deterministic
 DerivedData path inside the project, not one-off manual terminal commands. It
-should mirror the scheme and simulator choice already resolved through the MCP
-or repo inspection workflow.
+should mirror the scheme and simulator choice already resolved through project
+inspection.
 
-The script is a fallback runtime wrapper, not the source of truth for scheme or
-destination selection when MCP is available.
+The script is a runtime wrapper, not the source of truth for scheme or
+destination selection.
 
 If the current validation required
 `DEVELOPER_DIR=/Applications/Xcode-beta.app/Contents/Developer` (because the

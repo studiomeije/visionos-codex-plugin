@@ -31,7 +31,7 @@ by the user, repo docs, or current session defaults.
 
 ## Shell Checks
 
-Use these only as fallback checks or to explain an MCP discovery result:
+Use these first-party commands to inspect the project and build graph:
 
 ```bash
 find . -maxdepth 3 \( -name '*.xcworkspace' -o -name '*.xcodeproj' -o -name 'Package.swift' \)

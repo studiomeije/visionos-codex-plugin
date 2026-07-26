@@ -51,6 +51,8 @@ description: Implement and debug RealityKit runtime animation, character control
 - Use `animationgraph-editor` for authored Reality Composer Pro 3 Animation
   Graph / Animator Graph state machines, transitions, clip bindings, or graph
   package inspection.
+- Use `realitykit-performance-triage` when animation, physics, particles,
+  compute, or cloth cost needs trace-backed diagnosis.
 
 ## Guardrails
 

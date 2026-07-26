@@ -1,6 +1,6 @@
 ---
 name: realitykit-rendering-materials
-description: Implement and debug RealityKit rendering, materials, lighting, cameras, visual effects, post-processing, render cost controls, Gaussian splats, decals, lightmaps, probes, LOD, and occlusion on visionOS 27. Use when a RealityKit task is primarily about visual appearance, mesh/material display, lights, shadows, tone mapping, bloom, camera projection, rendering performance, or choosing rendering components instead of animation, audio, interaction, or custom ECS behavior.
+description: Implement and debug RealityKit rendering, materials, lighting, cameras, visual effects, post-processing, render cost controls, Gaussian splats, decals, lightmaps, probes, LOD, and occlusion on visionOS 27. Use for visual correctness, component choice, or implementing a measured rendering fix. Route frame pacing, high GPU cost, missed frames, Metal traces, and performance measurement to realitykit-performance-triage.
 ---
 
 # RealityKit Rendering Materials
@@ -51,6 +51,8 @@ description: Implement and debug RealityKit rendering, materials, lighting, came
 - Use `shadergraph-editor` for material graph source edits.
 - Use `scriptgraph-editor` for authored RCP behavior that triggers visual
   changes without changing the material graph itself.
+- Use `realitykit-performance-triage` when rendering cost has not yet been
+  measured or the task requires trace-backed before-and-after verification.
 
 ## Guardrails
 

@@ -22,13 +22,14 @@ Use this file when classifying a failing result.
 - Missing privacy key or entitlement: route to `signing-entitlements`.
 - Capability unavailable on simulator: classify as device-only when evidence
   matches.
-- Host-app or scene lifecycle problem: route to `build-run-debug`, and to
-  `telemetry` if event ordering needs proof.
+- Host-app or scene lifecycle problem: route launch/host failures to
+  `build-run-debug`; use `realitykit-observability` when RealityKit event
+  ordering needs proof.
 
 ## Evidence Map
 
-- XcodeBuildMCP action logs prove scheme, destination, install, launch, and the
-  first failing test action.
+- `xcodebuild` output proves scheme, destination, build action, and the first
+  failing test action.
 - `.xcresult` bundles prove the failing test identifier, assertion text,
   `XCTIssue` records, `XCTAttachment` artifacts, Swift Testing expectation
   failures, and crash records.

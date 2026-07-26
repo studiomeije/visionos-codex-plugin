@@ -39,6 +39,8 @@ description: Implement and debug RealityKit spatial audio, ambient audio, channe
   collision, physics, particle, or cloth behavior.
 - Use `realitykit-ecs-systems` when audio behavior needs custom per-frame
   query logic.
+- Use `realitykit-performance-triage` when playback, acoustics, or spatial
+  audio overhead needs trace-backed diagnosis.
 
 ## Guardrails
 

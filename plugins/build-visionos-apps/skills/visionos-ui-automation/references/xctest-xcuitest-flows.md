@@ -5,9 +5,7 @@ that should be owned by the test runner.
 
 ## Runner Choice
 
-Prefer the current XcodeBuildMCP session when it exposes a suitable test
-runner or project defaults. Fall back to `xcodebuild test` with a visionOS
-simulator destination:
+Use `xcodebuild test` with a visionOS simulator destination:
 
 ```bash
 xcodebuild test \
@@ -88,7 +86,7 @@ spatial interaction behavior.
 
 When reporting a UI test run, include:
 
-- runner used: XcodeBuildMCP or `xcodebuild`
+- runner used: `xcodebuild`
 - simulator destination or UDID
 - focused target/filter
 - assertion result and failure text, if any

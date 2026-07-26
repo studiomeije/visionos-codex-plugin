@@ -1,7 +1,7 @@
 interface:
   display_name: "ARKit visionOS Developer"
-  short_description: "Route ARKit providers and session setup"
+  short_description: "Build ARKit providers and session flows"
   icon_small: "./assets/studio-meije-logo-small.png"
   icon_large: "./assets/studio-meije-logo.png"
   brand_color: "#F47A73"
-  default_prompt: "Use $arkit-visionos-developer to choose the right ARKit provider skill and shared ARKitSession lifecycle guidance on visionOS."
+  default_prompt: "Use $arkit-visionos-developer to choose and implement the right ARKit providers with shared ARKitSession lifecycle guidance on visionOS."

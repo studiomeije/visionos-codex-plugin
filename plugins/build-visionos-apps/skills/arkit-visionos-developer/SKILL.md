@@ -1,32 +1,22 @@
 ---
 name: arkit-visionos-developer
-description: Router for ARKit features on visionOS 27, including ARKitSession setup, authorization, provider selection, anchor processing, and RealityKit integration. Use when choosing an ARKit provider set, combining multiple ARKit providers, or troubleshooting shared ARKit lifecycle behavior before routing to focused provider skills.
+description: Build and debug ARKit features on visionOS 27, including ARKitSession setup, authorization, provider selection, anchor processing, and RealityKit integration. Use for spatial tracking, hand tracking, reference tracking, camera access, environment lighting, stereo properties, visual fidelity, or multi-provider ARKit lifecycle work.
 ---
 
 # ARKit visionOS Developer
 
 ## Quick Start
 
-1. If the task names a specific provider family, switch to the matching
-   provider-focused skill below.
-2. If the task spans provider families, load the provider index plus shared
-   session and anchor references first.
+1. Load the provider index, then open only the provider guides needed by the
+   task.
+2. If the task spans provider families, load the shared session and anchor
+   references first.
 3. Add only the usage strings, entitlements, and authorizations required by the
    providers you actually use.
 4. Keep anchor state in a model layer, and bridge into RealityKit only when you
    have a rendering target.
 5. If the issue is app launch, test flow, simulator behavior, or signing,
    switch to `build-run-debug` or `signing-entitlements`.
-
-## Provider-Focused Skills
-
-| Skill | When to Use |
-|-------|-------------|
-| `$arkit-spatial-tracking-providers` | World tracking, plane detection, scene reconstruction, room tracking, or shared coordinate spaces. |
-| `$arkit-hand-tracking-provider` | Hand anchors, joint transforms, custom hand gestures, or hand visualizations. |
-| `$arkit-reference-tracking-providers` | Known image tracking, object tracking, barcode detection, or accessory tracking. |
-| `$arkit-camera-access-providers` | Camera frame streams or region-scoped camera content. |
-| `$arkit-rendering-context-providers` | Environment lighting, stereo properties, device fit, or foveated field-of-view tuning. |
 
 ## Load Shared References When
 
@@ -39,7 +29,7 @@ description: Router for ARKit features on visionOS 27, including ARKitSession se
 
 ## Workflow
 
-1. Choose the provider family or focused skill.
+1. Choose the provider family.
 2. Load the shared session and lifecycle guidance first.
 3. Add only the provider references that match the task.
 4. Keep anchor reconciliation in a model layer.
@@ -59,7 +49,7 @@ description: Router for ARKit features on visionOS 27, including ARKitSession se
 ## Output Expectations
 
 Provide:
-- the provider-focused skill or provider set chosen
+- the provider set chosen
 - which shared and provider references were used
 - the session and anchor-processing model
 - the RealityKit bridge plan if applicable

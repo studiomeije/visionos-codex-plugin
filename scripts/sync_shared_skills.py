@@ -23,13 +23,7 @@ MANIFEST_PATH = Path("sync/shared-skills.json")
 LOCK_PATH = Path("sync/shared-skills.lock.json")
 PLUGIN_SKILL_OWNERS = {
     "animationgraph-editor": "build-reality-composer-pro-3",
-    "arkit-camera-access-providers": "build-visionos-apps",
-    "arkit-hand-tracking-provider": "build-visionos-apps",
-    "arkit-reference-tracking-providers": "build-visionos-apps",
-    "arkit-rendering-context-providers": "build-visionos-apps",
-    "arkit-spatial-tracking-providers": "build-visionos-apps",
     "arkit-visionos-developer": "build-visionos-apps",
-    "coding-standards-enforcer": "build-visionos-apps",
     "realitykit-animation-physics": "build-realitykit",
     "realitykit-audio-spatial": "build-realitykit",
     "realitykit-ecs-systems": "build-realitykit",
@@ -40,7 +34,6 @@ PLUGIN_SKILL_OWNERS = {
     "shareplay-developer": "build-visionos-apps",
     "spatial-app-architecture": "build-visionos-apps",
     "spatial-swiftui-developer": "build-visionos-apps",
-    "swiftui-chart3d-developer": "build-visionos-apps",
     "usd-editor": "build-reality-composer-pro-3",
     "usdkit-runtime-developer": "build-realitykit",
     "visionos-immersive-media-developer": "build-visionos-apps",

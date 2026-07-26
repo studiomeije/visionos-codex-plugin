@@ -1,10 +1,9 @@
 # /test-visionos-app
 
 Run the smallest meaningful visionOS test scope first and classify failures by
-type. Use `test-triage` for the failure workflow, and use XcodeBuildMCP first
-for project, scheme, simulator, and build/run context. Use `xcodebuild test`
-with a visionOS simulator destination unless the current MCP session exposes a
-test runner or the project shape clearly requires something else.
+type. Use `test-triage` for the failure workflow and `xcodebuild test` with a
+visionOS simulator destination. XCTest/XCUITest and Swift Testing are the test
+runners; use `simctl`, result bundles, and unified logs for supporting evidence.
 
 ## Arguments
 
@@ -33,8 +32,8 @@ test runner or the project shape clearly requires something else.
    - Prefer a Vision Pro simulator destination.
    - Keep the destination aligned with the app's scene and immersive-space
      requirements.
-   - Reuse the XcodeBuildMCP defaults from `build-run-debug` when they already
-     point at the correct workspace/project, scheme, and simulator.
+   - Reuse the workspace/project, scheme, and simulator already verified by
+     `build-run-debug`.
 
 4. Classify the failure precisely.
    - Build failure

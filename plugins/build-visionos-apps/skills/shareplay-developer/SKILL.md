@@ -46,8 +46,8 @@ description: Build, integrate, and troubleshoot SharePlay GroupActivities featur
   or runtime debugging rather than SharePlay behavior.
 - Switch to `signing-entitlements` when the issue is capabilities,
   entitlements, or privacy gating.
-- Switch to `telemetry` when proof of event ordering or session state changes
-  matters more than API design.
+- Switch to `build-run-debug` when proof of event ordering or session state
+  changes requires focused runtime logs.
 
 ## Guardrails
 

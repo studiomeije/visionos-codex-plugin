@@ -77,8 +77,8 @@ capture screenshot, video, and logs around that sweep.
 xcrun simctl openurl "$UDID" "example-app://automation/run-spatial-sweep"
 ```
 
-Use `telemetry` for the log proof; simulator screenshots or videos provide the
-visual artifact, not the unified-log assertion.
+Use `realitykit-observability` for RealityKit log proof; simulator screenshots
+or videos provide the visual artifact, not the unified-log assertion.
 
 ## Simulator Settings Sweep
 

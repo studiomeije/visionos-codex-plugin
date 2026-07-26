@@ -1,0 +1,6 @@
+interface:
+  display_name: "Profile & Optimize RealityKit"
+  short_description: "Measure, diagnose, and verify RealityKit performance"
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use Profile & Optimize RealityKit to define a reproducible scenario, discover available Apple profiling tools, collect bounded logs, signposts, or Instruments traces, identify the measured bottleneck, route the implementation fix to its owning plugin, and verify the result with a matched capture."

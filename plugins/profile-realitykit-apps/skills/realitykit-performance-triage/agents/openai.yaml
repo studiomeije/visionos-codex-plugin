@@ -1,0 +1,4 @@
+interface:
+  display_name: "RealityKit Performance Triage"
+  short_description: "Plan and route evidence-driven performance investigations"
+  default_prompt: "Use $realitykit-performance-triage to define one reproducible RealityKit scenario, record the build and target, choose the smallest useful evidence capture, identify the implementation owner, and require a matched before-and-after verification."

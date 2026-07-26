@@ -6,12 +6,9 @@ infrastructure.
 
 ## Evidence Order
 
-1. XcodeBuildMCP action output: scheme, destination, simulator UDID, build
-   result, install result, test-host launch, and the first concrete test
-   failure.
-2. `xcodebuild test` output or `.xcresult` bundle: failing target, suite, test
+1. `xcodebuild test` output or `.xcresult` bundle: scheme, destination, failing target, suite, test
    identifier, assertion text, attachments, and crash records.
-3. Simulator logs: process, subsystem, category, privacy or entitlement denials,
+2. Simulator logs: process, subsystem, category, privacy or entitlement denials,
    scene lifecycle messages, and test-host launch messages.
 
 Do not treat "build succeeded" as "tests verified". The test action must run on
@@ -57,5 +54,5 @@ xcrun simctl spawn <udid> log stream \
   already proves a missing entitlement or privacy key.
 - A simulator crash before the first test body runs is not the same class as an
   assertion failure inside the test body.
-- If XcodeBuildMCP provides the action log and result bundle path, cite those
-  artifacts directly instead of broadening the test run first.
+- Cite the focused action log and result bundle directly instead of broadening
+  the test run first.

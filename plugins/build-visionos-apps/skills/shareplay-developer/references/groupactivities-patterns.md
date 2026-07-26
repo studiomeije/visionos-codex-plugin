@@ -20,7 +20,7 @@ before opening sample code. If the task needs complete sample excerpts, use
 - Join only after local UI and state are ready to receive session events.
 - Add messaging or journals only when the experience has real shared state.
 - Treat sample code as reference material; modernize observation and
-  concurrency with `coding-standards-enforcer` before copying patterns into new
+  concurrency with the repository's Swift standards before copying patterns into new
   code.
 
 ## Sample Escalation
