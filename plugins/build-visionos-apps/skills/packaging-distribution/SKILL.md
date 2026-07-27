@@ -15,10 +15,11 @@ Confirm the goal before anything else: validate an archive locally, export a
 release-testing or enterprise build, upload to TestFlight, or submit to the App
 Store.
 
-`asc` is a third-party App Store Connect CLI, not an Apple-supplied tool. Run
-the preflight in [`asc-preflight.md`](references/asc-preflight.md) to confirm it
-is installed and authenticated before planning around it, and fall back to
-Xcode or Transporter when it is unavailable.
+`asc` is the App Store Connect path for this skill. Run the preflight in
+[`asc-preflight.md`](references/asc-preflight.md) to confirm it is installed and
+authenticated before planning around it. If it is missing or unauthenticated,
+say so and stop remote-release work - do not substitute a different upload
+route.
 
 ## Load References When
 
@@ -27,7 +28,6 @@ Xcode or Transporter when it is unavailable.
 | [`references/asc-preflight.md`](references/asc-preflight.md) | When you need to confirm `asc` installation, auth, or profile health before upload or submission. |
 | [`references/distribution-workflow.md`](references/distribution-workflow.md) | When you need the archive/export/upload flow by release goal. |
 | [`references/asc-cli-reference.md`](references/asc-cli-reference.md) | When you need current `asc` command families for builds, review, metadata, screenshots, signing assets, or Xcode Cloud. |
-| [`references/manual-fallback.md`](references/manual-fallback.md) | When `asc` is unavailable and the user needs the Xcode or Transporter fallback path. |
 | [`references/visionos-distribution-checks.md`](references/visionos-distribution-checks.md) | When validating visionOS-specific bundle, entitlement, icon, or resource packaging concerns. |
 | [`references/credentials.md`](references/credentials.md) | When the task touches App Store Connect API keys, CI secrets, or auth-profile handling. |
 

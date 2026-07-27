@@ -26,10 +26,6 @@ SwiftUI spatial layout APIs let you measure, align, and compose views in three d
   spacing, `SpatialContainer`, and `depthAlignment(_:)` express layout depth.
 - Use `spatialOverlay` for adornments like labels or selection rings that should live within the same 3D bounds; keep overlays lightweight to avoid occlusion.
 - Use `rotation3DLayout` when rotation should affect layout size; use `rotation3DEffect` for purely visual rotation.
-- `debugBorder3D(_:)` in the examples below is **not a SwiftUI API**. It is a
-  project-local helper defined at the end of this file under
-  "DebugBorder3D" - copy that extension into the project before using it, and
-  keep it out of shipping builds.
 
 ## ZStack Depth Decision Guide
 
@@ -53,10 +49,7 @@ SwiftUI spatial layout APIs let you measure, align, and compose views in three d
 
 ## Code Examples
 
-These samples use the project-local `debugBorder3D(_:)` helper to visualize 3D
-bounds. It is not part of SwiftUI - its definition is in the "DebugBorder3D"
-section at the end of this file. Drop the modifier or add the extension when
-adapting a sample.
+Every sample below uses shipped SwiftUI API only.
 
 #### Robot image frame
 
@@ -84,43 +77,38 @@ VStack {
 .border(.yellow)
 ```
 
-#### Model3D frame
-
-```swift
-Model3D(named: "Robot")
-  .debugBorder3D(.red)
-```
-
 #### Zero depth views
+
+2D views have no depth of their own, so they contribute nothing to a `ZStack`'s
+depth budget.
 
 ```swift
 HStack {
   Image("RobotHead")
-    .debugBorder3D(.red)
   Text("Hello! I'm a piece of text. I have 0 depth.")
-    .debugBorder3D(.red)
   Color.blue
-    .debugBorder3D(.red)
     .frame(width: 200, height: 200)
 }
 ```
 
-#### RealityView depth
+#### Giving a RealityView a fixed depth
+
+A `RealityView` will otherwise take all available depth in its container.
 
 ```swift
 RealityView { content in
   // Setup RealityView content
 }
-.debugBorder3D(.red)
+.frame(depth: 200, alignment: .front)
 ```
 
-#### GeometryReader3D depth
+#### Reading depth with GeometryReader3D
 
 ```swift
 GeometryReader3D { proxy in
-  // GeometryReader3D content
+  Model3D(named: "Robot")
+    .frame(depth: proxy.size.depth / 2, alignment: .back)
 }
-.debugBorder3D(.red)
 ```
 
 #### Model3D scaledToFit3D
@@ -132,7 +120,6 @@ Model3D(url: robotURL) { resolved in
   ProgressView()
 }
 .scaledToFit3D()
-.debugBorder3D(.red)
 ```
 
 #### ZStack depth
@@ -140,11 +127,8 @@ Model3D(url: robotURL) { resolved in
 ```swift
 ZStack(alignment: .center, spacing: 16) {
   Model3D(named: "LargeRobot")
-    .debugBorder3D(.red)
   Model3D(named: "BabyBot")
-    .debugBorder3D(.red)
 }
-.debugBorder3D(.yellow)
 ```
 
 #### Stable card and label depth
@@ -193,11 +177,8 @@ HStackLayout().depthAlignment(.front) {
 ```swift
 ZStack {
   RealityView { ... }
-    .debugBorder3D(.red)
   Model3D(named: "BabyBot")
-    .debugBorder3D(.red)
 }
-.debugBorder3D(.yellow)
 ```
 
 #### Layouts are 3D
@@ -205,11 +186,8 @@ ZStack {
 ```swift
 HStack {
   Model3D(named: "LargeRobot")
-    .debugBorder3D(.red)
   Model3D(named: "BabyBot")
-    .debugBorder3D(.red)
 }
-.debugBorder3D(.yellow)
 ```
 
 #### ResizableRobotView
@@ -289,40 +267,30 @@ struct FavoriteRobotsRow: View {
 }
 ```
 
-#### Custom depth alignment ID
+#### Staggering depth within a row
 
-```swift
-struct DepthPodiumAlignment: DepthAlignmentID {
-  static func defaultValue(in context: ViewDimensions3D) -> CGFloat {
-    context[.front]
-  }
-}
-
-extension DepthAlignment {
-  static let depthPodium = DepthAlignment(DepthPodiumAlignment.self)
-}
-```
-
-#### Customizing depth alignment guides
-
-Requires the `DepthAlignment.depthPodium` extension from the previous snippet -
-`.depthPodium` is a custom alignment, not a built-in one.
+`DepthAlignment` ships three values - `.front`, `.center`, and `.back` - and
+`alignmentGuide(_:computeValue:)` has no depth overload, so there is no
+per-child depth guide. To stagger children along depth, align the row on one
+plane and give individual children their own depth budget with
+`frame(depth:alignment:)`, or nudge them with `offset(z:)`.
 
 ```swift
 struct FavoritesRow: View {
   let robots: [Robot]
 
   var body: some View {
-    HStackLayout().depthAlignment(.depthPodium) {
+    HStackLayout().depthAlignment(.front) {
       RobotProfile(robot: robots[2])
+
+      // Sits deeper than its neighbors by taking a larger depth budget
+      // aligned to the back of the row.
       RobotProfile(robot: robots[0])
-        .alignmentGuide(.depthPodium) {
-          $0[DepthAlignment.back]
-        }
+        .frame(depth: 120, alignment: .back)
+
+      // A small visual push, not a layout change.
       RobotProfile(robot: robots[1])
-        .alignmentGuide(.depthPodium) {
-          $0[DepthAlignment.center]
-        }
+        .offset(z: -20)
     }
   }
 }
@@ -419,26 +387,3 @@ struct RobotCarouselItem: View {
 }
 ```
 
-#### DebugBorder3D
-
-A development-only helper used throughout this file. Not a SwiftUI API - add
-this extension to the project to use the samples verbatim.
-
-```swift
-extension View {
-  func debugBorder3D(_ color: Color) -> some View {
-    spatialOverlay {
-      ZStack {
-        Color.clear.border(color, width: 4)
-        ZStack {
-          Color.clear.border(color, width: 4)
-          Spacer()
-          Color.clear.border(color, width: 4)
-        }
-        .rotation3DLayout(.degrees(90), axis: .y)
-        Color.clear.border(color, width: 4)
-      }
-    }
-  }
-}
-```

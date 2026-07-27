@@ -4,8 +4,8 @@ Run this once at the start of any task that needs App Store Connect.
 
 Do not run upload, TestFlight distribution, metadata apply, or App Store
 submission commands until this preflight passes. If `asc` is missing, continue
-only with local archive/export validation and use `manual-fallback.md` for the
-remaining release steps.
+only with local archive/export validation, and tell the user that remote release
+steps are blocked until `asc` is installed and authenticated.
 
 ## Step 1: Confirm `asc` Is Installed
 
@@ -15,8 +15,8 @@ command -v asc >/dev/null 2>&1 && asc --version
 
 - Exit 0: proceed.
 - Non-zero exit: stop remote-release work and ask the user how they want `asc`
-  installed or whether they want the manual fallback. Do not install a CLI or
-  ask for credentials without explicit approval.
+  installed. Do not install a CLI or ask for credentials without explicit
+  approval.
 
 Source of truth for command shape: `asc --help`, `asc <command> --help`, and
 the upstream README. Last checked: 2026-04-10.

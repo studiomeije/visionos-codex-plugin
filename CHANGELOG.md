@@ -72,6 +72,16 @@
   dead-ending.
 - Folded duplicated Quick Start/Workflow steps into a single procedure across
   eleven skills.
+- Removed the project-local `debugBorder3D(_:)` and `DepthAlignment.depthPodium`
+  helpers from `spatial-layout.md`. Every sample now uses shipped SwiftUI API
+  only. The depth-stagger example no longer relies on a custom
+  `DepthAlignmentID`, and it drops the per-child depth `alignmentGuide` that the
+  SDK does not provide - `alignmentGuide(_:computeValue:)` has horizontal and
+  vertical overloads only.
+- Made `asc` the sole App Store Connect path in `packaging-distribution`, and
+  removed the Xcode/Transporter manual fallback reference. When `asc` is missing
+  or unauthenticated the skill now stops remote-release work and says so instead
+  of substituting another upload route.
 - Added `scriptgraph-editor` for Reality Composer Pro 3 Script Graph behavior,
   node metadata inspection, package graph inspection, and runtime ownership
   routing.
