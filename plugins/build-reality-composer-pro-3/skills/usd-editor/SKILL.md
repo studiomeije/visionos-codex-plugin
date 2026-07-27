@@ -36,15 +36,12 @@ authored USD content in Swift unless the request is explicitly procedural.
 | [`composition-variants`](references/composition-variants.md) | When touching sublayers, references, payloads, or variant sets. |
 | [`transforms-units`](references/transforms-units.md) | When editing transforms, xformOps, or stage units and up-axis metadata. |
 | [`time-samples`](references/time-samples.md) | When modifying animated or time-sampled properties. |
-| [`command-line-tools`](references/command-line-tools.md) | When you need a quick reference for common USD command-line tools. |
-| [`usdcat`](references/usdcat.md) | When converting, flattening, or inspecting USD files. |
-| [`usdchecker`](references/usdchecker.md) | When validating USD or USDZ assets, including RealityKit-focused checks. |
-| [`usdrecord`](references/usdrecord.md) | When rendering images from USD files. |
-| [`usdtree`](references/usdtree.md) | When inspecting the prim hierarchy of a USD file. |
-| [`usdzip`](references/usdzip.md) | When creating or inspecting USDZ packages. |
-| [`usdedit`](references/usdedit.md) | When you need the official text-editing workflow for a USD-readable file. |
+| [`command-line-tools`](references/command-line-tools.md) | Choosing between `usdcat`, `usdchecker`, `usdtree`, `usdzip`, and `usdrecord`; which ship with macOS; and the `--arkit --strict` shipping gate. |
 | [`visionos-runtime-loading.md`](references/visionos-runtime-loading.md) | When the question is how authored USD or USDZ actually loads and behaves in a visionOS app. |
 | [`apple-runtime-boundaries.md`](references/apple-runtime-boundaries.md) | When deciding whether to edit authored USD / Reality Composer Pro content, load it through RealityKit, or validate it for Apple platforms. |
+
+Per-flag detail comes from `<tool> --help` on the installed version, not from
+this skill.
 
 ## Workflow
 

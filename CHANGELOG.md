@@ -97,6 +97,15 @@
     already carried by the routing tables.
   - Net effect: `build-realitykit` references went from 8,679 to 4,147 lines,
     and its skills now load per operation rather than per API surface.
+- Collapsed the six per-CLI-tool pages in `usd-editor` (`usdcat`, `usdchecker`,
+  `usdtree`, `usdzip`, `usdrecord`, `usdedit`) into one `command-line-tools.md`
+  that keeps tool selection, the `usdzip --arkitAsset` plus
+  `usdchecker --arkit --strict` shipping gate, and the behavior `--help` does
+  not state - notably that `usdchecker` validates only the first sample of a
+  time-sampled attribute. Flag lists now come from `<tool> --help` on the
+  installed version. It also records which tools actually ship with macOS:
+  `usdedit`, `usdview`, and `usdstitch` are **not** in `/usr/bin` and need a
+  full OpenUSD install, with an explicit `usdcat` round-trip as the fallback.
 - Corrected reference content that the SDK contradicted:
   `CharacterControllerStateComponent` has only `velocity` and `isOnGround` (not
   `isGrounded`, `isWalkingUpSlope`, `isStepping`, or `collision`), and
