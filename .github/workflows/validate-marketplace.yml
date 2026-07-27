@@ -132,3 +132,26 @@ jobs:
           for path in Path(".").rglob("*"):
               assert path.suffix not in forbidden_artifacts, path
           PY
+
+  snippet-typecheck:
+    name: Typecheck Swift snippets against the visionOS SDK
+    runs-on: macos-26
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Select the newest Xcode
+        run: |
+          set -euo pipefail
+          latest="$(ls -d /Applications/Xcode*.app | sort -V | tail -1)"
+          echo "Using $latest"
+          sudo xcode-select -s "$latest/Contents/Developer"
+          xcodebuild -version
+
+      - name: Report visionOS SDK
+        run: |
+          xcodebuild -showsdks | grep -i xros || echo "no visionOS SDK on this runner"
+
+      - name: Typecheck documented Swift snippets
+        run: python3 scripts/check_swift_snippets.py

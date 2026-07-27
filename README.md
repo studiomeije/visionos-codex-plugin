@@ -27,6 +27,8 @@ Use `build-visionos-apps` for Apple Vision Pro app work:
   architecture
 - ARKit providers, SharePlay, WidgetKit, immersive media, and
   Vision Pro specific interaction workflows
+- Swift 6.2 coding standards: strict concurrency, actor isolation, `Sendable`,
+  and `@Observable` ownership
 - signing, entitlements, privacy keys, testing, SwiftPM, packaging,
   distribution, and simulator UI automation
 
@@ -113,6 +115,24 @@ The same plugins are available from the Studio Meije marketplace in the Codex
 UI. Restart Codex after installation when prompted.
 
 ## Maintenance
+
+### Verifying documented API against the SDK
+
+These plugins document beta visionOS 27 API. Every Swift snippet in the docs is
+typechecked against the installed visionOS SDK, so a renamed or moved symbol
+fails CI instead of reaching an agent:
+
+```bash
+python3 scripts/check_swift_snippets.py
+```
+
+Pass a path to check one plugin or file. The script needs Xcode with a visionOS
+SDK and exits successfully (skipping) where none is installed. It fails only on
+diagnostics that indict the documentation - an unknown type or member, a wrong
+argument label, or API unavailable on visionOS. Snippets that are illustrative
+fragments referencing app-specific types are reported as skipped, not failed.
+
+### Shared skill sync
 
 The repo-to-repo sync workflow with `visionOSAgents` is documented in
 `docs/sync-agents.skills.md`. That document is only for keeping the shared

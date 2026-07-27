@@ -56,13 +56,16 @@ spotlight.intensity = 2000
 spotlight.innerAngleInDegrees = 30
 spotlight.outerAngleInDegrees = 45
 
-// Configure shadows
-var shadow = SpotLightComponent.Shadow()
-shadow.maximumDistance = 20.0
-shadow.depthBias = 0.01
-spotlight.shadow = shadow
-
 entity.components.set(spotlight)
+
+// Shadow is its own Component; set it on the same entity.
+// It has depthBias, zNear/zFar, layers, and quality - there is no
+// maximumDistance on spot shadows (that is a directional-light concept).
+var shadow = SpotLightComponent.Shadow()
+shadow.depthBias = 0.01
+shadow.zFar = .fixed(20.0)
+
+entity.components.set(shadow)
 ```
 
 ### Stage Lighting

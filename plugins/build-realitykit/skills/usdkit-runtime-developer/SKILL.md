@@ -7,20 +7,12 @@ description: Build USDKit runtime editing flows on visionOS 27, macOS 27, or iOS
 
 ## Quick Start
 
-Use this skill for in-process USD stage work from Swift. For hand-authored
-`.usda` edits, package inspection, CLI conversion, or `usdchecker` validation,
-switch to `$usd-editor`.
+Use this skill for in-process USD stage work from Swift. For
+hand-authored `.usda` edits, package inspection, CLI conversion, or
+`usdchecker` validation, switch to `$usd-editor`.
 
-1. Confirm the target uses the 27 SDKs and can `import USDKit`.
-2. Decide whether the task belongs to runtime USDKit or the `usd*` command-line
-   asset pipeline.
-3. Load the USDKit decision reference, then the USDKit framework reference.
-4. Keep `USDStage`, `USDPrim`, `USDLayer`, and nested property work on one
-   actor; these types are not Sendable.
-5. For live RealityKit display, use `USDStageComponent` from the RealityKit
-   skill.
-6. Route runtime load hitches, memory growth, or resource-residency
-   investigations to `realitykit-performance-triage`.
+`USDStage`, `USDPrim`, and `USDLayer` are **not `Sendable`** - keep a stage
+and its nested property work on one actor.
 
 ## Load References When
 
@@ -33,13 +25,17 @@ switch to `$usd-editor`.
 
 ## Workflow
 
-1. Identify the owner: runtime Swift-edited stage, authored asset, or package
-   pipeline.
-2. Use USDKit for in-process stage editing, observation, live rendering, or
+1. Confirm the target uses the 27 SDKs and can `import USDKit`.
+2. Identify the owner: runtime Swift-edited stage, authored asset, or
+   package pipeline.
+3. Load the USDKit decision reference, then the USDKit framework reference.
+4. Use USDKit for in-process stage editing, observation, live rendering, or
    runtime package export.
-3. Keep CLI validation in the asset pipeline; USDKit does not replace
+5. For live RealityKit display, use `USDStageComponent` from
+   `realitykit-visionos-developer`.
+6. Keep CLI validation in the asset pipeline; USDKit does not replace
    `usdchecker --arkit --strict`.
-4. Preserve authored assets as source of truth unless the task is explicitly
+7. Preserve authored assets as source of truth unless the task is explicitly
    procedural or runtime-generated.
 
 ## Guardrails
@@ -50,6 +46,24 @@ switch to `$usd-editor`.
   before shipping.
 - Do not recreate authored Reality Composer Pro content in Swift unless the
   feature explicitly requires procedural authoring.
+- Verify written Swift by building. USDKit is new in the 27 SDKs and its
+  symbols are beta; compile rather than trusting recalled signatures. Route
+  the build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+| `coding-standards-enforcer` | Build visionOS 27 apps |
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
+| `usd-editor` | Build with Reality Composer Pro 3 |
 
 ## Output Expectations
 

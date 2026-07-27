@@ -38,30 +38,36 @@ var sun = DirectionalLightComponent()
 sun.color = .white
 sun.intensity = 1.0
 
-// Configure shadows
-var shadow = DirectionalLightComponent.Shadow()
-shadow.maximumDistance = 50.0  // Shadow distance
-shadow.depthBias = 0.01
-sun.shadow = shadow
-
 entity.components.set(sun)
+
+// Shadow is its own Component; set it on the same entity.
+// On visionOS, use shadowProjection rather than the deprecated
+// maximumDistance property.
+var shadow = DirectionalLightComponent.Shadow()
+shadow.shadowProjection = .automatic(maximumDistance: 50.0)
+shadow.depthBias = 0.01
+
+entity.components.set(shadow)
 ```
 
 ### Real-World Proxy
 
-```swift
-// Make directional light act as real-world proxy
-var sun = DirectionalLightComponent()
-sun.isRealWorldProxy = true  // Responds to real-world lighting
-entity.components.set(sun)
-```
+`isRealWorldProxy` is unavailable on visionOS. On Apple Vision Pro, real-world
+lighting comes from the automatic environment IBL and from
+`ImageBasedLightComponent` / `EnvironmentLightingConfigurationComponent`; see
+[`imagebasedlightcomponent.md`](imagebasedlightcomponent.md).
 
 ## Key Properties
 
 - `color: Color` - The color of the light (default: white)
 - `intensity: Float` - The brightness of the light
-- `shadow: Shadow?` - Shadow configuration with `maximumDistance` and `depthBias`
-- `isRealWorldProxy: Bool` - Whether the light acts as a real-world proxy
+- `layers: RenderLayer.Set` - which render layers this light illuminates
+  (visionOS 27)
+- `DirectionalLightComponent.Shadow` - a separate `Component`, not a property.
+  Carries `shadowProjection` (`.automatic(maximumDistance:)` or
+  `.fixed(zNear:zFar:orthographicScale:)`), `depthBias`, `cullModeOverride`,
+  `cascades` (visionOS 27), and `layers` (visionOS 27).
+- `isRealWorldProxy: Bool` - unavailable on visionOS; other Apple platforms only
 
 ### Shadow Properties
 

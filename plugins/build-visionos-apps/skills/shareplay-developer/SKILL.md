@@ -7,16 +7,11 @@ description: Build, integrate, and troubleshoot SharePlay GroupActivities featur
 
 ## Quick Start
 
-1. Decide whether this experience is launch-only co-location or shared state
-   sync.
-2. Add the Group Activities capability and required entitlement before
-   building SharePlay UI.
-3. Define one `GroupActivity` per experience and keep the payload minimal and
-   `Codable`.
-4. Load the right reference only after you know the workflow.
-5. For spatial personas or immersive spaces, load
-   [`spatial-coordination.md`](references/spatial-coordination.md) before
-   joining.
+Decide first whether this experience is launch-only co-location or shared
+state sync - that choice drives everything else.
+
+Add the Group Activities capability and required entitlement before
+building any SharePlay UI.
 
 ## Load References When
 
@@ -33,11 +28,14 @@ description: Build, integrate, and troubleshoot SharePlay GroupActivities featur
 
 ## Workflow
 
-1. Define the activity and choose the activation surface.
+1. Define one `GroupActivity` per experience, keeping the payload minimal
+   and `Codable`, and choose the activation surface.
 2. Observe and configure the session before joining.
 3. Add messaging or journal synchronization only if shared state is required.
 4. Configure spatial coordination when the experience shares an immersive
-   space.
+   space. For spatial personas or immersive spaces, load
+   [`spatial-coordination.md`](references/spatial-coordination.md) before
+   joining.
 5. Summarize the session lifecycle, sync model, and launch surface clearly.
 
 ## When To Switch Skills
@@ -53,6 +51,10 @@ description: Build, integrate, and troubleshoot SharePlay GroupActivities featur
 
 - Keep `GroupActivity` data small and `Codable`.
 - Join only after the UI and local state are ready.
+- Verify written Swift by building before reporting done, and route the
+  build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
 ## Output Expectations
 

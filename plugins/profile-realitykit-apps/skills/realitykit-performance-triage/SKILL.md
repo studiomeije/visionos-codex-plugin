@@ -47,6 +47,17 @@ description: Diagnose broad or unknown RealityKit performance problems by defini
   Derive budgets from the product target and matched measurements.
 - Change one major variable at a time.
 
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+
 ## Output Expectations
 
 Provide:

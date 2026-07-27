@@ -38,23 +38,31 @@ entity.components.set(anchoringComponent)
 
 ### Anchor to Image
 
+`Target.image` takes only `group:` and `name:` - the group is an AR Resource
+Group in the asset catalog, and the physical size is authored there, not passed
+in code.
+
 ```swift
-// Anchor to tracked image
-let imageResource = try await TextureResource.load(named: "ReferenceImage")
+// Anchor to a tracked image from an AR Resource Group
 let target = AnchoringComponent.Target.image(
     group: "ImageGroup",
-    name: "ImageName",
-    physicalWidth: 0.2
+    name: "ImageName"
 )
 let anchoringComponent = AnchoringComponent(target)
 entity.components.set(anchoringComponent)
 ```
 
+For an image supplied at runtime instead of an asset catalog, use
+`.referenceImage(from:)` with an `ImageAnchoringSource`.
+
 ### Anchor to World Origin
+
+`Target.world` takes a non-optional `simd_float4x4`. Pass the identity matrix
+for the world origin.
 
 ```swift
 // Anchor to world origin
-let target = AnchoringComponent.Target.world(transform: nil)
+let target = AnchoringComponent.Target.world(transform: matrix_identity_float4x4)
 let anchoringComponent = AnchoringComponent(target)
 entity.components.set(anchoringComponent)
 ```
@@ -98,28 +106,31 @@ func startHeadPositionMode(content: RealityViewContent) {
 
 ### Tracking Modes
 
-```swift
-// Use predicted tracking for smoother updates
-let anchoringComponent = AnchoringComponent(
-    target,
-    trackingMode: .predicted
-)
+`TrackingMode` has exactly three values: `.once`, `.continuous`, and
+`.predicted`. There is no `.precise`.
 
-// Use precise tracking for accuracy
-let anchoringComponent = AnchoringComponent(
-    target,
-    trackingMode: .precise
-)
+```swift
+// Track continuously as the anchor moves
+let continuousAnchor = AnchoringComponent(target, trackingMode: .continuous)
+
+// Use predicted tracking for smoother updates
+let predictedAnchor = AnchoringComponent(target, trackingMode: .predicted)
+
+// Resolve the anchor once, then stop tracking
+let onceAnchor = AnchoringComponent(target, trackingMode: .once)
 ```
 
 ### Physics Simulation Space
+
+`PhysicsSimulation` has two values: `.isolated` (the default - the anchor owns
+its own simulation space) and `.none` (participate in the scene simulation).
 
 ```swift
 // Specify physics simulation space
 let anchoringComponent = AnchoringComponent(
     target,
     trackingMode: .predicted,
-    physicsSimulation: .entity
+    physicsSimulation: .none
 )
 ```
 

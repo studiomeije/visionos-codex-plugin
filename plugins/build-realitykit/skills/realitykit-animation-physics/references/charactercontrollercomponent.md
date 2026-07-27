@@ -36,35 +36,47 @@ entity.components.set(characterController)
 
 ### Character Movement
 
+Movement is driven by `Entity.moveCharacter(by:deltaTime:relativeTo:)`, not by a
+method on the component. It returns `CollisionFlags` and optionally reports each
+contact through a handler.
+
 ```swift
 // Move character and handle collisions
-func moveCharacter(_ entity: Entity, direction: SIMD3<Float>, deltaTime: Float) {
-    guard let controller = entity.components[CharacterControllerComponent.self] else { return }
-    
-    // Apply movement
+@MainActor
+func moveCharacter(_ entity: Entity, direction: SIMD3<Float>, deltaTime: Float, speed: Float) {
     let movement = direction * deltaTime * speed
-    let collision = controller.move(into: movement, relativeTo: entity.parent, deltaTime: deltaTime)
-    
-    // Handle collision response
-    if collision.hitEntity != nil {
-        // Character hit something - adjust movement
-        // Use collision.hitPosition, hitNormal, etc.
+
+    let flags = entity.moveCharacter(
+        by: movement,
+        deltaTime: deltaTime,
+        relativeTo: entity.parent
+    ) { collision in
+        // Handle collision response:
+        // collision.hitEntity, collision.hitPosition, collision.hitNormal
+        _ = collision.hitEntity
+    }
+
+    // CollisionFlags: .none, .side, .top, .bottom
+    if flags.contains(.bottom) {
+        // Standing on something
     }
 }
 ```
 
 ### With State Component
 
-```swift
-// Use CharacterControllerStateComponent to track state
-let state = CharacterControllerStateComponent()
-entity.components.set(state)
+`CharacterControllerStateComponent` is written by the simulation. Its
+properties are `let` - read them, do not assign them - and the grounded flag is
+`isOnGround`, not `isGrounded`.
 
-// Check if grounded
-if state.isGrounded {
-    // Allow jumping
-} else {
-    // Character is in air
+```swift
+// Read the state the character controller published this frame
+if let state = entity.components[CharacterControllerStateComponent.self] {
+    if state.isOnGround {
+        // Allow jumping
+    } else {
+        // Character is in air; state.velocity has the current velocity
+    }
 }
 ```
 

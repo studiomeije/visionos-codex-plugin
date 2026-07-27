@@ -47,11 +47,16 @@ struct Gravity: ForceEffectProtocol {
     }
 }
 
+// Custom collision groups are app-defined bitmasks - declare one before use.
+extension CollisionGroup {
+    static let asteroids = CollisionGroup(rawValue: 1 << 2)
+}
+
 // Create force effect with spatial falloff and mask
 let gravityEffect = ForceEffect(
     effect: Gravity(),
     spatialFalloff: .sphere(radius: 8.0),
-    mask: .asteroids  // Only affect entities matching bitmask
+    mask: .asteroids  // Only affect entities in this collision group
 )
 
 // Attach to entity

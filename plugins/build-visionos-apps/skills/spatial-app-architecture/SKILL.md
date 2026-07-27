@@ -59,6 +59,17 @@ Use it when:
   mutation.
 - Preserve strong repo conventions when they are already coherent.
 
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `realitykit-visionos-developer` | Build with RealityKit |
+
 ## Output Expectations
 
 Provide:

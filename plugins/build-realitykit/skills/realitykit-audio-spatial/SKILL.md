@@ -51,6 +51,23 @@ description: Implement and debug RealityKit spatial audio, ambient audio, channe
   symbols against the installed SDK.
 - Verify audio behavior on device when spatialization, acoustics, or output
   routing matters.
+- Verify written Swift by building before reporting done. Route the build
+  through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+| `coding-standards-enforcer` | Build visionOS 27 apps |
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
 
 ## Output Expectations
 

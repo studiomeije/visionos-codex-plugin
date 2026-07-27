@@ -64,6 +64,20 @@ debugging exports or interoperability.
   paths such as `/Root/MyMaterial`, not informal display labels.
 - Do not treat exported `info:id` strings or raw graph layout as stable public
   API unless Apple documents them directly.
+- Verify any Swift you write against the material by building. Route the
+  build through `build-run-debug`.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+| `realitykit-visionos-developer` | Build with RealityKit |
 
 ## Output Expectations
 

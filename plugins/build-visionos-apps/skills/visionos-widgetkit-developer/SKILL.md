@@ -9,11 +9,8 @@ description: Build and debug WidgetKit widgets for Apple Vision Pro (visionOS), 
 
 Treat visionOS widgets as spatial objects first, not as small 2D surfaces.
 
-1. Decide the platform and family scope first.
-2. Define both close and far layouts before polishing visuals.
-3. Treat timeline entries, shared storage, and App Intents as the integration
-   boundary; do not depend on live host-app state.
-4. Load only the reference files that match the current problem.
+Timeline entries, shared storage, and App Intents are the integration
+boundary - do not depend on live host-app state.
 
 ## Load References When
 
@@ -32,7 +29,8 @@ Treat visionOS widgets as spatial objects first, not as small 2D surfaces.
 ## Workflow
 
 1. Confirm the widget platform and family set.
-2. Choose mounting style, texture, and near/far layout strategy.
+2. Define both close and far layouts before polishing visuals: mounting
+   style, texture, and near/far layout strategy.
 3. Decide the data path: timeline-only, App Group/shared storage, background
    URL session, or WidgetKit push notification.
 4. Add interaction only if the widget still stays glanceable.
@@ -50,6 +48,10 @@ Treat visionOS widgets as spatial objects first, not as small 2D surfaces.
 - Use `Link` or `widgetURL(_:)` for open-app navigation; reserve `Button` and
   `Toggle` for real `AppIntent` actions.
 - Keep widget configurations per `WidgetBundle` within the practical limit.
+- Verify written Swift by building the widget extension target before
+  reporting done. Route the build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
 ## Output Expectations
 

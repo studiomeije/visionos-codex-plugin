@@ -64,6 +64,24 @@ description: Implement and debug RealityKit runtime animation, character control
   beta API; re-check symbols against the installed SDK.
 - Validate simulation work with deterministic inputs where possible and note
   whether the check ran in simulator or on device.
+- Verify written Swift by building before claiming a motion or simulation
+  fix works. Route the build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `animationgraph-editor` | Build with Reality Composer Pro 3 |
+| `build-run-debug` | Build visionOS 27 apps |
+| `coding-standards-enforcer` | Build visionOS 27 apps |
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
 
 ## Output Expectations
 

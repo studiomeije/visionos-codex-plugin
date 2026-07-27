@@ -17,18 +17,15 @@ transform, animation, or material, keep that authored surface as the source of
 truth. Use Swift and RealityKit to load or adjust runtime state; do not recreate
 authored USD content in Swift unless the request is explicitly procedural.
 
-If Swift code needs to open, edit, observe, or export stages in-process with
-`USDStage`, `USDPrim`, or `USDLayer`, switch to `$usdkit-runtime-developer`.
+## When To Switch Skills
 
-If the change is material- or shader-specific for RealityKit, prefer
-`shadergraph-editor`.
-
-If the change is Reality Composer Pro 3 Script Graph behavior, triggers, action
-nodes, or authored event logic, switch to `scriptgraph-editor`.
-
-If the change is Reality Composer Pro 3 Animation Graph / Animator Graph
-behavior, state machines, transitions, or clip bindings, switch to
-`animationgraph-editor`.
+- `$usdkit-runtime-developer` - Swift code opening, editing, observing, or
+  exporting stages in-process with `USDStage`, `USDPrim`, or `USDLayer`.
+- `shadergraph-editor` - material- or shader-specific changes for RealityKit.
+- `scriptgraph-editor` - RCP3 Script Graph behavior, triggers, action nodes, or
+  authored event logic.
+- `animationgraph-editor` - RCP3 Animation Graph / Animator Graph state
+  machines, transitions, or clip bindings.
 
 ## Load References When
 

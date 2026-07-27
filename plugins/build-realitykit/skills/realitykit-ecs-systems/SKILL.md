@@ -49,6 +49,24 @@ description: Design, implement, and debug custom RealityKit components, systems,
 - Do not store SwiftUI-only state in RealityKit components unless entity
   ownership is intentional.
 - Summarize registration order and query shape when changing ECS code.
+- Verify written Swift by building before reporting done. Route the build
+  through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+| `coding-standards-enforcer` | Build visionOS 27 apps |
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
+| `scriptgraph-editor` | Build with Reality Composer Pro 3 |
 
 ## Output Expectations
 

@@ -64,7 +64,7 @@ Export:
 ```swift
 try stage.exportFlattened(to: flatURL)
 try stage.exportPackage(to: usdzURL,
-                        options: [.preferSmallTextureFiles(quality: .medium)])
+                        options: .preferSmallTextureFiles(quality: .medium))
 ```
 
 `ExportOptions` also has `.preferSmallTextureFiles` and

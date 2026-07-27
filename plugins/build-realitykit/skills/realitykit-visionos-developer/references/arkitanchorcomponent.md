@@ -5,6 +5,12 @@
 
 A component that attaches ARKit anchor data to RealityKit entities (`AnchorEntity`). It allows accessing raw ARKit anchor properties—such as extents, transforms, and classifications—while using RealityKit abstractions. This component provides access to the underlying ARKit anchor when you need detailed anchor information.
 
+visionOS 26.0+, and unavailable on every other platform. `anchor` is typed
+`any ARKit.Anchor`, so cast to the **visionOS** anchor types - `PlaneAnchor`,
+`AccessoryAnchor`, `MeshAnchor`, `ImageAnchor`, `ObjectAnchor`, `RoomAnchor`,
+`HandAnchor`, `WorldAnchor`. The iOS-era `ARPlaneAnchor` / `ARAnchor` class
+names do not exist on visionOS.
+
 ## When to Use
 
 - Accessing detailed ARKit anchor properties (extents, classification, etc.)
@@ -34,7 +40,7 @@ content.subscribe(to: SceneEvents.AnchoredStateChanged.self) { event in
     if event.isAnchored {
         if let arkitAnchor = event.entity.components[ARKitAnchorComponent.self] {
             // Access ARKit anchor data
-            if let planeAnchor = arkitAnchor.anchor as? ARPlaneAnchor {
+            if let planeAnchor = arkitAnchor.anchor as? PlaneAnchor {
                 print("Plane size: \(planeAnchor.geometry.extent)")
                 print("Plane alignment: \(planeAnchor.alignment)")
             }
@@ -48,10 +54,11 @@ content.subscribe(to: SceneEvents.AnchoredStateChanged.self) { event in
 ```swift
 // Get plane anchor details
 if let arkitComponent = entity.components[ARKitAnchorComponent.self],
-   let planeAnchor = arkitComponent.anchor as? ARPlaneAnchor {
-    let width = planeAnchor.geometry.extent.x
-    let height = planeAnchor.geometry.extent.z
-    let alignment = planeAnchor.alignment  // .horizontal or .vertical
+   let planeAnchor = arkitComponent.anchor as? PlaneAnchor {
+    // Extent exposes width/height, not x/z
+    let width = planeAnchor.geometry.extent.width
+    let height = planeAnchor.geometry.extent.height
+    let alignment = planeAnchor.alignment  // .horizontal, .vertical, .slanted
 }
 ```
 
@@ -60,16 +67,20 @@ if let arkitComponent = entity.components[ARKitAnchorComponent.self],
 ```swift
 // Access accessory anchor data
 if let arkitComponent = entity.components[ARKitAnchorComponent.self],
-   let accessoryAnchor = arkitComponent.anchor as? ARAccessoryAnchor {
-    // Access accessory-specific data
+   let accessoryAnchor = arkitComponent.anchor as? AccessoryAnchor {
+    let isTracked = accessoryAnchor.isTracked
+    let chirality = accessoryAnchor.heldChirality
+    _ = (isTracked, chirality)
 }
 ```
 
 ## Key Properties
 
-- `anchor: ARAnchor` - The underlying ARKit anchor (can be cast to specific types like `ARPlaneAnchor`, `ARAccessoryAnchor`, etc.)
+- `anchor: any ARKit.Anchor` - The underlying ARKit anchor. Cast to a concrete
+  visionOS anchor type such as `PlaneAnchor`, `AccessoryAnchor`, `MeshAnchor`,
+  `ImageAnchor`, `ObjectAnchor`, `RoomAnchor`, or `WorldAnchor`.
 
-### ARPlaneAnchor Properties
+### PlaneAnchor Properties
 
 - `geometry.extent` - Size of the plane (width, height)
 - `alignment` - Plane alignment (`.horizontal` or `.vertical`)
@@ -80,9 +91,9 @@ if let arkitComponent = entity.components[ARKitAnchorComponent.self],
 
 - Automatically attached to `AnchorEntity` when it becomes anchored
 - Access via `AnchorStateEvents` like `DidAnchor` when anchor state changes
-- Can be cast to specific anchor types (`ARPlaneAnchor`, `ARAccessoryAnchor`, etc.)
+- Can be cast to specific anchor types (`PlaneAnchor`, `AccessoryAnchor`, etc.)
 - Provides access to ARKit-specific data not in RealityKit abstractions
-- Available on visionOS, iOS, and other Apple platforms
+- visionOS 26.0+ only - unavailable on iOS, macOS, macCatalyst, and tvOS
 - Works with `AnchoringComponent` for anchor management
 
 ## Best Practices

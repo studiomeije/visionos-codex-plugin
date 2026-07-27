@@ -75,6 +75,18 @@ the same application state path.
   before running commands. It is easy to capture or relaunch the wrong booted
   device and get misleading evidence.
 
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `realitykit-observability` | Profile & Optimize RealityKit |
+| `realitykit-visionos-developer` | Build with RealityKit |
+
 ## Output Expectations
 
 Provide:

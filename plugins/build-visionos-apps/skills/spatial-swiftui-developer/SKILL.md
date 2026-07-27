@@ -7,14 +7,11 @@ description: Design and implement visionOS 27 SwiftUI scenes and 3D data visuali
 
 ## Quick Start
 
-1. If the task is really about surface choice, scene ownership, or file
-   structure, switch to `spatial-app-architecture` first.
-2. Pick the rendering track: `Model3D` for simple asset display, `RealityView`
-   for custom entity graphs and attachments.
-3. Load only the matching reference files.
-4. Keep loading async and keep RealityKit mutations inside its intended entry
-   points.
-5. Route build, launch, simulator, and test problems to `build-run-debug`.
+If the task is really about surface choice, scene ownership, or file
+structure, switch to `spatial-app-architecture` first.
+
+Pick the rendering track early: `Model3D` for simple asset display,
+`RealityView` for custom entity graphs and attachments.
 
 ## Load References When
 
@@ -33,11 +30,14 @@ description: Design and implement visionOS 27 SwiftUI scenes and 3D data visuali
 ## Workflow
 
 1. Confirm the architecture and scene ownership are already settled.
-2. Choose the rendering surface: `Model3D`, `RealityView`, window, volume, or
-   immersive scene.
+2. Choose the rendering surface: `Model3D`, `RealityView`, window, volume,
+   or immersive scene.
 3. Load only the matching reference files.
-4. Implement the smallest viable scene and keep mutations in the right layer.
-5. Summarize the chosen SwiftUI-to-RealityKit integration path.
+4. Implement the smallest viable scene, keeping loading async and RealityKit
+   mutations inside their intended entry points.
+5. Build to verify, then summarize the chosen SwiftUI-to-RealityKit
+   integration path. Route build, launch, simulator, and test problems to
+   `build-run-debug`.
 
 ## Guardrails
 
@@ -65,6 +65,11 @@ description: Design and implement visionOS 27 SwiftUI scenes and 3D data visuali
   guidance here is current for visionOS 27. New in 27: gesture `inputKinds:`
   filtering (see `interaction.md`) plus cross-platform toolbar and navigation
   refinements that also apply on visionOS.
+- Verify written Swift by building. SwiftUI/RealityKit API on visionOS 27
+  is beta and shifts between seeds; do not report a change as done until the
+  scheme compiles. Route the build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
 ## Output Expectations
 

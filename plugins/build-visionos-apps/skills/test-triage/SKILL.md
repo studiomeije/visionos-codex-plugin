@@ -11,15 +11,8 @@ Use this skill to run the smallest meaningful test scope first, classify
 failures precisely, and avoid treating every simulator or entitlement issue like
 a product bug.
 
-After a build succeeds, test triage is the verification loop: run the smallest
-relevant XCTest or Swift Testing scope with `xcodebuild test`, inspect the
-result bundle and simulator logs, then classify the result from concrete
-evidence.
-
-Anchor every classification to the active test API. Load
-[`harness-detection.md`](references/harness-detection.md) for API-specific
-evidence rules and [`failure-categories.md`](references/failure-categories.md)
-for classification.
+Anchor every classification to the active test API and to concrete evidence -
+`xcodebuild test` output, the `.xcresult` bundle, and simulator logs.
 
 If the project cannot build or the app cannot launch on the selected simulator,
 switch to `build-run-debug` first, establish a stable run loop, then resume
@@ -74,6 +67,17 @@ test triage.
 - Treat a visionOS simulator boot, install, test-host attach, or scene-launch
   failure that occurs before a test body executes as environment or host
   lifecycle evidence until a test assertion proves otherwise.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `realitykit-observability` | Profile & Optimize RealityKit |
 
 ## Output Expectations
 

@@ -7,13 +7,9 @@ description: Implement immersive and spatial video experiences on Apple Vision P
 
 ## Quick Start
 
-Decide first whether the app should use the system AVKit experience or a custom
-RealityKit playback surface.
-
-1. Clarify the media shape: surface video, portal, progressive immersive, full
-   immersive, spatial video, or Apple Immersive Video.
-2. Load only the matching reference files.
-3. Treat playback-mode changes as both media and scene-orchestration work.
+Decide first whether the app should use the system AVKit experience or a
+custom RealityKit playback surface. Treat playback-mode changes as both
+media and scene-orchestration work.
 
 ## Load References When
 
@@ -31,11 +27,14 @@ RealityKit playback surface.
 
 ## Workflow
 
-1. Choose the playback architecture.
-2. Load the references for that surface and media type.
+1. Clarify the media shape: surface video, portal, progressive immersive,
+   full immersive, spatial video, or Apple Immersive Video.
+2. Choose the playback architecture and load the references for that surface
+   and media type.
 3. Implement playback and viewing-mode transitions.
 4. Add event handling and comfort mitigation where relevant.
-5. Summarize the playback path, transition model, and remaining validation work.
+5. Summarize the playback path, transition model, and remaining validation
+   work.
 
 ## Guardrails
 
@@ -46,6 +45,10 @@ RealityKit playback surface.
 - Do not treat immersive-mode transitions as a simple property flip when the
   app also needs scene changes.
 - Make sure the user has a clear exit path from immersive playback.
+- Verify written Swift by building before reporting done. Route the build
+  through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
 ## Output Expectations
 

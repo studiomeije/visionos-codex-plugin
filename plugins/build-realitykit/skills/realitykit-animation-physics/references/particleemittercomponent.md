@@ -18,60 +18,76 @@ A component that generates particle systems—tiny visual elements like sparks, 
 
 ### Basic Setup
 
+There is no `ParticleEmitterComponent(emitter:)` initializer. Create the
+component with `ParticleEmitterComponent()` and configure the nested emitter
+through `mainEmitter` (or `spawnedEmitter` for the secondary burst).
+
 ```swift
 import RealityKit
 
-// Create particle emitter
-var emitter = ParticleEmitterComponent.ParticleEmitter()
+// Create the component, then configure its main emitter
+var component = ParticleEmitterComponent()
 
-// Configure particle properties
-emitter.color = .constant(.single(.red))
-emitter.lifeSpan = 2.0  // Particles live for 2 seconds
-emitter.billboardMode = .viewPlaneAligned  // Face the camera
+component.mainEmitter.color = .constant(.single(.red))
+component.mainEmitter.lifeSpan = 2.0        // Particles live for 2 seconds
+component.mainEmitter.billboardMode = .billboard  // Face the camera
 
-let component = ParticleEmitterComponent(emitter: emitter)
 entity.components.set(component)
 ```
 
 ### Spark Effect
 
-```swift
-var sparkEmitter = ParticleEmitterComponent.ParticleEmitter()
-sparkEmitter.color = .constant(.single(.yellow))
-sparkEmitter.lifeSpan = 0.5
-sparkEmitter.spawnSpreadFactor = 0.3
-sparkEmitter.radialAmount = 5.0
-sparkEmitter.burstCountVariation = 10
+Emission-shape properties live on the **component**, not on the nested
+`ParticleEmitter`.
 
-let component = ParticleEmitterComponent(emitter: sparkEmitter)
+```swift
+var component = ParticleEmitterComponent()
+component.mainEmitter.color = .constant(.single(.yellow))
+component.mainEmitter.lifeSpan = 0.5
+
+component.spawnSpreadFactor = 0.3
+component.radialAmount = 5.0
+component.burstCountVariation = 10
+
 entity.components.set(component)
 ```
 
 ### Smoke Effect
 
 ```swift
-var smokeEmitter = ParticleEmitterComponent.ParticleEmitter()
-smokeEmitter.color = .constant(.single(.gray))
-smokeEmitter.lifeSpan = 3.0
-smokeEmitter.spawnSpreadFactor = 0.1
-smokeEmitter.radialAmount = 2.0
-smokeEmitter.billboardMode = .viewPlaneAligned
+var component = ParticleEmitterComponent()
+component.mainEmitter.color = .constant(.single(.gray))
+component.mainEmitter.lifeSpan = 3.0
+component.mainEmitter.billboardMode = .billboard
 
-let component = ParticleEmitterComponent(emitter: smokeEmitter)
+component.spawnSpreadFactor = 0.1
+component.radialAmount = 2.0
+
 entity.components.set(component)
 ```
 
 ## Key Properties
 
-### ParticleEmitter Properties
+### ParticleEmitterComponent Properties
 
-- `color: ParticleColor` - Particle color (e.g., `.constant(.single(.red))`)
-- `lifeSpan: Float` - How long each particle lives before disappearing
-- `billboardMode: BillboardMode` - How particles are oriented (e.g., `.viewPlaneAligned`)
-- `spawnSpreadFactor: Float` - How much particles spread out spatially when spawned
-- `radialAmount: Float` - How strongly particles spread radially from emission origin
-- `burstCountVariation: Int` - Randomness in number of particles when emitter bursts fire
-- `sortOrder: SortOrder` - Rendering order among particles and other scene elements
+- `mainEmitter: ParticleEmitter` - the primary emitter configuration
+- `spawnedEmitter: ParticleEmitter?` - secondary emitter spawned from particles
+- `emitterShape` / `emitterShapeSize` - the volume particles spawn from
+- `spawnSpreadFactor: Float` (and `spawnSpreadFactorVariation`) - how much
+  particles spread out spatially when spawned
+- `radialAmount: Float` - how strongly particles spread radially from the
+  emission origin
+- `burstCount: Int` / `burstCountVariation: Int` - burst size and its randomness
+- `isEmitting: Bool`, `simulationState`, `speed`, `speedVariation`
+
+### ParticleEmitter (`mainEmitter`) Properties
+
+- `color` - particle color (e.g. `.constant(.single(.red))`)
+- `lifeSpan: Double` (and `lifeSpanVariation`) - how long each particle lives
+- `billboardMode: BillboardMode` - `.billboard`, `.billboardYAligned`, or
+  `.free(axis:variation:)`. There is no `.viewPlaneAligned`.
+- `birthRate`, `size`, `sizeVariation`, `opacityCurve`, `blendMode`
+- `sortOrder: SortOrder` - rendering order among particles
 
 ## Important Notes
 
@@ -85,7 +101,7 @@ entity.components.set(component)
 
 - Configure particle properties to match your desired effect
 - Use appropriate `lifeSpan` values for particle duration
-- Set `billboardMode` for desired particle orientation
+- Set `mainEmitter.billboardMode` for desired particle orientation
 - Adjust `spawnSpreadFactor` and `radialAmount` for emission patterns
 - Consider performance when using many particle emitters
 - Test particle effects on target devices

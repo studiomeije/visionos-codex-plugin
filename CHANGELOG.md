@@ -27,8 +27,51 @@
 - Moved the long SharePlay sample-backed GroupActivities material into
   `shareplay-developer/samples/` and kept the active reference as a compact
   pattern map.
-- Removed the macOS-only Spatial Preview skill and the redundant coding
-  standards skill from the visionOS-focused plugin.
+- Removed the macOS-only Spatial Preview skill from the visionOS-focused
+  plugin.
+- Restored `coding-standards-enforcer` to `build-visionos-apps`. Nothing else
+  in the repo covered Swift 6.2 strict concurrency, actor isolation, `Sendable`,
+  or `@Observable` ownership, and it is the one skill that applies to every
+  Swift change.
+- Added `scripts/check_swift_snippets.py` and a macOS CI job that typechecks
+  every documented Swift snippet against the installed visionOS SDK, so beta
+  API drift fails the build instead of reaching an agent.
+- Fixed API errors the new typecheck surfaced, verified against the visionOS
+  27.0 SDK:
+  - `SpotLightComponent.Shadow` and `DirectionalLightComponent.Shadow` are
+    components set on the light entity, not a `shadow` property on the light
+    component; directional shadows use `shadowProjection`, not the
+    visionOS-unavailable `maximumDistance`.
+  - `ParticleEmitterComponent` has no `init(emitter:)`; emission-shape
+    properties live on the component and appearance on `mainEmitter`, and
+    `BillboardMode` has no `.viewPlaneAligned`.
+  - `AnchoringComponent`: `TrackingMode` has no `.precise`, `Target.image`
+    takes no `physicalWidth`, `Target.world` takes a non-optional transform,
+    and `PhysicsSimulation` is `.isolated` / `.none`.
+  - Character movement is `Entity.moveCharacter(by:deltaTime:relativeTo:)`, and
+    `CharacterControllerStateComponent` exposes read-only `isOnGround`.
+  - `MeshInstancesComponent` takes `LowLevelInstanceData` and no `materials:`;
+    `MeshInstanceCollection` uses `insert(_:)`, not `add(_:)`.
+  - `Reverb.Preset` has no `.mediumRoom`; `PresentationComponent.Configuration`
+    has no `.sheet`; `SpatialTrackingSession.Configuration.sceneUnderstanding`
+    is an initializer argument, not a settable property.
+  - `supportedVolumeViewpoints(_:)` and `volumeBaseplateVisibility(_:)` are View
+    modifiers, not Scene modifiers.
+  - `ARKitAnchorComponent.anchor` is `any ARKit.Anchor` and casts to the
+    visionOS anchor types (`PlaneAnchor`, `AccessoryAnchor`), not the iOS-era
+    `ARPlaneAnchor` / `ARAccessoryAnchor` classes.
+- Marked references that document API unavailable on visionOS
+  (`BodyTrackingComponent`, `ARBodyTrackingConfiguration`,
+  `ARWorldTrackingConfiguration`, `isRealWorldProxy`) with explicit platform
+  banners and visionOS alternatives.
+- Added a "verify by building" guardrail to the twelve implementation skills
+  that previously never told the agent to compile what it wrote, and pointed
+  the Swift-producing ones at `coding-standards-enforcer`.
+- Added a "Skills In Other Plugins" table to every skill that routes across
+  plugin boundaries, so an uninstalled route degrades gracefully instead of
+  dead-ending.
+- Folded duplicated Quick Start/Workflow steps into a single procedure across
+  eleven skills.
 - Added `scriptgraph-editor` for Reality Composer Pro 3 Script Graph behavior,
   node metadata inspection, package graph inspection, and runtime ownership
   routing.

@@ -18,6 +18,7 @@
     "xcode",
     "simulator",
     "swift-6",
+    "swift-concurrency",
     "vision-pro",
     "shareplay",
     "widgetkit"
@@ -27,7 +28,7 @@
   "interface": {
     "displayName": "Build visionOS 27 apps",
     "shortDescription": "Build, run, debug, refactor, and ship visionOS 27 apps with first-party Xcode workflows",
-    "longDescription": "Development for Apple Vision Pro on visionOS 27: spatial SwiftUI and Chart3D, ARKit, SharePlay, WidgetKit, immersive media, app architecture, signing, packaging, SwiftPM, simulator UI automation, first-party Xcode build/run/debug workflows, command entrypoints, and Run-button bootstrap. Link to Build with RealityKit for RealityKit runtime implementation, Profile & Optimize RealityKit for performance evidence, and Build with Reality Composer Pro 3 for authored graph, package, and USD asset-pipeline work.",
+    "longDescription": "Development for Apple Vision Pro on visionOS 27: spatial SwiftUI and Chart3D, ARKit, SharePlay, WidgetKit, immersive media, app architecture, Swift 6.2 concurrency and Observation standards, signing, packaging, SwiftPM, simulator UI automation, first-party Xcode build/run/debug workflows, command entrypoints, and Run-button bootstrap. Link to Build with RealityKit for RealityKit runtime implementation, Profile & Optimize RealityKit for performance evidence, and Build with Reality Composer Pro 3 for authored graph, package, and USD asset-pipeline work.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [

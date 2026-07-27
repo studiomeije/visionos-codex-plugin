@@ -7,18 +7,10 @@ description: Build, run, and test Swift packages that target visionOS, including
 
 ## Quick Start
 
-Use this skill when `Package.swift` is the primary entrypoint, when a library
-has visionOS-specific behavior behind a platform condition, or when a Reality
-Composer Pro package is the artifact of interest. For app projects driven by
-an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
-
-1. Decide whether the work is package structure, build command selection,
-   Reality Composer Pro packaging, or diagnostics.
-2. Load only the matching reference files.
-3. Use package-native SwiftPM checks for host-compatible code, and use an
-   Apple Vision Pro Simulator `xcodebuild` destination for visionOS SDK checks.
-4. Route back to `build-run-debug` once the task becomes app-runner or
-   simulator-launch focused.
+Use this skill when `Package.swift` is the primary entrypoint, when a
+library has visionOS-specific behavior behind a platform condition, or when
+a Reality Composer Pro package is the artifact of interest. For app projects
+driven by an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug`.
 
 ## Load References When
 
@@ -31,12 +23,18 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
 
 ## Workflow
 
-1. Inspect `Package.swift` and identify products, targets, tests, and resource
-   bundles.
-2. Choose the narrowest build or test path that answers the question.
-3. Load the Reality Composer Pro reference only if the package actually owns
+1. Inspect `Package.swift` and identify products, targets, tests, and
+   resource bundles.
+2. Decide whether the work is package structure, build command selection,
+   Reality Composer Pro packaging, or diagnostics.
+3. Choose the narrowest build or test path that answers the question:
+   package-native SwiftPM checks for host-compatible code, an Apple Vision
+   Pro Simulator `xcodebuild` destination for visionOS SDK checks.
+4. Load the Reality Composer Pro reference only if the package actually owns
    scene or asset bundles.
-4. Classify the result precisely before escalating out of the skill.
+5. Classify the result precisely before escalating out of the skill, and
+   route back to `build-run-debug` once the task becomes app-runner or
+   simulator-launch focused.
 
 ## When To Switch Skills
 
@@ -60,6 +58,19 @@ an `.xcodeproj` or `.xcworkspace`, stay in `build-run-debug` instead.
   bundles.
 - Treat arm64 simulator and Xcode beta requirements as build-environment facts,
   not reasons to rewrite package code first.
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `animationgraph-editor` | Build with Reality Composer Pro 3 |
+| `scriptgraph-editor` | Build with Reality Composer Pro 3 |
+| `shadergraph-editor` | Build with Reality Composer Pro 3 |
+| `usd-editor` | Build with Reality Composer Pro 3 |
 
 ## Output Expectations
 

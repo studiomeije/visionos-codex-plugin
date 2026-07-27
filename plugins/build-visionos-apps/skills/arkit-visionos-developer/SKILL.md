@@ -5,19 +5,6 @@ description: Build and debug ARKit features on visionOS 27, including ARKitSessi
 
 # ARKit visionOS Developer
 
-## Quick Start
-
-1. Load the provider index, then open only the provider guides needed by the
-   task.
-2. If the task spans provider families, load the shared session and anchor
-   references first.
-3. Add only the usage strings, entitlements, and authorizations required by the
-   providers you actually use.
-4. Keep anchor state in a model layer, and bridge into RealityKit only when you
-   have a rendering target.
-5. If the issue is app launch, test flow, simulator behavior, or signing,
-   switch to `build-run-debug` or `signing-entitlements`.
-
 ## Load Shared References When
 
 | Reference | When to Use |
@@ -29,11 +16,16 @@ description: Build and debug ARKit features on visionOS 27, including ARKitSessi
 
 ## Workflow
 
-1. Choose the provider family.
-2. Load the shared session and lifecycle guidance first.
-3. Add only the provider references that match the task.
-4. Keep anchor reconciliation in a model layer.
-5. Bridge into RealityKit only after the model layer has stable state.
+1. Choose the provider family, then load the provider index.
+2. Load the shared session and anchor references first when the task spans
+   provider families.
+3. Open only the provider guides the task actually needs.
+4. Add only the usage strings, entitlements, and authorizations required by
+   the providers you actually use.
+5. Keep anchor reconciliation in a model layer.
+6. Bridge into RealityKit only after the model layer has stable state.
+7. If the issue turns into app launch, test flow, simulator behavior, or
+   signing, switch to `build-run-debug` or `signing-entitlements`.
 
 ## Guardrails
 
@@ -45,6 +37,11 @@ description: Build and debug ARKit features on visionOS 27, including ARKitSessi
   or provisioning requirements.
 - Route launch, build, simulator, and codesign problems out to the execution
   skills instead of expanding this skill with run-loop detail.
+- Verify written Swift by building. Provider APIs on visionOS 27 are beta;
+  do not report a change as done until the scheme compiles. Route the build
+  through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
 ## Output Expectations
 

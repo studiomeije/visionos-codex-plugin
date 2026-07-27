@@ -56,6 +56,11 @@ component.setTexture(myTexture, at: 0)
 ### Build a Graph Programmatically
 
 ```swift
+// ComputeNodeGraph / ComputeGraphResource come from the RealityKit x
+// ComputeGraph cross-import overlay - import both modules.
+import RealityKit
+import ComputeGraph
+
 var graph = ComputeNodeGraph()
 let library = ComputeNodeGraph.Library.shared
 // Or bring your own kernels:

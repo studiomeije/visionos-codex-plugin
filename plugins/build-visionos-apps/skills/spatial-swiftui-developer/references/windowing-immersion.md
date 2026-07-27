@@ -107,15 +107,22 @@ struct VolumeApp: App {
     var body: some Scene {
         WindowGroup(id: "Volume") {
             ContentView()
+                // View modifiers - they go on the content, not the scene.
+                .supportedVolumeViewpoints(.all)
+                .volumeBaseplateVisibility(.hidden)
         }
+        // Scene modifiers.
         .windowStyle(.volumetric)
         .defaultSize(width: 0.6, height: 0.6, depth: 0.6, in: .meters)
         .defaultWorldScaling(.dynamic)
-        .supportedVolumeViewpoints(.all)
-        .volumeBaseplateVisibility(.hidden)
     }
 }
 ```
+
+Watch the boundary here: `windowStyle`, `defaultSize`, and
+`defaultWorldScaling` are **Scene** modifiers, while
+`supportedVolumeViewpoints(_:)` and `volumeBaseplateVisibility(_:)` are **View**
+modifiers. Applying the view modifiers to the `WindowGroup` does not compile.
 
 ### Reacting to volume viewpoint changes
 
@@ -125,7 +132,7 @@ struct VolumeContent: View {
         RealityView { content in
             // ...
         }
-        .onVolumeViewpointChange(updateStrategy: .continuous, initial: true) { _, newViewpoint in
+        .onVolumeViewpointChange(updateStrategy: .all, initial: true) { _, newViewpoint in
             // Adjust layout based on the new viewer direction.
         }
     }

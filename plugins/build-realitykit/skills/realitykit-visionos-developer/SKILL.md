@@ -69,6 +69,30 @@ description: Route RealityKit implementation work on visionOS 27 and handle core
   or assets that depend on them load.
 - Prefer `ManipulationComponent.configureEntity(...)` when built-in direct
   manipulation fits the need.
+- Verify written Swift by building. Many components here are visionOS 27
+  beta API; confirm the symbols exist in the installed SDK by compiling, not
+  from memory. Route the build through `build-run-debug`.
+- Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
+  concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `animationgraph-editor` | Build with Reality Composer Pro 3 |
+| `arkit-visionos-developer` | Build visionOS 27 apps |
+| `build-run-debug` | Build visionOS 27 apps |
+| `coding-standards-enforcer` | Build visionOS 27 apps |
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
+| `scriptgraph-editor` | Build with Reality Composer Pro 3 |
+| `shadergraph-editor` | Build with Reality Composer Pro 3 |
+| `spatial-swiftui-developer` | Build visionOS 27 apps |
+| `usd-editor` | Build with Reality Composer Pro 3 |
 
 ## Output Expectations
 

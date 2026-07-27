@@ -18,31 +18,44 @@ A component that provides access to scene understanding data for an entity. Scen
 
 ### Basic Setup
 
+`sceneUnderstanding` is an initializer argument, not a settable property. Build
+the configuration in one call and pass it to `session.run(_:)`.
+
 ```swift
 import RealityKit
-import ARKit
 
 // Configure SpatialTrackingSession with scene understanding
-let configuration = SpatialTrackingSession.Configuration()
-configuration.sceneUnderstanding = [.collision, .physics]
+let session = SpatialTrackingSession()
+let configuration = SpatialTrackingSession.Configuration(
+    tracking: [.plane],
+    sceneUnderstanding: [.collision, .physics]
+)
+let unavailable = await session.run(configuration)
 
 // Entities can access scene understanding data
 let entity = Entity()
 entity.components.set(SceneUnderstandingComponent())
 ```
 
+`run(_:)` returns the capabilities it could **not** provide - check it rather
+than assuming every requested capability is active.
+
 ### With Collision and Physics
 
 ```swift
 // Enable scene understanding for collision and physics
-let configuration = SpatialTrackingSession.Configuration()
-configuration.sceneUnderstanding = [.collision, .physics]
+let session = SpatialTrackingSession()
+_ = await session.run(
+    SpatialTrackingSession.Configuration(sceneUnderstanding: [.collision, .physics])
+)
 
 // Entity can now collide with real-world geometry
 let entity = Entity()
-entity.components.set(PhysicsBodyComponent(...))
 entity.components.set(SceneUnderstandingComponent())
 ```
+
+The four `SceneUnderstandingCapability` values are `.collision`, `.physics`,
+`.occlusion`, and `.shadow`.
 
 ### Environment Mesh Access
 

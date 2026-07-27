@@ -17,14 +17,6 @@ logic:
 - App Store Connect or export rejection that names an entitlement, profile,
   privacy key, or unsupported capability
 
-1. Classify the target first: simulator, device, or distribution artifact.
-2. Capture the exact failing boundary: install, launch, ARKit authorization,
-   archive, export, upload validation, or App Review metadata check.
-3. Load only the reference files that match the failure class.
-4. Inspect built output before proposing changes to project settings.
-5. Switch back to `build-run-debug` once signing and privacy state are known
-   good and the failure is still present.
-
 ## Load References When
 
 | Reference | When to Use |
@@ -37,17 +29,21 @@ logic:
 
 ## Workflow
 
-1. Determine whether the artifact is simulator-only, physical-device, archive,
-   or exported distribution.
-2. Inspect the built app, embedded entitlements, `Info.plist`, and provisioning
-   profile when present.
-3. Compare three sources before changing anything: project entitlements file,
+1. Classify the artifact: simulator-only, physical-device, archive, or exported
+   distribution.
+2. Capture the exact failing boundary: install, launch, ARKit authorization,
+   archive, export, upload validation, or App Review metadata check.
+3. Inspect the built app, embedded entitlements, `Info.plist`, and provisioning
+   profile when present - built output before project settings.
+4. Compare three sources before changing anything: project entitlements file,
    provisioning-profile entitlements, and signed app entitlements.
-4. Classify the failure precisely: identity/profile, managed capability,
+5. Classify the failure precisely: identity/profile, managed capability,
    privacy usage string, simulator/device mismatch, archive/export mismatch, or
    non-signing issue.
-5. Apply the smallest fix that matches that class.
-6. Rebuild and verify against built output, not just source configuration.
+6. Apply the smallest fix that matches that class.
+7. Rebuild and verify against built output, not just source configuration.
+   Switch back to `build-run-debug` once signing and privacy state are known
+   good and the failure is still present.
 
 ## Guardrails
 

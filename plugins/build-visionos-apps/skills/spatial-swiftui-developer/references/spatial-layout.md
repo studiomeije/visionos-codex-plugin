@@ -26,7 +26,10 @@ SwiftUI spatial layout APIs let you measure, align, and compose views in three d
   spacing, `SpatialContainer`, and `depthAlignment(_:)` express layout depth.
 - Use `spatialOverlay` for adornments like labels or selection rings that should live within the same 3D bounds; keep overlays lightweight to avoid occlusion.
 - Use `rotation3DLayout` when rotation should affect layout size; use `rotation3DEffect` for purely visual rotation.
-- Keep debug helpers like `debugBorder3D` for development only.
+- `debugBorder3D(_:)` in the examples below is **not a SwiftUI API**. It is a
+  project-local helper defined at the end of this file under
+  "DebugBorder3D" - copy that extension into the project before using it, and
+  keep it out of shipping builds.
 
 ## ZStack Depth Decision Guide
 
@@ -50,7 +53,10 @@ SwiftUI spatial layout APIs let you measure, align, and compose views in three d
 
 ## Code Examples
 
-
+These samples use the project-local `debugBorder3D(_:)` helper to visualize 3D
+bounds. It is not part of SwiftUI - its definition is in the "DebugBorder3D"
+section at the end of this file. Drop the modifier or add the extension when
+adapting a sample.
 
 #### Robot image frame
 
@@ -299,6 +305,9 @@ extension DepthAlignment {
 
 #### Customizing depth alignment guides
 
+Requires the `DepthAlignment.depthPodium` extension from the previous snippet -
+`.depthPodium` is a custom alignment, not a built-in one.
+
 ```swift
 struct FavoritesRow: View {
   let robots: [Robot]
@@ -411,6 +420,9 @@ struct RobotCarouselItem: View {
 ```
 
 #### DebugBorder3D
+
+A development-only helper used throughout this file. Not a SwiftUI API - add
+this extension to the project to use the samples verbatim.
 
 ```swift
 extension View {

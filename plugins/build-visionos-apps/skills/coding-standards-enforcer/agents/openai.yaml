@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coding Standards Enforcer"
+  short_description: "Review Swift code against Swift 6.2 concurrency and Observation standards"
+  default_prompt: "Use $coding-standards-enforcer whenever visionOS Swift code is written or changed: check Swift 6.2 strict concurrency, actor isolation, Sendable, @Observable ownership, and modern API usage, then verify the result still builds with $build-run-debug."

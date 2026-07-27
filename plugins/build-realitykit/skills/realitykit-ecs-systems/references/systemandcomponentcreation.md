@@ -153,11 +153,11 @@ struct TraceSystem: System {
             let contents = trace.mesh.meshContents
             if let model = trace.model {
                 try? model.model?.mesh.replace(with: contents)
-            } else {
-                let model = try? ModelEntity.makeTraceModel(with: contents)
-                model?.name = "\(anchor.name)-trace"
+            } else if let mesh = try? MeshResource.generate(from: contents) {
+                let model = ModelEntity(mesh: mesh, materials: [SimpleMaterial()])
+                model.name = "\(anchor.name)-trace"
                 trace.model = model
-                anchor.addChild(model!)
+                anchor.addChild(model)
             }
         }
     }
@@ -202,6 +202,10 @@ SpinSystem.registerSystem()
 ### System with Dependencies
 
 ```swift
+struct DamageComponent: Component {
+    var amount: Float = 0
+}
+
 struct DamageSystem: System {
     static let query = EntityQuery(where: .has(DamageComponent.self))
     
@@ -312,7 +316,7 @@ Use `EntityQuery` with `QueryPredicate` to find entities that match specific cri
 
 ```swift
 // Entities with a specific component
-static let query = EntityQuery(where: .has(MyComponent.self))
+static let query = EntityQuery(where: .has(HealthComponent.self))
 
 // Entities with multiple components
 static let query = EntityQuery(
@@ -368,7 +372,7 @@ Always register custom components before use:
 
 ```swift
 // Register a component
-MyComponent.registerComponent()
+HealthComponent.registerComponent()
 ```
 
 This ensures the component can be properly serialized and deserialized when saving/loading scenes.

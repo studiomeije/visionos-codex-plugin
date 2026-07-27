@@ -17,40 +17,56 @@ Renders many instances of a mesh efficiently. This component allows you to rende
 
 ### Basic Setup
 
+`MeshInstancesComponent` takes a `LowLevelInstanceData` buffer of transforms.
+It carries no `materials:` argument - materials come from the entity's
+`ModelComponent`.
+
 ```swift
 import RealityKit
 
-// Create mesh instances component
-let instances = MeshInstancesComponent(
-    mesh: meshResource,
-    materials: [material],
-    instances: meshInstanceCollection
-)
-entity.components.set(instances)
-```
-
-### Creating Instance Collection
-
-```swift
-// Create a collection of instance transforms
-var instanceCollection = MeshInstanceCollection()
-
-// Add instances with different transforms
-for i in 0..<100 {
-    let transform = Transform(
-        translation: [Float(i) * 0.5, 0, 0],
-        rotation: .identity,
-        scale: 1.0
-    )
-    instanceCollection.add(transform)
+// Allocate the instance buffer and fill in per-instance transforms
+let data = try LowLevelInstanceData(instanceCount: 100)
+data.withMutableTransforms { transforms in
+    for i in 0..<transforms.count {
+        transforms[i] = Transform(
+            translation: [Float(i) * 0.5, 0, 0]
+        ).matrix
+    }
 }
 
-let instances = MeshInstancesComponent(
-    mesh: meshResource,
-    materials: [material],
-    instances: instanceCollection
-)
+let instances = try MeshInstancesComponent(mesh: meshResource, instances: data)
 entity.components.set(instances)
+
+// Materials still come from the model component on the same entity
+entity.components.set(ModelComponent(mesh: meshResource, materials: [material]))
+```
+
+### Updating Instance Transforms
+
+`LowLevelInstanceData` is a reference type, so transforms can be rewritten in
+place without rebuilding the component.
+
+```swift
+data.replaceMutableTransforms { transforms in
+    for i in 0..<transforms.count {
+        transforms[i] = Transform(
+            translation: [Float(i) * 0.5, sin(time + Float(i)), 0]
+        ).matrix
+    }
+}
+```
+
+### MeshInstanceCollection Is A Different Type
+
+`MeshInstanceCollection` holds `MeshResource.Instance` values for
+instancing *inside a mesh resource*, and it uses `insert(_:)` / `update(_:)` /
+`remove(id:)` - there is no `add(_:)`.
+
+```swift
+var collection = MeshInstanceCollection()
+collection.insert(
+    MeshResource.Instance(id: "tree-0", model: "tree", at: .init(diagonal: .one))
+)
 ```
 
 ## Key Properties

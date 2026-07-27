@@ -44,6 +44,11 @@ entity.components[USDStageComponent.self]?.timeCode = 24.0
 ### One-Shot Render and Completion
 
 ```swift
+// USDStageComponent comes from the RealityKit x USDKit cross-import overlay -
+// both modules must be imported.
+import RealityKit
+import USDKit
+
 let result = await USDStageComponent.render(stage, to: entity)
 if result.status == .failed {
     // result.errors: [USDRenderError]
@@ -88,7 +93,7 @@ poses, influences), `BlendShapeData` (weights, position offsets), and
 ```swift
 // Single entity, smaller textures:
 try await entity.write(to: outputURL,
-                       options: [.preferSmallTextureFiles(quality: .medium)])
+                       options: .preferSmallTextureFiles(quality: .medium))
 
 // Multiple scenes into one USD:
 try await Entity.write([sceneA, sceneB], to: outputURL,

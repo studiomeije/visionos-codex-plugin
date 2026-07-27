@@ -3,12 +3,12 @@
 
 ## Overview
 
-A component that integrates SwiftUI content as modal presentations (popovers, sheets, etc.) into RealityKit entities. This helps bridge 2D SwiftUI view content into 3D spatial contexts, allowing entities to present SwiftUI modals or system UI in a spatially-aware manner.
+A component that integrates SwiftUI content as a popover presentation attached to a RealityKit entity. This helps bridge 2D SwiftUI view content into 3D spatial contexts, allowing entities to present SwiftUI modals or system UI in a spatially-aware manner.
 
 ## When to Use
 
 - Presenting SwiftUI modals from 3D entities
-- Showing popovers or sheets triggered by entity interactions
+- Showing popovers triggered by entity interactions
 - Integrating SwiftUI UI into spatial experiences
 - Creating interactive UI that appears from entities
 - Presenting system UI from spatial interactions
@@ -22,16 +22,14 @@ A component that integrates SwiftUI content as modal presentations (popovers, sh
 import RealityKit
 import SwiftUI
 
-// Create presentation component with popover
+// `content:` takes a View value, not a closure.
 let presentation = PresentationComponent(
     configuration: .popover(arrowEdge: .bottom),
-    content: {
-        VStack {
-            Text("Entity Info")
-            Button("Close") { }
-        }
-        .padding()
+    content: VStack {
+        Text("Entity Info")
+        Button("Close") { }
     }
+    .padding()
 )
 entity.components.set(presentation)
 ```
@@ -39,12 +37,11 @@ entity.components.set(presentation)
 ### With Popover
 
 ```swift
-// Create popover presentation
+// Drive presentation from a Binding<Bool>
 let presentation = PresentationComponent(
+    isPresented: $isShowingDetail,
     configuration: .popover(arrowEdge: .top),
-    content: {
-        MySwiftUIView()
-    }
+    content: MySwiftUIView()
 )
 entity.components.set(presentation)
 
@@ -55,16 +52,18 @@ if var presentation = entity.components[PresentationComponent.self] {
 }
 ```
 
-### Sheet Presentation
+### There Is No `.sheet` Configuration
+
+`PresentationComponent.Configuration` exposes only `.popover(arrowEdge:)` in
+the visionOS 27 SDK. For sheet-style presentation, present a SwiftUI sheet from
+the owning window/scene instead, or open a separate window. Use the popover for
+content that must stay attached to the entity.
 
 ```swift
-// Create sheet presentation
 let presentation = PresentationComponent(
-    configuration: .sheet,
-    content: {
-        NavigationView {
-            MyDetailView()
-        }
+    configuration: .popover(arrowEdge: nil),
+    content: NavigationStack {
+        MyDetailView()
     }
 )
 entity.components.set(presentation)
@@ -72,15 +71,18 @@ entity.components.set(presentation)
 
 ## Key Properties
 
-- `configuration: PresentationComponent.Configuration` - Presentation configuration (popover, sheet, etc.)
-- `content: () -> some View` - SwiftUI view content to present
-- `isPresented: Bool` - Boolean to toggle the presentation on/off
+- `isPresented: Bool` - toggles the presentation on/off
+
+### Initializers
+
+- `init(configuration:content:)` - `content` is a **View value**, not a
+  view-builder closure
+- `init(isPresented:configuration:content:)` - drives presentation from a
+  `Binding<Bool>`
 
 ### Configuration Types
 
-- `.popover(arrowEdge:)` - Popover presentation with arrow edge
-- `.sheet` - Sheet presentation
-- Other presentation types as available
+- `.popover(arrowEdge: Edge?)` - the only configuration in the visionOS 27 SDK
 
 ## Important Notes
 

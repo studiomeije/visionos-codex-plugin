@@ -11,17 +11,9 @@ Default to Reality Composer Pro 3 for creating and refining Script Graphs. Use
 package inspection only to locate, compare, explain, or minimally repair
 authored graph data.
 
-1. Identify whether the task is authored behavior, node availability, package
-   inspection, runtime validation, or cross-skill routing.
-2. Confirm the owner: the editable RCP3 project always ends in
-   `.realitycomposerpro`. Treat `RealityKitContent`, `.rkassets`, and
-   `.reality` as downstream packaging or runtime artifacts, not as the Script
-   Graph project to modify.
-3. Load only the matching reference files.
-4. Prefer RCP UI edits for graph structure; use text/package edits only when
-   you have a small known-good diff or the user explicitly needs package repair.
-5. Validate by reopening the package in Reality Composer Pro and, when runtime
-   behavior matters, by building or launching the visionOS app.
+The editable RCP3 project always ends in `.realitycomposerpro`. Treat
+`RealityKitContent`, `.rkassets`, and `.reality` as downstream packaging or
+runtime artifacts, not as the Script Graph project to modify.
 
 ## Load References When
 
@@ -39,10 +31,13 @@ authored graph data.
    entity reference, custom component interaction, or runtime handoff.
 4. Use the installed `ScriptGraphNodeMetadata.plist` to verify node names,
    availability, inputs, and outputs before proposing specific nodes.
-5. Make the smallest graph or package change that preserves existing object
+5. Prefer RCP UI edits for graph structure; use text/package edits only with a
+   small known-good diff, or when the user explicitly needs package repair.
+6. Make the smallest graph or package change that preserves existing object
    identifiers and authored structure.
-6. Validate the package in Reality Composer Pro, then validate app behavior
-   through the relevant build/run/test skill if needed.
+7. Validate by reopening the package in Reality Composer Pro, then validate app
+   behavior through the relevant build/run/test skill when runtime behavior
+   matters.
 
 ## When To Switch Skills
 
@@ -78,6 +73,20 @@ authored graph data.
   artifact instead of assuming the editor picked up filesystem changes.
 - Keep exact entity names, graph names, node type names, custom component type
   names, and bundle/resource paths in the answer.
+
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+| `realitykit-animation-physics` | Build with RealityKit |
+| `realitykit-ecs-systems` | Build with RealityKit |
+| `swiftpm-visionos` | Build visionOS 27 apps |
 
 ## Output Expectations
 

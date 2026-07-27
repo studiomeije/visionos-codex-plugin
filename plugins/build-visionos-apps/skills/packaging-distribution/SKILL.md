@@ -11,16 +11,14 @@ Use this skill when the work is about shipping the app rather than building or
 debugging it locally: archive creation, export, TestFlight, App Store review,
 or release-readiness checks.
 
-1. Confirm the goal first:
-   - validate an archive locally
-   - export a release-testing or enterprise build
-   - upload to TestFlight
-   - submit to the App Store
-2. Confirm the artifact path and whether the artifact is an archive, exported
-   `.ipa`, or only a simulator build.
-3. Load the narrowest reference files that match the task.
-4. Keep local build/debug issues in `build-run-debug`, privacy/capability
-   issues in `signing-entitlements`, and failing tests in `test-triage`.
+Confirm the goal before anything else: validate an archive locally, export a
+release-testing or enterprise build, upload to TestFlight, or submit to the App
+Store.
+
+`asc` is a third-party App Store Connect CLI, not an Apple-supplied tool. Run
+the preflight in [`asc-preflight.md`](references/asc-preflight.md) to confirm it
+is installed and authenticated before planning around it, and fall back to
+Xcode or Transporter when it is unavailable.
 
 ## Load References When
 
@@ -35,7 +33,9 @@ or release-readiness checks.
 
 ## Workflow
 
-1. Confirm the release target, scheme, bundle ID, team, and artifact path.
+1. Confirm the release target, scheme, bundle ID, team, and artifact path, and
+   whether the artifact is an archive, an exported `.ipa`, or only a simulator
+   build.
 2. Reject simulator output as non-distributable.
 3. Run the `asc` preflight once if the task needs App Store Connect.
 4. Archive for `generic/platform=visionOS` and export with the appropriate

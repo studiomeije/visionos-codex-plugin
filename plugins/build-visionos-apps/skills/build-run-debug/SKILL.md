@@ -73,6 +73,17 @@ the available path first and keep the workflow aligned to that choice.
 - If build output is huge, summarize the first real blocker and point to the
   next command that should run.
 
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `realitykit-performance-triage` | Profile & Optimize RealityKit |
+
 ## Output Expectations
 
 Provide:

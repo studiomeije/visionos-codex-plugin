@@ -38,7 +38,7 @@ entity.components.set(
 
 // Medium room reverb
 entity.components.set(
-    ReverbComponent(reverb: .preset(.mediumRoom))
+    ReverbComponent(reverb: .preset(.mediumRoomDry))
 )
 
 // Large room reverb
@@ -59,25 +59,32 @@ entity.components.set(
 // Place reverb component on a parent entity to affect all children
 let roomEntity = Entity()
 roomEntity.components.set(
-    ReverbComponent(reverb: .preset(.mediumRoom))
+    ReverbComponent(reverb: .preset(.mediumRoomDry))
 )
 
 // All child entities will use this reverb
 let soundSource = Entity()
 roomEntity.addChild(soundSource)
-// soundSource will use mediumRoom reverb
+// soundSource will use mediumRoomDry reverb
 ```
 
 ## Key Properties
 
-- `reverb: ReverbComponent.Reverb` - The reverb configuration, typically using `.preset()` with a reverb preset type
+- `reverb: Reverb` - The reverb configuration. Build it with
+  `.preset(_:)`, `.anechoic`, or `.simulated(mesh:materials:)`.
 
 ### Reverb Presets
 
-- `.smallRoom` - Small room acoustic environment
-- `.mediumRoom` - Medium room acoustic environment
-- `.largeRoom` - Large room acoustic environment
-- `.veryLargeRoom` - Very large room acoustic environment
+The complete `Reverb.Preset` set in the visionOS 27 SDK. There is no
+`.mediumRoom`; the medium sizes are `.mediumRoomDry` and `.mediumRoomTreated`.
+
+- `.verySmallRoomBright`
+- `.smallRoom`, `.smallRoomBright`
+- `.mediumRoomDry`, `.mediumRoomTreated`
+- `.largeRoom`, `.largeRoomTreated`
+- `.veryLargeRoom`
+- `.concertHall`
+- `.outside`
 
 ## Important Notes
 

@@ -79,14 +79,18 @@ RealityView { content in
 
 This example shows how to update a ModelComponent's mesh dynamically (from TraceSystem):
 
+`ModelComponent` takes a `MeshResource`, not a `MeshResource.Contents`. Build
+the resource with `MeshResource.generate(from:)` (or the async
+`MeshResource(from:)`) before constructing the component.
+
 ```swift
-// Update an existing model's mesh
-if let model = trace.model {
+// Update an existing model's mesh in place when one already exists
+if let model = trace.model, model.model != nil {
     try model.model?.mesh.replace(with: newMeshContents)
 } else {
-    // Create a new model entity with the mesh
-    let model = try ModelEntity.makeTraceModel(with: meshContents)
-    entity.components.set(ModelComponent(mesh: meshContents, materials: [material]))
+    // Otherwise build a resource from the contents and set a fresh component
+    let mesh = try MeshResource.generate(from: newMeshContents)
+    entity.components.set(ModelComponent(mesh: mesh, materials: [material]))
 }
 ```
 

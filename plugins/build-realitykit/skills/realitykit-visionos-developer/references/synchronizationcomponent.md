@@ -28,16 +28,22 @@ entity.components.set(syncComponent)
 
 ### With Collaboration Enabled
 
+`ARWorldTrackingConfiguration` and `ARView` are **unavailable on visionOS** -
+that collaboration path is iOS/iPadOS only. On visionOS, shared sessions come
+from SharePlay GroupActivities; see the `shareplay-developer` skill in the
+Build visionOS 27 apps plugin.
+
 ```swift
-// Enable collaboration in AR session configuration
+#if os(iOS)
+// iOS only: enable collaboration in the AR session configuration
 let configuration = ARWorldTrackingConfiguration()
 configuration.isCollaborationEnabled = true
 arView.session.run(configuration)
+#endif
 
-// Mark entities for synchronization
+// Mark entities for synchronization (all platforms)
 let sharedEntity = Entity()
 sharedEntity.components.set(SynchronizationComponent())
-scene.addChild(sharedEntity)
 ```
 
 ### Synchronized Entity Updates

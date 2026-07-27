@@ -41,11 +41,17 @@ those layers. Directional and spot `Shadow` types gained an optional
 `layers: RenderLayer.Set?` (and `init(layers:)`) to scope shadow casting
 independently of illumination.
 
+`Shadow` is itself a `Component`, not a property of the light component. Set it
+on the light entity alongside the light component. (`entity.shadow` exists only
+on the legacy `HasSpotLight` / `HasDirectionalLight` entity protocols.)
+
 ```swift
 var spot = SpotLightComponent()
 spot.layers = [heroLayer]                 // Light only the hero content
-spot.shadow = .init(layers: [heroLayer])  // Shadows from hero content only
 lightEntity.components.set(spot)
+
+// Shadows from hero content only.
+lightEntity.components.set(SpotLightComponent.Shadow(layers: [heroLayer]))
 ```
 
 ## Cascaded Directional Shadows
@@ -54,11 +60,11 @@ lightEntity.components.set(spot)
 cascades for stable quality across large distances.
 
 ```swift
-var sun = DirectionalLightComponent()
 var shadow = DirectionalLightComponent.Shadow()
 shadow.cascades = .fixed(4, bias: 0.5)  // Or .automatic
-sun.shadow = shadow
-sunEntity.components.set(sun)
+
+sunEntity.components.set(DirectionalLightComponent())
+sunEntity.components.set(shadow)
 ```
 
 - `.fixed(_ count: Int, bias: Float = 0.0)` - explicit cascade count;
@@ -71,12 +77,12 @@ sunEntity.components.set(sun)
 soft penumbras.
 
 ```swift
-var spot = SpotLightComponent()
 var shadow = SpotLightComponent.Shadow()
 shadow.quality = .high       // .low / .medium / .high
 shadow.lightSize = 0.05      // Larger source -> softer shadow edges
-spot.shadow = shadow
-lightEntity.components.set(spot)
+
+lightEntity.components.set(SpotLightComponent())
+lightEntity.components.set(shadow)
 ```
 
 `lightSize` and `quality` are not available on tvOS; they cover visionOS 27,

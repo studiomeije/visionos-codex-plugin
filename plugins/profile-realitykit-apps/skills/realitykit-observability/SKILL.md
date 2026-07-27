@@ -34,6 +34,17 @@ description: Instrument and inspect an already-running RealityKit app with Logge
   broader trace or target conditions differ.
 - Keep `.logarchive` and related captures outside source control.
 
+
+## Skills In Other Plugins
+
+These routes live in other plugins from this marketplace. If one is not
+installed, say so plainly and continue with the best available path rather
+than stalling or inventing the missing skill's guidance.
+
+| Skill | Plugin |
+|---|---|
+| `build-run-debug` | Build visionOS 27 apps |
+
 ## Output Expectations
 
 Provide:
