@@ -67,7 +67,6 @@ debugging exports or interoperability.
 - Verify any Swift you write against the material by building. Route the
   build through `build-run-debug`.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

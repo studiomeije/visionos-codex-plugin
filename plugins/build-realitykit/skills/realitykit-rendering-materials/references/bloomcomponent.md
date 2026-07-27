@@ -1,18 +1,10 @@
 # BloomComponent
 
-
 ## Overview
 
 Components that add a bloom (glow) effect to bright rendered content. `BloomComponent` enables bloom and sets its scope; `BloomOptionsComponent` tunes strength, threshold, and blur radius. Bright pixels above the threshold bleed light into neighboring pixels, making emissive materials and intense lights read as glowing.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Making emissive materials (neon, screens, energy effects) visibly glow
-- Emphasizing very bright lights or highlights
-- Sci-fi, magic, or HUD-style effects that need light bleed
-- Softening harsh bright-to-dark transitions on HDR content
 
 ## How to Use
 
@@ -67,20 +59,3 @@ entity.components.set(options)
   tunes it. Set both when customizing the look.
 - `.hierarchical` scopes the effect to the entity's subtree; `.unbounded`
   does not bound it to the hierarchy.
-
-## Best Practices
-
-- Keep `threshold` at or above 1.0 so only genuinely bright (HDR) content
-  blooms; low thresholds make the whole scene hazy.
-- Drive bloom from emissive material intensity rather than cranking
-  `strength` globally.
-- Tune alongside `ToneMappingComponent` - tone-curve shoulder changes shift
-  which pixels exceed the bloom threshold.
-- Use `.hierarchical` when only one object should glow, so unrelated bright
-  content stays clean.
-
-## Related Components
-
-- `ToneMappingComponent` - For the filmic curve that feeds bloom
-- `ModelComponent` - For the emissive materials that typically trigger bloom
-- `RenderLayerComponent` - For scoping rendering features to named layers

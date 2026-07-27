@@ -68,7 +68,6 @@ test triage.
   failure that occurs before a test body executes as environment or host
   lifecycle evidence until a test assertion proves otherwise.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

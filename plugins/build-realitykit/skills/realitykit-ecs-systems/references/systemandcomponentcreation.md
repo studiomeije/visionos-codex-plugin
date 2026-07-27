@@ -1,25 +1,8 @@
 # System and Component Creation
 
-
 ## Overview
 
 This guide covers creating custom Systems and Components in RealityKit's Entity Component System (ECS). Systems define continuous behavior that affects multiple entities every scene update, while Components store per-entity data and state. Together, they form the foundation of RealityKit's ECS architecture.
-
-## When to Use
-
-### Systems
-- Implementing continuous, per-frame behavior
-- Processing multiple entities with shared logic
-- Creating game mechanics that update over time
-- Optimizing performance by batching entity updates
-- Implementing physics, animation, or AI behaviors
-
-### Components
-- Storing per-entity state and data
-- Creating custom properties for entities
-- Defining entity behavior through composition
-- Enabling systems to query and process entities
-- Persisting entity state across scene saves
 
 ## How to Use
 
@@ -355,15 +338,6 @@ static var dependencies: [SystemDependency] {
 - Systems without dependencies are updated in registration order
 - Conflicting dependencies are ignored with a warning
 
-## Best Practices
-
-- Store per-entity state in components, not in the system
-- Use `EntityQuery` to efficiently find relevant entities
-- Define dependencies to ensure correct update order
-- Profile system performance on device
-- Keep system logic focused on a single responsibility
-- Use `updatingSystemWhen` appropriately for your use case
-
 ## Registration
 
 ### Registering Components
@@ -386,19 +360,3 @@ MySystem.registerSystem()
 ```
 
 This is typically done in your app's initialization code or scene setup. Systems are registered globally and will be available to all scenes.
-
-## Related APIs
-
-### Component APIs
-- `Component.registerComponent()` - Register a custom component
-- `Component` - Protocol for all components
-- `Codable` - Protocol for serializable components
-- `Entity.components.set(_:)` - Attach a component to an entity
-- `Entity.components[ComponentType.self]` - Access a component from an entity
-
-### System APIs
-- `System.registerSystem()` - Register a system with RealityKit
-- `SystemDependency` - Control update order
-- `EntityQuery` - Query entities from the scene
-- `SceneUpdateContext` - Context for system updates
-- `QueryPredicate` - Define query criteria

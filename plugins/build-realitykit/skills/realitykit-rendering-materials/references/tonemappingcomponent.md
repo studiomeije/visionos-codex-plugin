@@ -1,18 +1,10 @@
 # ToneMappingComponent
 
-
 ## Overview
 
 A component that controls tone mapping with a filmic curve. Tone mapping compresses high-dynamic-range scene color into displayable range; this component exposes the curve's toe (dark end) and shoulder (highlight end) so you can tune contrast and highlight rolloff per scene, plus an exposure adjustment applied with it.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Tuning highlight rolloff when bright emissive content or strong lights clip harshly
-- Lifting or crushing shadow detail for a stylized look
-- Adjusting overall exposure of rendered content
-- Matching the rendered look of content authored in another engine or grading tool
 
 ## How to Use
 
@@ -67,20 +59,3 @@ entity.components.set(toneMapping)
   and adjust one parameter at a time.
 - Pairs naturally with `BloomComponent` / `BloomOptionsComponent` when tuning
   the look of bright content.
-
-## Best Practices
-
-- Adjust `exposure` first; only touch curve parameters when exposure alone
-  cannot fix the look.
-- Make small adjustments - the curve parameters interact, and large changes to
-  one region shift perceived contrast in the other.
-- Keep one tone-mapping configuration per scene look; toggle between presets
-  rather than animating individual parameters per frame.
-- Verify on device: passthrough blending on visionOS changes how tone-mapped
-  content reads compared to the simulator.
-
-## Related Components
-
-- `BloomComponent` / `BloomOptionsComponent` - For glow on bright content
-- `ImageBasedLightComponent` - For environment lighting feeding the curve
-- `VirtualEnvironmentProbeComponent` - For reflection environment control

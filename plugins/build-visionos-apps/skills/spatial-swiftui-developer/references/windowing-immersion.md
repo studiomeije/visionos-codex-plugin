@@ -5,30 +5,6 @@
 WindowGroup is a scene that presents a group of identically structured windows.
 ImmersiveSpace presents content in an unbounded space on visionOS.
 
-## Best Practices
-
-- Use explicit `id` values for WindowGroup and ImmersiveSpace so you can open them programmatically.
-- Keep windows and volumes in WindowGroup scenes and immersive content in ImmersiveSpace scenes.
-- Set `windowStyle(.volumetric)` for volumes, and add `defaultSize` when you want a predictable initial size. Treat it as an initial-size hint rather than a guaranteed final size.
-- Set `windowResizability(_:)` (`.contentSize`, `.contentMinSize`) when the window's intrinsic size should drive resizability.
-- Use `defaultWorldScaling(_:)` with a `WorldScalingBehavior` value when the scene should scale with viewing distance instead of staying at a fixed real-world size.
-- Use `supportedVolumeViewpoints(_:)` and `onVolumeViewpointChange(updateStrategy:initial:_:)` to adapt a volume when the viewer moves around it.
-- Use `volumeBaseplateVisibility(_:)` to hide or show the system baseplate under a volumetric window.
-- Use `defaultLaunchBehavior(.presented / .automatic / .suppressed)` to control launch presentation.
-- Use `restorationBehavior(.disabled)` when a scene should not restore on relaunch.
-- Use `immersiveEnvironmentBehavior(.coexist)` when an immersive space should coexist with the active system immersive environment.
-- Use `breakthroughEffect(_:)` for RealityView attachments that should render with the system breakthrough effect.
-- Open and dismiss immersive spaces using the environment actions; only one immersive space can be open at a time.
-- Keep scene declarations in the app/scene layer. Put open/dismiss buttons in
-  views, but route the decision through a scene coordinator when multiple
-  controls can trigger the same surface.
-- Track immersive open state explicitly when user cancellation, failed open, or
-  external dismissal would otherwise leave UI out of sync.
-- Use `Window` for a single unique utility/document surface and `WindowGroup`
-  when multiple instances are valid or the scene should be opened by ID.
-- Use a volume for bounded 3D work; use an immersive space for unbounded
-  presence, full/progressive immersion, spatial media, or world context.
-
 ## Scene Ownership Pattern
 
 - App scene file declares `Window`, `WindowGroup`, volumetric style,
@@ -138,8 +114,6 @@ struct VolumeContent: View {
     }
 }
 ```
-
-
 
 #### Disabling restoration
 

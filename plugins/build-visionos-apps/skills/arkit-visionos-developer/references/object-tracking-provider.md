@@ -4,18 +4,7 @@
 
 ObjectTrackingProvider tracks reference objects in a person's surroundings and emits ObjectAnchor updates. Use it for physical object recognition and anchoring virtual content to real-world objects.
 
-
 For shared session setup, authorization, and lifecycle rules, see [session-basics.md](session-basics.md). For model-layer reconciliation, see [anchor-processing.md](anchor-processing.md).
-
-## Best Practices
-
-- Build reference objects with accurate size and orientation to improve tracking stability.
-- Check `ObjectTrackingProvider.isSupported` before creating the provider.
-- Request `requiredAuthorizations` before running the session and handle denied states.
-- Use the tracking configuration to balance performance and fidelity for your use case.
-- New in visionOS 27: opt into per-object high-frame-rate tracking with `ReferenceObject.Configuration` and its `highFrameRateTrackingEnabled` flag, passed to `ReferenceObject(from:configuration:)` or `ReferenceObject(named:from:configuration:)`. Beta API: names and shapes may change before release.
-- The `ObjectTrackingProvider.TrackingConfiguration` properties `stationaryObjectTrackingRate` and `movingObjectTrackingRate` are deprecated on visionOS 27 in favor of `ReferenceObject.Configuration.highFrameRateTrackingEnabled`.
-- Shared session and lifecycle rules live in [session-basics.md](session-basics.md). Keep this file focused on provider-specific behavior.
 
 ## Code Examples
 

@@ -1,18 +1,8 @@
 # ParticleEmitterComponent
 
-
 ## Overview
 
 A component that generates particle systems—tiny visual elements like sparks, smoke, fire, rain, etc.—attached to entities in a scene. Particle emitters create visual effects by spawning many small particles that can have various properties like color, velocity, lifespan, and billboard behavior.
-
-## When to Use
-
-- Creating visual effects (sparks, smoke, fire, explosions)
-- Implementing particle-based effects (rain, snow, debris)
-- Adding atmospheric effects to scenes
-- Creating dynamic visual feedback
-- Implementing particle-based animations
-- Adding visual polish to interactions
 
 ## How to Use
 
@@ -96,19 +86,3 @@ entity.components.set(component)
 - Particle properties can be constants, curves, or enums depending on the effect
 - Available on visionOS, iOS, and other Apple platforms
 - Particle systems can impact performance - use judiciously
-
-## Best Practices
-
-- Configure particle properties to match your desired effect
-- Use appropriate `lifeSpan` values for particle duration
-- Set `mainEmitter.billboardMode` for desired particle orientation
-- Adjust `spawnSpreadFactor` and `radialAmount` for emission patterns
-- Consider performance when using many particle emitters
-- Test particle effects on target devices
-- Use `sortOrder` to control rendering order if needed
-
-## Related Components
-
-- `ModelComponent` - Entities with particle emitters typically have models
-- `PhysicsBodyComponent` - For particles that need physics interaction
-- `TransientComponent` - For temporary particle effects

@@ -21,13 +21,16 @@
     "animation",
     "physics",
     "audio",
-    "ecs"
+    "ecs",
+    "sdk-lookup",
+    "entities",
+    "scene-graph"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Build with RealityKit",
     "shortDescription": "Build RealityKit scenes, systems, rendering, animation, physics, audio, and USDKit runtime flows",
-    "longDescription": "Cross-platform RealityKit implementation for Apple platforms: scene setup, entity loading, documented components, custom ECS systems, rendering and materials, animation and physics, spatial audio, USDKit runtime stages, and runtime handoff from authored Reality Composer Pro 3 assets. Use alongside Build visionOS 27 apps for platform app structure, Profile & Optimize RealityKit for measured runtime performance investigations, and Build with Reality Composer Pro 3 for authored graph and package work.",
+    "longDescription": "Cross-platform RealityKit implementation for Apple platforms: task routing, scene setup, entity loading, interaction and accessibility, SwiftUI attachments, anchoring and portals, rendering and materials, animation and physics, spatial audio, custom ECS systems, USDKit runtime stages, installed-SDK API lookup, and runtime handoff from authored Reality Composer Pro 3 assets. Use alongside Build visionOS 27 apps for platform app structure, Profile & Optimize RealityKit for measured runtime performance investigations, and Build with Reality Composer Pro 3 for authored graph and package work.",
     "developerName": "Studio Meije",
     "category": "Coding",
     "capabilities": [

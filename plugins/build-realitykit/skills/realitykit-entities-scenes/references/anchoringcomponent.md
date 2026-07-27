@@ -1,0 +1,154 @@
+# AnchoringComponent
+
+## Overview
+
+A component that anchors virtual content to a real world target. This component is essential for getting AR features into RealityKit. Use `AnchoringComponent` to anchor virtual content to a real world target by attaching the component to any `Entity` in your RealityKit scene.
+
+## How to Use
+
+### Anchor to Hand
+
+```swift
+import RealityKit
+
+// Anchor to left hand's wrist
+let target = AnchoringComponent.Target.hand(.left, location: .wrist)
+let anchoringComponent = AnchoringComponent(target, trackingMode: .predicted)
+let entity = Entity()
+entity.components.set(anchoringComponent)
+```
+
+### Anchor to Plane
+
+```swift
+// Anchor to horizontal plane (table, floor)
+let target = AnchoringComponent.Target.plane(.horizontal, classification: .any, minimumBounds: [0.1, 0.1])
+let anchoringComponent = AnchoringComponent(target)
+entity.components.set(anchoringComponent)
+```
+
+### Anchor to Image
+
+`Target.image` takes only `group:` and `name:` - the group is an AR Resource
+Group in the asset catalog, and the physical size is authored there, not passed
+in code.
+
+```swift
+// Anchor to a tracked image from an AR Resource Group
+let target = AnchoringComponent.Target.image(
+    group: "ImageGroup",
+    name: "ImageName"
+)
+let anchoringComponent = AnchoringComponent(target)
+entity.components.set(anchoringComponent)
+```
+
+For an image supplied at runtime instead of an asset catalog, use
+`.referenceImage(from:)` with an `ImageAnchoringSource`.
+
+### Anchor to World Origin
+
+`Target.world` takes a non-optional `simd_float4x4`. Pass the identity matrix
+for the world origin.
+
+```swift
+// Anchor to world origin
+let target = AnchoringComponent.Target.world(transform: matrix_identity_float4x4)
+let anchoringComponent = AnchoringComponent(target)
+entity.components.set(anchoringComponent)
+```
+
+### Real-World Example: Anchor to Head
+
+This example from the Head Tracking sample shows how to anchor content to the wearer's head position:
+
+```swift
+import RealityKit
+
+func startHeadPositionMode(content: RealityViewContent) {
+    // Create an anchor for the head and set the tracking mode to `.once`
+    // This stops tracking after the initial anchor is established
+    let headAnchor = AnchorEntity(.head)
+    headAnchor.anchoring.trackingMode = .once
+    headAnchor.name = "headAnchor"
+    
+    // Add the AnchorEntity to the scene
+    headAnchorRoot.addChild(headAnchor)
+    
+    // Add entities as subentities of a root
+    headPositionedEntitiesRoot.addChild(feeder)
+    headPositionedEntitiesRoot.addChild(hummingbird)
+    
+    // Position entities relative to the head anchor
+    hummingbird.setPosition([0, 0, -0.15], relativeTo: headPositionedEntitiesRoot)
+    
+    // Add the positioned entities to the anchor, in front of the wearer
+    headAnchor.addChild(headPositionedEntitiesRoot)
+    headPositionedEntitiesRoot.setPosition([0, 0, -0.6], relativeTo: headAnchor)
+}
+```
+
+**Important Notes about Head Anchoring:**
+- Only works in immersive spaces
+- No authorization required
+- The transform property returns identity - you can't access the actual head transform
+- Use `.once` tracking mode to stop tracking after initial anchor
+- Content anchored to head moves with the wearer's head position
+
+### Tracking Modes
+
+`TrackingMode` has exactly three values: `.once`, `.continuous`, and
+`.predicted`. There is no `.precise`.
+
+```swift
+// Track continuously as the anchor moves
+let continuousAnchor = AnchoringComponent(target, trackingMode: .continuous)
+
+// Use predicted tracking for smoother updates
+let predictedAnchor = AnchoringComponent(target, trackingMode: .predicted)
+
+// Resolve the anchor once, then stop tracking
+let onceAnchor = AnchoringComponent(target, trackingMode: .once)
+```
+
+### Physics Simulation Space
+
+`PhysicsSimulation` has two values: `.isolated` (the default - the anchor owns
+its own simulation space) and `.none` (participate in the scene simulation).
+
+```swift
+// Specify physics simulation space
+let anchoringComponent = AnchoringComponent(
+    target,
+    trackingMode: .predicted,
+    physicsSimulation: .none
+)
+```
+
+## Key Properties
+
+- `target: AnchoringComponent.Target` - The real world anchor target
+- `trackingMode: AnchoringComponent.TrackingMode` - How the entity tracks its target
+- `physicsSimulation: AnchoringComponent.PhysicsSimulation` - Physics simulation space
+
+## Anchor Targets
+
+- `.world(transform: simd_float4x4)` - World origin or custom transform; the
+  transform is not optional
+- `.plane(.horizontal/.vertical, classification, minimumBounds)` - Detected planes
+- `.image(group:name:)` - Tracked images from an AR Resource Group; physical
+  size is authored in the catalog. Use `.referenceImage(from:)` for a runtime
+  image source
+- `.object(group:name:)` - Tracked 3D objects; `.referenceObject(from:)` for a
+  runtime source
+- `.hand(.left/.right, location:)` - Hand tracking locations
+- `.face(anchor:)` - Face tracking
+- `.head` - Center of wearer's head (immersive spaces only, no authorization required)
+
+## Important Notes
+
+- The entity with `AnchoringComponent` is inactive when created
+- RealityKit anchors and activates the entity when it finds a matching anchor
+- Use `AnchoredStateChanged` events to monitor anchor status
+- RealityKit unanchors the entity if the target disappears
+- Check anchor status using scene events

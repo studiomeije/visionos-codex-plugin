@@ -22,13 +22,11 @@ description: Implement and debug RealityKit spatial audio, ambient audio, channe
 
 | Reference | When to Use |
 |---|---|
-| [`references/spatialaudiocomponent.md`](references/spatialaudiocomponent.md) | Place sound in 3D space on a RealityKit entity. |
-| [`references/ambientaudiocomponent.md`](references/ambientaudiocomponent.md) | Add non-positional ambient audio. |
-| [`references/channelaudiocomponent.md`](references/channelaudiocomponent.md) | Control channel-oriented audio playback. |
-| [`references/audiolibrarycomponent.md`](references/audiolibrarycomponent.md) | Use reusable audio libraries. |
-| [`references/audiomixgroupscomponent.md`](references/audiomixgroupscomponent.md) | Organize playback with mix groups. |
-| [`references/reverbcomponent.md`](references/reverbcomponent.md) | Add or tune reverb. |
+| [`references/audio-components.md`](references/audio-components.md) | Choosing between spatial, ambient, and channel playback, and the semantics of reverb inheritance, mix groups, libraries, and loading strategy. |
 | [`references/audio-groups-and-acoustics.md`](references/audio-groups-and-acoustics.md) | Use grouped playback or simulated room acoustics. |
+
+For exact signatures, property lists, enum cases, and availability, query the
+installed SDK with `apple-sdk-lookup` rather than relying on recall.
 
 ## Cross-Routing
 
@@ -47,15 +45,14 @@ description: Implement and debug RealityKit spatial audio, ambient audio, channe
 - Keep audio resource and file loading off the synchronous UI path.
 - Decide whether audio should be positional, ambient, channel-based, grouped,
   or acoustically simulated before adding components.
-- Treat visionOS 27 audio group and acoustics additions as beta API; re-check
-  symbols against the installed SDK.
+- Treat visionOS 27 audio group and acoustics additions as beta API; confirm
+  symbols against the installed SDK with `apple-sdk-lookup` before writing them.
 - Verify audio behavior on device when spatialization, acoustics, or output
   routing matters.
 - Verify written Swift by building before reporting done. Route the build
   through `build-run-debug`.
 - Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
   concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
-
 
 ## Skills In Other Plugins
 

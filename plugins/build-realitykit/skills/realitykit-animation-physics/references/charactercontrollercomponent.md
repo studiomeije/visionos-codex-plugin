@@ -1,18 +1,8 @@
 # CharacterControllerComponent
 
-
 ## Overview
 
 A component that enables character movement and physics behavior for player-controlled characters in RealityKit. It handles movement, collision detection, ground detection, slope limits, and step limits. The character controller uses a capsule-shaped collider and provides collision information for responsive character movement.
-
-## When to Use
-
-- Implementing player-controlled character movement
-- Creating characters that walk, run, or move in 3D space
-- Handling character collision with the environment
-- Implementing ground detection and slope/step limits
-- Creating characters that respond to physics while maintaining control
-- Building games or interactive experiences with character movement
 
 ## How to Use
 
@@ -104,25 +94,8 @@ if let state = entity.components[CharacterControllerStateComponent.self] {
 
 - Uses a capsule-shaped collider for character collision
 - Requires `CollisionComponent` on scene geometry for collision detection
-- Movement is handled by calling `move(into:relativeTo:deltaTime:)` method
-- Collision information is returned from move operations
+- Movement is driven by `Entity.moveCharacter(by:deltaTime:relativeTo:)`, which
+  returns `CollisionFlags`; there is no move method on the component
+- Collision information arrives through the move call's collision handler
 - Works with `CharacterControllerStateComponent` to track character state
 - Available on iOS, macOS, and visionOS
-
-## Best Practices
-
-- Set appropriate radius and height to match your character model
-- Use skinWidth to prevent characters from getting stuck on surfaces
-- Configure slopeLimit based on your game's movement requirements
-- Set stepLimit to allow characters to step over small obstacles
-- Use collision filters to optimize performance
-- Combine with `CharacterControllerStateComponent` for state tracking
-- Handle collision responses appropriately for smooth movement
-- Test movement on various terrain types
-
-## Related Components
-
-- `CharacterControllerStateComponent` - Tracks runtime state (grounded, colliding, etc.)
-- `CollisionComponent` - Required on scene geometry for collision detection
-- `PhysicsBodyComponent` - Not used with character controller (controller handles physics)
-- `AnimationLibraryComponent` - For character animations (idle, walk, run)

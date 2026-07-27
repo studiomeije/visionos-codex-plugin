@@ -22,23 +22,19 @@ description: Implement and debug RealityKit rendering, materials, lighting, came
 
 | Reference | When to Use |
 |---|---|
-| [`references/modelcomponent.md`](references/modelcomponent.md) | Render meshes and assign RealityKit materials. |
-| [`references/modeldebugoptionscomponent.md`](references/modeldebugoptionscomponent.md) | Inspect or debug model rendering output. |
-| [`references/meshinstancescomponent.md`](references/meshinstancescomponent.md) | Reuse mesh instances efficiently. |
-| [`references/modelsortgroupcomponent.md`](references/modelsortgroupcomponent.md) | Control model sorting for transparent or layered content. |
-| [`references/opacitycomponent.md`](references/opacitycomponent.md) | Control entity opacity. |
-| [`references/adaptiveresolutioncomponent.md`](references/adaptiveresolutioncomponent.md) | Manage adaptive resolution. |
-| [`references/levelofdetailcomponent.md`](references/levelofdetailcomponent.md) | Select content by distance or detail tier. |
-| [`references/occlusioncullingcomponent.md`](references/occlusioncullingcomponent.md) | Reduce render work for hidden content. |
+| [`references/models-and-cameras.md`](references/models-and-cameras.md) | Mesh rendering, mesh instancing, opacity inheritance, draw-order/z-fighting, debug visualization, adaptive resolution, and cameras. |
+| [`references/lighting-and-shadows.md`](references/lighting-and-shadows.md) | Choosing between IBL and analytic lights, what each light responds to, shadow components, grounding shadows, and environment probes. |
+| [`references/render-layers-and-shadows.md`](references/render-layers-and-shadows.md) | visionOS 27 named render layers, per-light layer masks, cascaded shadows, projective spotlight textures, surroundings lights. |
+| [`references/lightmaps-and-probes.md`](references/lightmaps-and-probes.md) | Baked lightmaps and diffuse probes. |
+| [`references/levelofdetailcomponent.md`](references/levelofdetailcomponent.md) | Select content by distance, screen area, or resolution metric. |
+| [`references/occlusioncullingcomponent.md`](references/occlusioncullingcomponent.md) | Skip rendering geometry hidden behind opaque occluders. |
+| [`references/clippingcomponent.md`](references/clippingcomponent.md) | Clip rendered geometry to a box volume, with optional feathered edges. |
+| [`references/tonemappingcomponent.md`](references/tonemappingcomponent.md) and [`references/bloomcomponent.md`](references/bloomcomponent.md) | Tune the filmic tone curve and bloom. |
 | [`references/gaussiansplatcomponent.md`](references/gaussiansplatcomponent.md) | Render Gaussian splat captures. |
 | [`references/physicallybaseddecalcomponent.md`](references/physicallybaseddecalcomponent.md) | Project physically based decals onto geometry. |
-| [`references/clippingcomponent.md`](references/clippingcomponent.md) | Clip rendered geometry against bounds. |
-| [`references/tonemappingcomponent.md`](references/tonemappingcomponent.md) and [`references/bloomcomponent.md`](references/bloomcomponent.md) | Tune tone mapping and bloom post-processing. |
-| [`references/pointlightcomponent.md`](references/pointlightcomponent.md), [`references/directionallightcomponent.md`](references/directionallightcomponent.md), [`references/spotlightcomponent.md`](references/spotlightcomponent.md) | Add or debug direct lights. |
-| [`references/imagebasedlightcomponent.md`](references/imagebasedlightcomponent.md) and [`references/imagebasedlightreceivercomponent.md`](references/imagebasedlightreceivercomponent.md) | Configure image-based lighting and receivers. |
-| [`references/groundingshadowcomponent.md`](references/groundingshadowcomponent.md), [`references/dynamiclightshadowcomponent.md`](references/dynamiclightshadowcomponent.md), [`references/render-layers-and-shadows.md`](references/render-layers-and-shadows.md) | Tune grounding shadows, dynamic shadows, render layers, and per-light masks. |
-| [`references/environmentlightingconfigurationcomponent.md`](references/environmentlightingconfigurationcomponent.md), [`references/virtualenvironmentprobecomponent.md`](references/virtualenvironmentprobecomponent.md), [`references/lightmaps-and-probes.md`](references/lightmaps-and-probes.md) | Configure environment lighting, virtual probes, baked lightmaps, and diffuse probes. |
-| [`references/perspectivecameracomponent.md`](references/perspectivecameracomponent.md), [`references/orthographiccameracomponent.md`](references/orthographiccameracomponent.md), [`references/projectivetransformcameracomponent.md`](references/projectivetransformcameracomponent.md) | Work with RealityKit cameras and projection. |
+
+For exact signatures, property lists, enum cases, and availability, query the
+installed SDK with `apple-sdk-lookup` rather than relying on recall.
 
 ## Cross-Routing
 
@@ -66,7 +62,6 @@ description: Implement and debug RealityKit rendering, materials, lighting, came
   Route the build through `build-run-debug`.
 - Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
   concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
-
 
 ## Skills In Other Plugins
 

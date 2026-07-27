@@ -54,7 +54,6 @@ description: Design, implement, and debug custom RealityKit components, systems,
 - Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
   concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

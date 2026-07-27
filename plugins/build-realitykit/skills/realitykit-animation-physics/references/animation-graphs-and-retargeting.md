@@ -1,6 +1,5 @@
 # Animation Graphs, Retargeting, and Mesh Deformers
 
-
 ## Overview
 
 A character-animation toolchain: declarative skeletons (`SkeletonResource`),
@@ -14,14 +13,6 @@ For authored Reality Composer Pro 3 Animation Graph / Animator Graph project
 edits inside `.realitycomposerpro`, switch to `animationgraph-editor`. This
 reference owns runtime RealityKit APIs and validation, not RCP3 graph package
 authoring.
-
-## When to Use
-
-- Playing one character's animations on a differently proportioned skeleton
-- State-machine-driven character animation (idle/walk/run with transitions)
-- Driving entity movement from animation root motion
-- Custom blend-shape/skinning/subdivision deformation pipelines
-- Building skeletons in code instead of importing them
 
 ## How to Use
 
@@ -124,10 +115,3 @@ GPU or `deform(parameter:)` for CPU, `options`) for custom deformers.
   raw definition data - validation returns human-readable error strings.
 - Deformer order in a `MeshDeformationStack` matters: blend shapes, then
   skinning, then renormalization is the conventional order.
-
-## Related Components
-
-- `BlendShapeWeightsComponent` - direct blend-shape weight control
-- `IKComponent` / `SkeletalPosesComponent` - lower-level pose access
-- `AnimationLibraryComponent` - storing clips on an entity
-- `CharacterControllerComponent` - consume extracted root motion for movement

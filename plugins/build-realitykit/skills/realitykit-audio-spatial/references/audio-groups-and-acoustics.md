@@ -1,6 +1,5 @@
 # Audio Playback Groups and Simulated Acoustics
 
-
 ## Overview
 
 Two audio additions: `AudioPlaybackGroupController` plays multiple audio
@@ -9,14 +8,6 @@ start via `AVAudioTime`), and simulated acoustics computes reverb from actual
 room geometry (`ReverbMeshResource` + `Reverb.simulated(mesh:materials:)`)
 with frequency-dependent surface materials. New in visionOS 27. Also
 on iOS, macOS, macCatalyst, and tvOS 27.
-
-## When to Use
-
-- Stems/layers that must start and stay in sample-accurate sync
-- Scheduling playback at a precise host time (multi-device sync, beat sync)
-- Group-wide gain, fade, speed, and seek control
-- Reverb that matches a modeled room instead of a generic preset
-- Per-surface acoustic materials (absorption/scattering by frequency)
 
 ## How to Use
 
@@ -112,10 +103,3 @@ reverbEntity.components.set(
   the group controller only synchronizes transport.
 - Keep reverb meshes coarse - acoustic simulation does not need render-level
   detail.
-
-## Related Components
-
-- `ReverbComponent` - where a `Reverb` value (including `.simulated`) is set
-- `SpatialAudioComponent` - per-entity spatial playback parameters
-- `AudioMixGroupsComponent` - mix-group gain control across entities
-- `AmbientAudioComponent` / `ChannelAudioComponent` - non-spatial sources

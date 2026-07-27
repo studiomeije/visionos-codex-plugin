@@ -4,17 +4,7 @@
 
 `Chart3D` is a SwiftUI view that displays interactive three-dimensional charts and visualizations. It supports 3D mark initializers for `PointMark`, `RuleMark`, and `RectangleMark`, plus the 3D-only `SurfacePlot` for functions of the form `y = f(x, z)`. `Chart3DPose` describes the viewing pose (azimuth and inclination) and is bound via `.chart3DPose` to set an initial orientation and enable interactive rotation. `SurfacePlot` can be styled with chart surface styles like `.heightBased` and `.normalBased` to improve depth cues.
 
-## Best Practices
-
-- Use `Chart3D` when the third dimension adds meaning; otherwise prefer a 2D `Chart` for clarity.
-- Use 3D mark initializers or `SurfacePlot` and keep x, y, z semantics consistent and clearly labeled.
-- Set `chartXScale`, `chartYScale`, and `chartZScale` domains (and ranges when needed) to control the plot volume and readability.
-- Bind a `Chart3DPose` to `.chart3DPose` to define an initial pose and allow interactive rotation; use `chart3DCameraProjection(.perspective)` when depth cues matter.
-- Apply surface styles like `.heightBased` or `.normalBased` to make surface shapes easier to interpret.
-
 ## Code Examples
-
-
 
 #### Chart3D scatterplot
 

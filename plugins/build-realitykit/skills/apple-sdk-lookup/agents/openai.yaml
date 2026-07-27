@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apple SDK Lookup"
+  short_description: "Check exact API signatures and availability in the installed SDK"
+  default_prompt: "Use $apple-sdk-lookup to confirm an Apple API before writing code against it: grep the installed .swiftinterface files for the exact declaration, read its @available attributes, and compile a small probe when the answer still is not certain."

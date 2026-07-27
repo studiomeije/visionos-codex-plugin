@@ -73,7 +73,6 @@ the available path first and keep the workflow aligned to that choice.
 - If build output is huge, summarize the first real blocker and point to the
   next command that should run.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

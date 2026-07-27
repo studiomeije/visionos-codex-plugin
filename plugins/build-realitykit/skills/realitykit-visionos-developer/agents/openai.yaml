@@ -1,7 +1,7 @@
 interface:
-  display_name: "RealityKit visionOS Developer"
-  short_description: "Route and build core RealityKit scenes"
+  display_name: "RealityKit Router"
+  short_description: "Pick the right owner for a RealityKit task"
   icon_small: "./assets/studio-meije-logo-small.png"
   icon_large: "./assets/studio-meije-logo.png"
   brand_color: "#F47A73"
-  default_prompt: "Use $realitykit-visionos-developer to route RealityKit work and implement core entity loading, component selection, input, attachments, anchoring, portals, sync, or USDStage behavior on visionOS."
+  default_prompt: "Use $realitykit-visionos-developer to decide which skill owns a RealityKit task on visionOS: $realitykit-entities-scenes for scene graph and interaction, $realitykit-rendering-materials, $realitykit-animation-physics, $realitykit-audio-spatial, $realitykit-ecs-systems, or $realitykit-performance-triage for measured performance work."

@@ -44,7 +44,7 @@ CLI.
 `import USDKit` plus `import RealityKit` auto-loads a bridge overlay whose
 `USDStageComponent` renders a live `USDStage` on an `Entity`, re-rendering as
 the stage changes. That bridge belongs to the realitykit skill; see
-[`usdstagecomponent`](../../realitykit-visionos-developer/references/usdstagecomponent.md).
+[`usdstagecomponent`](../../realitykit-entities-scenes/references/usdstagecomponent.md).
 
 USDKit is beta API: names and shapes may change before release. When in
 doubt, default to the CLI flow and authored-asset edits.

@@ -4,22 +4,6 @@
 
 RealityView is a RealityKit view that hosts 3D content in SwiftUI using make and update closures. RealityViewAttachments provides access to attachment entities created by the attachment builder, and ViewAttachmentComponent stores metadata for a SwiftUI view attachment entity.
 
-## Best Practices
-
-- Load RealityKit entities asynchronously in the make closure to avoid UI hangs.
-- Keep state-driven mutations inside the update closure instead of SwiftUI body.
-- Use `attachments.entity(for:)` to resolve SwiftUI attachments and position them in 3D.
-- Use `ViewAttachmentComponent` when you need explicit attachment entities or bounds.
-- Keep `make` for initial content creation and registration. Keep `update`
-  idempotent: find existing entities and mutate them; do not repeatedly add
-  duplicate children.
-- Put long-lived entity references, subscriptions, and placement rules in a
-  named Reality owner when more than one closure or view needs them.
-- Use attachments for SwiftUI controls that belong inside the 3D scene; keep
-  ordinary navigation and settings in windows unless the scene context matters.
-- Prefer stable attachment IDs and central placement code so the SwiftUI view
-  content can change without breaking 3D layout.
-
 ## Closure Ownership
 
 | Location | Good Use | Avoid |
@@ -149,8 +133,6 @@ struct StageView: View {
     }
 }
 ```
-
-
 
 #### Switch to RealityView
 

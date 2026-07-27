@@ -1,6 +1,5 @@
 # Navigation Meshes and Behavior Trees
 
-
 ## Overview
 
 Game-AI building blocks: `NavigationMeshResource` bakes a walkable navmesh
@@ -8,13 +7,6 @@ from scene geometry, `NavigationComponent` + `NavigationController` run async
 pathfinding over it, and `BehaviorTreeResource` + `BehaviorTreeComponent` run
 data-driven behavior trees that can trigger custom entity actions. New in
 visionOS 27. Also on iOS, macOS, macCatalyst, and tvOS 27.
-
-## When to Use
-
-- NPC or agent movement across walkable surfaces
-- Path queries with area costs (water, mud) and flag filtering
-- Off-mesh links (jumps, ladders, teleporters)
-- Authored AI logic with reusable, swappable behavior trees
 
 ## How to Use
 
@@ -114,11 +106,3 @@ MyAction.subscribe(to: .updated) { event -> ActionResult in
   navigation; keep a `NavigationComponent` on the agent.
 - `computePath` returns positions only; moving the entity along the path is
   your code (custom `System` or `CharacterControllerComponent`).
-
-## Related Components
-
-- `CharacterControllerComponent` - move agents along computed paths
-- `SceneUnderstandingComponent` - real-world geometry as pathfinding input
-- `AnimationGraphComponent` - drive locomotion states from behavior trees
-- [`custom-systems.md`](../../realitykit-ecs-systems/references/custom-systems.md)
-  - per-frame agent steering

@@ -7,19 +7,6 @@ their location. `ManipulationComponent` adds immersive interaction behaviors to
 RealityKit entities, while targeted SwiftUI gestures let you bind tap or other
 gesture handling to a specific entity.
 
-## Best Practices
-
-- Use SpatialTapGesture when you need tap locations in a specific coordinate space.
-- Configure ManipulationComponent on entities that should be directly manipulated, and rely on its lifecycle events for feedback.
-- Use targeted SwiftUI gestures, such as `TapGesture().targetedToEntity(...)`,
-  when you need entity-specific tap handling.
-- Pass `inputKinds:` to gesture initializers when only specific input
-  sources should drive a gesture (new in visionOS 27).
-- For entity-owned `GestureComponent` setup, switch to
-  `realitykit-visionos-developer` in the Build with RealityKit plugin and load
-  its `gesturecomponent.md` reference.
-- Keep gesture handling on the main actor and update RealityKit entities in RealityView closures.
-
 ## Code Examples
 
 ### SpatialTapGesture

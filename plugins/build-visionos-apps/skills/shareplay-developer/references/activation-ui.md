@@ -74,4 +74,3 @@ struct SharePlaySharingSheet: UIViewControllerRepresentable {
 
 - `prepareForActivation()` is usually the simplest decision point for a Start button.
 - `GroupStateObserver.isEligibleForGroupSession` can be used for gating, but you still need the share sheet fallback when activation is disabled.
-

@@ -4,16 +4,7 @@
 
 PlaneDetectionProvider detects planar surfaces in a person's surroundings and emits PlaneAnchor updates. Use it to place content on real-world surfaces like tables, floors, and walls.
 
-
 For shared session setup, authorization, and lifecycle rules, see [session-basics.md](session-basics.md). For model-layer reconciliation, see [anchor-processing.md](anchor-processing.md).
-
-## Best Practices
-
-- Choose alignments that match your experience, such as horizontal for tables or vertical for walls.
-- Check `PlaneDetectionProvider.isSupported` before creating the provider.
-- Request `requiredAuthorizations` before running the session and handle denied states.
-- Use `anchorUpdates` to add, update, and remove plane-backed entities.
-- Shared session and lifecycle rules live in [session-basics.md](session-basics.md). Keep this file focused on provider-specific behavior.
 
 ## Code Examples
 

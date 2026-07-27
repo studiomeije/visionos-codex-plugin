@@ -74,7 +74,6 @@ runtime artifacts, not as the Script Graph project to modify.
 - Keep exact entity names, graph names, node type names, custom component type
   names, and bundle/resource paths in the answer.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

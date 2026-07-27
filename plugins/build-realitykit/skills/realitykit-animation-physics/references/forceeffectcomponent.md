@@ -1,18 +1,8 @@
 # ForceEffectComponent
 
-
 ## Overview
 
 A component that allows you to attach one or more force effects to an entity. These effects continuously apply physics-based forces to physics bodies within a defined volume. Force effects can be built-in (like gravity wells, vortices, drag, or turbulence) or custom implementations that apply forces based on position, distance, or other parameters.
-
-## When to Use
-
-- Creating gravity wells or attraction/repulsion effects
-- Implementing vortex effects that make bodies circulate around an axis
-- Applying drag forces to slow down moving bodies
-- Creating turbulence effects with random forces
-- Implementing custom force fields (explosions, magnetic fields, etc.)
-- Applying area-of-effect forces to multiple physics bodies
 
 ## How to Use
 
@@ -129,20 +119,3 @@ entity.components.set(ForceEffectComponent(effects: effects))
 - Spatial falloff defines the volume of influence - bodies outside are unaffected
 - Use bitmasks to filter which entities are affected by the force
 - Custom force effects can use position, distance, velocity, and other physics body parameters
-
-## Best Practices
-
-- Use spatial falloff to limit the area of effect and improve performance
-- Use bitmasks to selectively affect only relevant entities
-- Start with built-in force effects before creating custom ones
-- Test force magnitudes to avoid instability or unrealistic behavior
-- Combine multiple force effects for complex behaviors (e.g., gravity + drag)
-- Consider performance when applying forces to many physics bodies
-- Use appropriate spatial falloff shapes (sphere, box, etc.) for your use case
-
-## Related Components
-
-- `PhysicsBodyComponent` - Required on entities that should respond to force effects
-- `PhysicsMotionComponent` - Can be used to set initial velocity for orbiting objects
-- `CollisionComponent` - Entities with force effects typically need collision
-- `PhysicsSimulationComponent` - For configuring physics simulation parameters

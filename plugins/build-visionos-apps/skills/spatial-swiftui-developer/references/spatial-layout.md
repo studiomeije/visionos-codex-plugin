@@ -4,29 +4,6 @@
 
 SwiftUI spatial layout APIs let you measure, align, and compose views in three dimensions for visionOS. `GeometryReader3D` reads a view's available size and coordinate space including depth, and returns a flexible preferred size and depth to its parent. `ZStack` composes child depths the way `VStack` composes child heights, and can use `spacing` to separate adjacent children along the depth axis. `SpatialContainer` is a layout container that aligns overlapping content in 3D space and sizes itself to the maximum dimension of its children. `spatialOverlay(alignment:content:)` adds secondary views within a view's 3D bounds, stacking multiple overlays depthwise using a `SpatialContainer`. `rotation3DLayout` rotates a view while updating its layout frame to account for the rotation, which can change the view's layout size.
 
-## Best Practices
-
-- Use `GeometryReader3D` only when you need depth measurements; it participates in depth layout and can affect ZStack sizing.
-- When layering SwiftUI UI in a `ZStack`, decide whether depth is semantic layout
-  or a small visual lift. Use `ZStack(alignment:spacing:)`,
-  `frame(depth:alignment:)`, and layout `depthAlignment(_:)` for semantic depth;
-  use `offset(z:)` only for fine visual separation.
-- Prefer `SpatialContainer` and `Alignment3D` or `DepthAlignment` guides over hard-coded offsets for composable 3D layout.
-- Use `.front` depth alignment when text, controls, or labels need to remain
-  readable in front of deeper 3D content. Use `.back` when models or panels
-  should share a stable rear plane.
-- Give fixed-format 3D UI stable depth proposals with
-  `frame(depth:alignment:)`; do not let a `RealityView` or resizable `Model3D`
-  unexpectedly consume all available depth in a `ZStack`.
-- Keep decorative depth shallow. Apple recommends small amounts of depth even in
-  windows, but large offsets can increase occlusion, clipping, and visual
-  confusion.
-- Do not use `zIndex(_:)` as a substitute for spatial depth. `zIndex(_:)`
-  changes drawing order; `offset(z:)`, `frame(depth:alignment:)`, ZStack
-  spacing, `SpatialContainer`, and `depthAlignment(_:)` express layout depth.
-- Use `spatialOverlay` for adornments like labels or selection rings that should live within the same 3D bounds; keep overlays lightweight to avoid occlusion.
-- Use `rotation3DLayout` when rotation should affect layout size; use `rotation3DEffect` for purely visual rotation.
-
 ## ZStack Depth Decision Guide
 
 - Start with the layout question. If children are true layers in a 3D stack, use
@@ -386,4 +363,3 @@ struct RobotCarouselItem: View {
   }
 }
 ```
-

@@ -75,7 +75,6 @@ runtime artifacts, not as the Animation Graph project to modify.
   Composer Pro. Reopen the project or validate through the generated app
   artifact instead of assuming the editor picked up filesystem changes.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

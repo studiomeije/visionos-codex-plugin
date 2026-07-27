@@ -4,20 +4,6 @@
 
 Model3D is a RealityKit view that asynchronously loads and displays a 3D model in SwiftUI. Model3DPhase represents the current loading state, and Model3DAsset is a container for the loaded asset when you need animation metadata or playback control.
 
-## Best Practices
-
-- Use the `content` closure to apply `ResolvedModel3D` modifiers like `resizable()` and `aspectRatio`, not on `Model3D` directly.
-- Prefer phase-based initializers when you need explicit placeholder and error handling.
-- Use `Model3DAsset` when you need animation selection or playback controls.
-- Keep loading asynchronous and supply a lightweight placeholder during fetch.
-- Choose `Model3D` only when the model can remain a SwiftUI view. Switch to
-  `RealityView` for entity lookup, component writes, physics, attachments,
-  subscriptions, or custom scene graph ownership.
-- Keep asset state in a scene or feature model when multiple views or surfaces
-  need the same loaded model.
-- Use stable frame or 3D layout constraints so placeholders, errors, and loaded
-  models do not resize the surrounding interface unpredictably.
-
 ## Model3D vs RealityView
 
 | Need | Prefer |
@@ -60,8 +46,6 @@ struct Model3DExample: View {
     }
 }
 ```
-
-
 
 #### Model3D
 

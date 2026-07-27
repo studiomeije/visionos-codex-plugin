@@ -6,43 +6,43 @@ when they match the behavior.
 
 ## Core Interaction
 
-- [`InputTargetComponent`](inputtargetcomponent.md): make an entity eligible
+- [`InputTargetComponent`](../../realitykit-entities-scenes/references/interaction-and-accessibility.md): make an entity eligible
   for input and hit testing.
 - [`CollisionComponent`](../../realitykit-animation-physics/references/collisioncomponent.md):
   provide shapes for hit testing and physics contacts.
-- [`HoverEffectComponent`](hovereffectcomponent.md): add system hover
+- [`HoverEffectComponent`](../../realitykit-entities-scenes/references/interaction-and-accessibility.md): add system hover
   affordances.
-- [`ManipulationComponent`](manipulationcomponent.md): use built-in direct
+- [`ManipulationComponent`](../../realitykit-entities-scenes/references/interaction-and-accessibility.md): use built-in direct
   manipulation before writing a custom transform stack.
 - SwiftUI targeted gestures: use documented targeted gestures, such as
   `TapGesture().targetedToEntity(...)`, for entity-specific tap handling.
-- [`GestureComponent`](gesturecomponent.md): attach a UI gesture to the entity
+- [`GestureComponent`](../../realitykit-entities-scenes/references/interaction-and-accessibility.md): attach a UI gesture to the entity
   as RealityKit component state when that ownership model is more natural than
   a SwiftUI view modifier.
 
 ## Presentation and UI
 
-- [`ViewAttachmentComponent`](viewattachmentcomponent.md): attach SwiftUI-backed
+- [`ViewAttachmentComponent`](../../realitykit-entities-scenes/references/attachments-and-presentation.md): attach SwiftUI-backed
   views as RealityKit entities when direct entity ownership is natural.
 - `RealityView` attachments builder: prefer this for declarative SwiftUI-owned
   attachments inside a `RealityView`.
-- [`TextComponent`](textcomponent.md): render text inside the entity graph.
-- [`ImagePresentationComponent`](imagepresentationcomponent.md): present image
+- [`TextComponent`](../../realitykit-entities-scenes/references/attachments-and-presentation.md): render text inside the entity graph.
+- [`ImagePresentationComponent`](../../realitykit-entities-scenes/references/attachments-and-presentation.md): present image
   content in RealityKit.
-- [`VideoPlayerComponent`](videoplayercomponent.md): present AVPlayer-backed
+- [`VideoPlayerComponent`](../../realitykit-entities-scenes/references/attachments-and-presentation.md): present AVPlayer-backed
   video in RealityKit.
 
 ## Scene Content and Rendering
 
-- [`ModelComponent`](../../realitykit-rendering-materials/references/modelcomponent.md):
+- [`ModelComponent`](../../realitykit-rendering-materials/references/models-and-cameras.md):
   render meshes and materials.
-- [`OpacityComponent`](../../realitykit-rendering-materials/references/opacitycomponent.md):
+- [`OpacityComponent`](../../realitykit-rendering-materials/references/models-and-cameras.md):
   control entity opacity.
-- [`ImageBasedLightComponent`](../../realitykit-rendering-materials/references/imagebasedlightcomponent.md)
+- [`ImageBasedLightComponent`](../../realitykit-rendering-materials/references/lighting-and-shadows.md)
   and
-  [`ImageBasedLightReceiverComponent`](../../realitykit-rendering-materials/references/imagebasedlightreceivercomponent.md):
+  [`ImageBasedLightReceiverComponent`](../../realitykit-rendering-materials/references/lighting-and-shadows.md):
   configure image-based lighting.
-- [`GroundingShadowComponent`](../../realitykit-rendering-materials/references/groundingshadowcomponent.md):
+- [`GroundingShadowComponent`](../../realitykit-rendering-materials/references/lighting-and-shadows.md):
   use system grounding shadows where appropriate.
 - `realitykit-rendering-materials`: use this skill for cameras, lights,
   shadows, materials, post-processing, splats, decals, lightmaps, probes,
@@ -58,12 +58,12 @@ when they match the behavior.
 
 ## Tracking and Anchoring
 
-- [`SpatialTrackingSession`](spatialtrackingsession.md): use when
+- [`SpatialTrackingSession`](../../realitykit-entities-scenes/references/spatialtrackingsession.md): use when
   RealityKit-managed anchoring is enough.
 - `ARKitSession`: use `arkit-visionos-developer` when the app needs provider
   streams, explicit authorization, or direct anchor-update reconciliation.
-- [`AnchoringComponent`](anchoringcomponent.md) and
-  [`ARKitAnchorComponent`](arkitanchorcomponent.md): use for RealityKit-owned
+- [`AnchoringComponent`](../../realitykit-entities-scenes/references/anchoringcomponent.md) and
+  [`ARKitAnchorComponent`](../../realitykit-entities-scenes/references/entity-structure-and-lifecycle.md): use for RealityKit-owned
   anchor component state.
 
 ## Animation and Physics
@@ -101,11 +101,11 @@ before release.
 - Audio: use `realitykit-audio-spatial` for
   [`audio groups and acoustics`](../../realitykit-audio-spatial/references/audio-groups-and-acoustics.md).
 - Local USD rendering: use
-  [`USDStageComponent`](usdstagecomponent.md). For Swift USDKit authoring, use
+  [`USDStageComponent`](../../realitykit-entities-scenes/references/usdstagecomponent.md). For Swift USDKit authoring, use
   `usdkit-runtime-developer`; for authored USD edits or command-line
   inspection, use `usd-editor`.
 - Portals and accessory anchoring: use
-  [`portal-volumes-and-accessory-anchoring.md`](portal-volumes-and-accessory-anchoring.md).
+  [`portal-volumes-and-accessory-anchoring.md`](../../realitykit-entities-scenes/references/portal-volumes-and-accessory-anchoring.md).
 
 ## Custom ECS Boundary
 

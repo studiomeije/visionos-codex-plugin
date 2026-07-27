@@ -14,15 +14,6 @@ For shared session setup, authorization, and lifecycle rules, see [session-basic
 - `DeviceFitStatus` — `.valid`, `.eyesAbove`, `.eyesBelow`, `.eyesLeft`, `.eyesRight`.
 - `anchorUpdates` — `FieldOfViewAnchor` updates with `leftPolygonPoints` and `rightPolygonPoints` (`[simd_float4]`) plus `originFromAnchorTransform`.
 
-## Best Practices
-
-- Check `VisualFidelityProvider.isSupported` before creating the provider.
-- Request `requiredAuthorizations` before running the session and handle denied states.
-- Pass `requestDeviceFitUpdates: true` only when you act on fit status; otherwise skip it to reduce noise.
-- Prefer `presentCoachingAlerts: true` for system fit coaching unless you need custom UI driven by `deviceFitStatus`.
-- Validate custom polygons with `FieldOfView.isValid` and watch `isFieldOfViewValid` in fidelity data updates.
-- Shared session and lifecycle rules live in [session-basics.md](session-basics.md). Keep this file focused on provider-specific behavior.
-
 ## Code Examples
 
 ```swift

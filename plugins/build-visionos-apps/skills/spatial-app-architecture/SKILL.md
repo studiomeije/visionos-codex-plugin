@@ -59,7 +59,6 @@ Use it when:
   mutation.
 - Preserve strong repo conventions when they are already coherent.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

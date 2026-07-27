@@ -19,16 +19,6 @@ capabilities, allowing entities to reflect real-world body poses and movements.
 This component works with `ARBodyTrackingConfiguration` to provide skeleton and
 joint information.
 
-## When to Use
-
-Only on iOS / iPadOS (and Catalyst / macOS builds that host an `ARView`):
-
-- Creating virtual characters that mirror real-world body movements
-- Implementing full-body tracking experiences
-- Animating entities based on ARKit body pose data
-- Creating avatars that follow user movements
-- Building fitness or movement tracking applications
-
 ## How to Use (iOS / iPadOS only)
 
 ### Basic Setup with ARKit
@@ -91,21 +81,3 @@ if let bodyTracking = entity.components[BodyTrackingComponent.self] {
 - Requires appropriate `Info.plist` permissions
 - Body tracking data comes from ARKit, not RealityKit directly
 - Check `ARBodyTrackingConfiguration.isSupported` before use
-
-## Best Practices
-
-- Guard the whole feature behind `#if os(iOS)` in a cross-platform target
-- Check for body tracking support before attempting to use it
-- Request appropriate permissions in `Info.plist`
-- Handle cases where body tracking is not available gracefully
-- Combine with `SkeletalPosesComponent` for skeleton manipulation
-- Update entity poses based on body tracking data each frame
-
-## Related Components
-
-- `SkeletalPosesComponent` - available on visionOS 2.0+; use it to drive a rig
-  from whatever pose source the platform supports
-- `IKComponent` - solve limb placement from a small number of targets
-- `AnimationLibraryComponent` - for blending tracked pose with keyframe animations
-- `AnchoringComponent` - `.head` and `.hand` targets for body-relative placement
-  on visionOS

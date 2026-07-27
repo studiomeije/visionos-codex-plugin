@@ -1,18 +1,10 @@
 # ClippingComponent
 
-
 ## Overview
 
 A component that clips rendered geometry to a box volume, with optional feathered (soft) edges. Anything outside `bounds` is cut away; the feathered edge fades geometry near the box faces instead of producing a hard cut. Useful for table-top scenes, portals into volumes, and revealing cross-sections.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Constraining content to a volume so it never pokes outside its region
-- Cross-section or cutaway views of models
-- Soft-fading content at the boundary of a diorama or table-top scene
-- Reveal effects driven by animating the clip bounds
 
 ## How to Use
 
@@ -80,19 +72,3 @@ entity.components.set(clipping)
   inside `bounds`, not outside it.
 - Clipping is visual - collision shapes, physics, and input targets are not
   clipped.
-
-## Best Practices
-
-- Animate `bounds` for reveal effects instead of swapping meshes.
-- Use `.cubic` falloff for smooth, organic fades; `.linear` for technical
-  cross-sections.
-- Keep `shouldClipChildren = true` (and structure content under one clip root)
-  rather than attaching separate clip components per child.
-- Pair with collision/input adjustments when clipped-away geometry should also
-  stop being interactive.
-
-## Related Components
-
-- `PortalComponent` - For rendering content through a portal surface
-- `OpacityComponent` - For whole-hierarchy fading without a volume
-- `WorldComponent` - For separate world content shown through portals

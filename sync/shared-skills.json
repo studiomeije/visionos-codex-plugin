@@ -2,11 +2,13 @@
   "version": 1,
   "sharedSkills": [
     "animationgraph-editor",
+    "apple-sdk-lookup",
     "arkit-visionos-developer",
     "coding-standards-enforcer",
     "realitykit-animation-physics",
     "realitykit-audio-spatial",
     "realitykit-ecs-systems",
+    "realitykit-entities-scenes",
     "realitykit-rendering-materials",
     "realitykit-visionos-developer",
     "scriptgraph-editor",

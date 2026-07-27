@@ -1,6 +1,5 @@
 # ComputeGraph (GPU Particles and Simulation)
 
-
 ## Overview
 
 `ComputeGraph` is a GPU compute-node-graph framework: you assemble a graph of
@@ -14,13 +13,6 @@ macCatalyst, and tvOS 27.
 
 Importing both `RealityKit` and `ComputeGraph` activates the cross-import
 overlay that provides the ECS types (`ComputeGraphComponent` and friends).
-
-## When to Use
-
-- Large-scale GPU particle systems beyond `ParticleEmitterComponent`
-- Custom per-element simulation logic written as Metal compute kernels
-- Authored compute-graph effect files loaded at runtime
-- Reading simulation output buffers back for gameplay logic
 
 ## How to Use
 
@@ -135,9 +127,3 @@ simulation.advance(.init(deltaTime: 1 / 90,
   `ComputeNodeGraph.Library`; `Library.shared` holds the built-in nodes.
 - Authored graph files imply tooling support; loading via
   `ComputeGraphResource(contentsOf:bundle:)` is the stable path.
-
-## Related Components
-
-- `ParticleEmitterComponent` - simpler, CPU-configured particles
-- `ModelComponent` - bound as graph output for rendering
-- `TransientComponent` - the runtime/output components are transient

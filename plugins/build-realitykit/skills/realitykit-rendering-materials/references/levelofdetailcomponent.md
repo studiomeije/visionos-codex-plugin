@@ -1,18 +1,10 @@
 # LevelOfDetailComponent
 
-
 ## Overview
 
 A component that switches between detail levels of content based on a selection strategy. Each level is an array of entities (`DetailLevel = [Entity]`); RealityKit shows exactly one level at a time, chosen by camera distance, projected screen area, or a per-axis resolution metric. Use it to render cheap proxies far away and full-detail meshes up close.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Reducing triangle and material cost for distant objects
-- Large scenes with many instances where only nearby ones need full detail
-- Swapping imposter/proxy versions of complex assets automatically
-- Keeping frame rate stable as users move through big environments
 
 ## How to Use
 
@@ -106,19 +98,3 @@ Static helpers:
   useful for flat or elongated content.
 - `.fixed` is the debugging tool: pin each level to verify its content before
   trusting automatic switching.
-
-## Best Practices
-
-- Author meaningfully cheaper levels - LOD only pays off if lower levels cut
-  triangles, materials, or texture bindings.
-- Order levels highest-detail first and verify thresholds on device, where
-  perceived sizes differ from the simulator.
-- Prefer the static helpers; they bundle level/threshold pairing in one call.
-- Avoid switching distances right at typical user standing distance, or
-  content will pop as users sway.
-
-## Related Components
-
-- `ModelComponent` - For the meshes inside each detail level
-- `OcclusionCullingComponent` - For skipping hidden geometry entirely
-- `AdaptiveResolutionComponent` - For texture-resolution-driven adaptation

@@ -62,7 +62,6 @@ than stalling or inventing the missing skill's guidance.
 |---|---|
 | `build-run-debug` | Build visionOS 27 apps |
 | `coding-standards-enforcer` | Build visionOS 27 apps |
-| `realitykit-performance-triage` | Profile & Optimize RealityKit |
 | `usd-editor` | Build with Reality Composer Pro 3 |
 
 ## Output Expectations

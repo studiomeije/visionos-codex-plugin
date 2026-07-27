@@ -1,17 +1,10 @@
 # GaussianSplatComponent
 
-
 ## Overview
 
 A component that renders a 3D Gaussian splat scene from a `GaussianSplatResource`. Gaussian splatting reconstructs photorealistic captures as clouds of oriented, view-dependent Gaussians instead of triangle meshes. The resource is built from raw Metal buffers (one attribute stream per splat property) plus spherical-harmonics color data.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Displaying photorealistic scene captures produced by Gaussian-splat training pipelines
-- Rendering scanned environments or objects where mesh reconstruction loses detail
-- Showing volumetric, view-dependent content that PBR meshes cannot represent
 
 ## How to Use
 
@@ -98,19 +91,3 @@ entity.components.set(splats)
   (commonly exponential scale and sigmoid opacity).
 - Apple ships a sample project named "GaussianSplatsOnVisionOS" that
   demonstrates the full decode-and-render flow.
-
-## Best Practices
-
-- Match `format`, `stride`, and `offset` exactly to your decoded buffer layout;
-  mismatches render garbage rather than erroring.
-- Pick the lowest `SphericalHarmonicDegree` that preserves acceptable quality.
-- Keep splat decoding off the main actor; only the `BufferResource` build and
-  component mutation belong on it.
-- Treat the resource as immutable scene data; swap `splatResource` to change
-  captures instead of rebuilding buffers in place.
-
-## Related Components
-
-- `ModelComponent` - For triangle-mesh rendering
-- `RenderLayerComponent` - For scoping lights and effects to specific content
-- `OpacityComponent` - For hierarchy-level fading

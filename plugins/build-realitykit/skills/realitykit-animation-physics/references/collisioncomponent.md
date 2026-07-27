@@ -1,17 +1,8 @@
 # CollisionComponent
 
-
 ## Overview
 
 A component that gives an entity the ability to collide with other entities that also have collision components. This component holds the entity's data related to participating in the scene's physics simulation and is also used to calculate collision queries, raycasts, and convex shape casts.
-
-## When to Use
-
-- Making entities interactive (required for input handling)
-- Physics simulation and collision detection
-- Raycasting and hit testing
-- Creating trigger volumes for game logic
-- Defining collision boundaries for spatial interactions
 
 ## How to Use
 
@@ -153,17 +144,3 @@ entity.components.set(collision)
 - An entity can be a rigid body OR a trigger, but not both
 - Non-uniform scaling is only supported for box, convex mesh, and triangle mesh collision shapes
 - For non-uniform scales, avoid adding children with rotations below the scaled entity
-
-## Best Practices
-
-- Keep collision shapes simple and aligned with mesh scale
-- Use collision filters to optimize performance by reducing unnecessary collision checks
-- Use trigger mode for game logic events (doors, pickups, etc.)
-- Combine with `InputTargetComponent` for interactive entities
-- Use `PhysicsBodyComponent` for entities that need to participate in physics simulation
-
-## Related Components
-
-- `InputTargetComponent` - Required for input handling
-- `PhysicsBodyComponent` - For physics simulation
-- `PhysicsMotionComponent` - For controlling physics velocity

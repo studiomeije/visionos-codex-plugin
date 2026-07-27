@@ -1,18 +1,10 @@
 # PhysicallyBasedDecalComponent
 
-
 ## Overview
 
 A component that projects a physically based decal onto surrounding geometry. The decal carries optional PBR slots (base color, normal, roughness, metallic, specular, emissive, opacity) that blend onto receiving surfaces inside the decal's bounds - bullet holes, scorch marks, posters, dirt, and damage without modifying the receiving meshes.
 
 New in visionOS 27. Beta API: names and shapes may change before release.
-
-## When to Use
-
-- Projecting damage, dirt, graffiti, or signage onto existing meshes
-- Layering surface detail that should follow receiver geometry
-- Stamping dynamic marks (impacts, footprints) at runtime
-- Avoiding mesh or texture edits for localized surface changes
 
 ## How to Use
 
@@ -77,19 +69,3 @@ decalEntity.components.set(decal)
   explicitly to restrict projection to known receivers.
 - `layers` integrates decals with the named render-layer system (see
   `render-layers-and-shadows.md`).
-
-## Best Practices
-
-- Provide an `opacity` mask so decal edges fade instead of showing the
-  rectangular bounds.
-- Keep `bounds` as tight as possible around the visible decal area.
-- Use `sortOrder` deliberately when decals overlap; rely on it rather than
-  transform tweaks to control layering.
-- Restrict `receiverEntities` in busy scenes so decals do not bleed onto
-  unintended geometry behind the receiver.
-
-## Related Components
-
-- `ModelComponent` - For the receiving meshes and their materials
-- `RenderLayerComponent` - For layer-scoped rendering
-- `ClippingComponent` - For box-bounded clipping rather than projection

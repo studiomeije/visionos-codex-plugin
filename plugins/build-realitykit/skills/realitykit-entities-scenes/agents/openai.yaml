@@ -1,0 +1,4 @@
+interface:
+  display_name: "RealityKit Entities & Scenes"
+  short_description: "Load, place, structure, and make RealityKit entities interactive"
+  default_prompt: "Use $realitykit-entities-scenes to build the RealityKit scene graph on visionOS: load entities from assets, set up RealityView, make content interactive with collision plus input target, add SwiftUI attachments, anchor content, and compose portals and worlds."

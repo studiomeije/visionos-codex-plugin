@@ -75,7 +75,6 @@ the same application state path.
   before running commands. It is easy to capture or relaunch the wrong booted
   device and get misleading evidence.
 
-
 ## Skills In Other Plugins
 
 These routes live in other plugins from this marketplace. If one is not

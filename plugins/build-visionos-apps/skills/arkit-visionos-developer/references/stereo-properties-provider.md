@@ -4,16 +4,7 @@
 
 StereoPropertiesProvider supplies the latest viewpoint properties for stereo rendering. Use it to inform custom rendering or compositing pipelines.
 
-
 For shared session setup, authorization, and lifecycle rules, see [session-basics.md](session-basics.md). For model-layer reconciliation, see [anchor-processing.md](anchor-processing.md).
-
-## Best Practices
-
-- Check `StereoPropertiesProvider.isSupported` before creating the provider.
-- Request `requiredAuthorizations` before running the session and handle denied states.
-- Read `latestViewpointProperties` as needed and avoid heavy processing on the main actor.
-- Combine stereo properties with your rendering loop instead of polling excessively.
-- Shared session and lifecycle rules live in [session-basics.md](session-basics.md). Keep this file focused on provider-specific behavior.
 
 ## Code Examples
 

@@ -41,7 +41,10 @@ asset-pipeline work is the source of truth.
 
 Use `build-realitykit` for cross-platform RealityKit runtime development:
 
-- entity loading, component selection, scene ownership, and runtime integration
+- picking the owning skill for a broad or ambiguous RealityKit task
+- entity loading, scene graph structure, interaction, attachments, anchoring,
+  and portals
+- looking up exact API signatures and availability in the installed SDK
 - rendering, materials, cameras, lighting, shadows, post-processing, LOD,
   occlusion, splats, and decals
 - animation, physics, particles, character controllers, IK, navigation,

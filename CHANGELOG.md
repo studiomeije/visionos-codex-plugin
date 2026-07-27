@@ -78,6 +78,29 @@
   `DepthAlignmentID`, and it drops the per-child depth `alignmentGuide` that the
   SDK does not provide - `alignmentGuide(_:computeValue:)` has horizontal and
   vertical overloads only.
+- Reshaped `build-realitykit` from a documentation set into operation-scoped
+  skills. It held 76 one-component-per-file reference pages - 44% of every
+  reference line in the repo - while the other three plugins had none.
+  - Added `apple-sdk-lookup`: a dedicated skill for querying the installed SDK
+    (`.swiftinterface` grep, availability attributes, symbol-graph extraction,
+    compile probes) instead of documenting signatures that drift each beta.
+    Every command in it is verified against the installed SDK.
+  - Merged 48 thin component pages into consolidated notes that keep only what
+    the SDK cannot tell you - semantics, ordering rules, required component
+    pairings, and platform gating. The dense visionOS 27 pages were left intact.
+  - Split `realitykit-visionos-developer` into a thin router (routing tables and
+    component selection only) and a new `realitykit-entities-scenes` skill
+    owning entity loading, interaction, attachments, anchoring, portals, and the
+    USDStage bridge.
+  - Stripped `When to Use`, `Best Practices`, and `Related Components` sections
+    from 75 reference pages: 1,503 lines of generic advice and cross-links
+    already carried by the routing tables.
+  - Net effect: `build-realitykit` references went from 8,679 to 4,147 lines,
+    and its skills now load per operation rather than per API surface.
+- Corrected reference content that the SDK contradicted:
+  `CharacterControllerStateComponent` has only `velocity` and `isOnGround` (not
+  `isGrounded`, `isWalkingUpSlope`, `isStepping`, or `collision`), and
+  `AnchoringComponent.Target` list entries now match the real case signatures.
 - Made `asc` the sole App Store Connect path in `packaging-distribution`, and
   removed the Xcode/Transporter manual fallback reference. When `asc` is missing
   or unauthenticated the skill now stops remote-release work and says so instead

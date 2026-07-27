@@ -24,20 +24,21 @@ description: Implement and debug RealityKit runtime animation, character control
 
 | Reference | When to Use |
 |---|---|
-| [`references/animationlibrarycomponent.md`](references/animationlibrarycomponent.md) | Work with loaded animation clips or animation libraries. |
-| [`references/animation-graphs-and-retargeting.md`](references/animation-graphs-and-retargeting.md) | Use animation graphs, retargeting, root motion, or mesh deformers. |
-| [`references/blendshapeweightscomponent.md`](references/blendshapeweightscomponent.md) | Drive blendshape weights for facial, character, or mesh deformation. |
-| [`references/skeletalposescomponent.md`](references/skeletalposescomponent.md) | Inspect or set skeletal pose state. |
+| [`references/animation-and-skeleton.md`](references/animation-and-skeleton.md) | Animation libraries, skeletal poses, blend shapes, and the character-controller state the simulation publishes. |
+| [`references/animation-graphs-and-retargeting.md`](references/animation-graphs-and-retargeting.md) | Animation graphs, retargeting, root motion, or mesh deformers. |
 | [`references/ikcomponent.md`](references/ikcomponent.md) | Configure inverse kinematics. |
-| [`references/bodytrackingcomponent.md`](references/bodytrackingcomponent.md) | Use body tracking component state. |
-| [`references/charactercontrollercomponent.md`](references/charactercontrollercomponent.md) and [`references/charactercontrollerstatecomponent.md`](references/charactercontrollerstatecomponent.md) | Build character controller movement and inspect controller state. |
+| [`references/charactercontrollercomponent.md`](references/charactercontrollercomponent.md) | Build character controller movement and read contact results. |
 | [`references/navigation-and-behavior-trees.md`](references/navigation-and-behavior-trees.md) | Add navmesh pathfinding, agent steering, or behavior trees. |
 | [`references/collisioncomponent.md`](references/collisioncomponent.md) | Define collision shapes for physics, contacts, hit testing, or input targeting. |
-| [`references/physicsbodycomponent.md`](references/physicsbodycomponent.md), [`references/physicsmotioncomponent.md`](references/physicsmotioncomponent.md), [`references/physicssimulationcomponent.md`](references/physicssimulationcomponent.md) | Configure rigid-body physics, motion, and simulation behavior. |
-| [`references/physicsjointscomponent.md`](references/physicsjointscomponent.md), [`references/forceeffectcomponent.md`](references/forceeffectcomponent.md), [`references/geometricpinscomponent.md`](references/geometricpinscomponent.md) | Configure joints, forces, and pinning. |
+| [`references/physics-bodies-and-joints.md`](references/physics-bodies-and-joints.md) | Rigid-body modes, motion, damping, anchored simulation spaces, joints, and pins. |
+| [`references/forceeffectcomponent.md`](references/forceeffectcomponent.md) | Configure custom and built-in force effects. |
 | [`references/particleemittercomponent.md`](references/particleemittercomponent.md) | Use built-in particle emitters. |
 | [`references/compute-graph-particles.md`](references/compute-graph-particles.md) | Build GPU particles or compute simulations with `ComputeGraph`. |
 | [`references/cloth-simulation.md`](references/cloth-simulation.md) | Simulate cloth bodies, cloth colliders, or cloth grabbing. |
+| [`references/bodytrackingcomponent.md`](references/bodytrackingcomponent.md) | iOS/iPadOS body tracking. Unavailable on visionOS - read the platform banner first. |
+
+For exact signatures, property lists, enum cases, and availability, query the
+installed SDK with `apple-sdk-lookup` rather than relying on recall.
 
 ## Cross-Routing
 
@@ -68,7 +69,6 @@ description: Implement and debug RealityKit runtime animation, character control
   fix works. Route the build through `build-run-debug`.
 - Apply `coding-standards-enforcer` to Swift you write here: Swift 6.2 strict
   concurrency, actor isolation, `Sendable`, and `@Observable` ownership.
-
 
 ## Skills In Other Plugins
 

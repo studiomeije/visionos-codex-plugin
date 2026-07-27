@@ -1,18 +1,8 @@
 # IKComponent
 
-
 ## Overview
 
 A component that enables inverse kinematics (IK) for procedural animation on entities with skeletons. IK allows natural joint movement where you specify a target position (e.g., a hand reaching toward an object), and the system automatically adjusts intermediate joints (elbow, shoulder, spine) to achieve the target while respecting constraints.
-
-## When to Use
-
-- Implementing procedural character animation (reaching, pointing, looking)
-- Creating natural joint movement that follows targets
-- Animating characters to interact with objects dynamically
-- Implementing head/eye tracking that follows targets
-- Creating procedural animation that blends with keyframe animation
-- Building interactive characters that respond to user input
 
 ## How to Use
 
@@ -132,20 +122,3 @@ func setupHeadTracking(target: Entity) {
 - IK is computed each frame based on current constraints
 - Works with `SkeletalPosesComponent` for joint manipulation
 - Can be combined with `AnimationLibraryComponent` for blended animation
-
-## Best Practices
-
-- Set appropriate `maxIterations` for performance vs accuracy tradeoff
-- Use `globalFkWeight` to blend IK with keyframe animation
-- Update IK targets each frame for smooth following behavior
-- Use constraints to limit joint movement for natural-looking results
-- Test IK behavior with various target positions
-- Consider performance when using IK on multiple characters
-- Combine with `SkeletalPosesComponent` for additional joint control
-
-## Related Components
-
-- `SkeletalPosesComponent` - For accessing and modifying joint transforms
-- `AnimationLibraryComponent` - For keyframe animations that blend with IK
-- `ModelComponent` - The mesh component that uses the skeleton
-- `CharacterControllerComponent` - For character movement (can use IK for upper body)

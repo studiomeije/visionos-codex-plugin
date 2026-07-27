@@ -1,6 +1,5 @@
 # Cloth Simulation
 
-
 ## Overview
 
 A real-time cloth simulation system built from dedicated components: a
@@ -9,14 +8,6 @@ more `ClothBodyComponent` entities carrying simulated meshes, and
 `ClothColliderComponent` entities the cloth collides against. Force volumes,
 query volumes, and grab support round out the system. New in visionOS 27.
 Also available on iOS, macOS, and macCatalyst 27; unavailable on tvOS.
-
-## When to Use
-
-- Simulating flags, curtains, capes, clothing, or banners
-- Inflatable shapes via the inflation constraint
-- Wind- or force-driven soft surfaces
-- Letting users grab and pull cloth interactively
-- Querying which cloth bodies enter a region of space
 
 ## How to Use
 
@@ -134,9 +125,3 @@ Subscribe via `scene.subscribe(to:)` like other RealityKit events:
   `ClothMeshResource.isWatertight` and `volume`.
 - Lower `targetEdgeLength` raises vertex count and solver cost; tune iteration
   count and `maximumStepsPerUpdate` on device.
-
-## Related Components
-
-- `PhysicsBodyComponent` - rigid-body physics; cloth uses its own solver
-- `ParticleEmitterComponent` - visual-only particle effects
-- `MeshDeformerComponent` - non-simulated GPU mesh deformation
